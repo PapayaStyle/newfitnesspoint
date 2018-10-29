@@ -1,0 +1,7 @@
+.mat-sidenav-container, .mat-sidenav-content, .mat-tab-body-content {
+    transform: none !important;
+}
+.gallery {
+    display: block;
+    margin: 10px auto;
+}

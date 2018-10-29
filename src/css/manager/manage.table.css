@@ -1,0 +1,106 @@
+.mat-tab-cnt {
+    padding: 1em;
+}
+.tab-corsi {
+    padding-top: 1em;
+}
+/* Start Dynamic Table Activity */
+.dym-table {
+    width: 90%;
+    display: table;
+    table-layout: fixed;
+    margin: 1em auto 2em auto;
+    position: relative;
+}
+.dym-table .dym-row {
+    display: table-row;
+}
+.dym-table .dym-cell {
+    display: table-cell;
+    border:1px solid #F5F5F5;
+    vertical-align: middle;
+}
+.dym-row .dym-cell:first-child {
+    width: 80px;
+}
+.dym-cell {
+    text-align: center;
+}
+.dym-row .head {
+    font-weight: bold;
+}
+.add-activity {
+    text-align: center;
+}
+.dym-item {
+    position: relative;
+}
+.dym-cell-act {
+    display: inline-block; 
+    width: 70%;
+}
+.delete-row {
+    position: absolute;
+    top: 50%;
+    transform: translate(-30%, -50%);
+}
+.row-form {
+    margin: 0 auto !important;
+    
+}
+.row-form .dym-cell:not(:first-of-type) {
+    border: 1px solid #F5F5F5 !important;
+    /*background-color: #BDBDBD;*/
+    background-color: #FF5722;
+    padding: 2px 0px 3px 0px;
+}
+.row-form .dym-cell:nth-child(2n+2):not(:first-of-type) {
+    background-color: #212121;
+}
+.empty {
+    background-color: #BDBDBD !important;
+}
+
+.short-width {
+    width: 50px;
+}
+.select-act {
+    width: calc(100% - 4px);
+}
+/* button css */
+.add-row {
+    clear: both;
+    /*margin: 0 20px;*/
+    position: absolute;
+    transform: translate(-30%, 0%);
+}
+.form-btn {
+    clear: both;
+    padding: 10px 20px;
+}
+.form-btn button:nth-child(2) {
+    margin-left: 10px;   
+}
+.form-btn button:nth-child(3) {
+    float: right; 
+}
+
+.act-form {
+    position: relative;
+}
+.act-form .select-act, .act-form .note {
+    display: inline-block;
+}
+.act-form .select-act {
+    width: 100px;
+    margin: 0;
+    padding: 0;
+    margin-right: 2px;
+}
+.act-form .note {
+    width: 24px;
+    height: 24px;
+    margin: 0;
+    padding: 0;
+}
+/* End Dynamic Table Activity */

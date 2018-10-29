@@ -1,0 +1,14 @@
+<div class="wrapper">
+    <div class="carousel">
+        <ul class="slides">
+            <li *ngFor="let image of images">
+                <img src="{{image.url}}" alt="">
+                <div class="img" [ngStyle]="changeBackground(image.url)"></div>
+                <div>
+                    <h2>{{image.title}}</h2>
+                    <p>{{image.content}}</p>
+                </div>                
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,70 @@
+<!--
+<mat-progress-bar mode="buffer" *ngIf="loading" style="position: fixed; z-index: 99999"></mat-progress-bar>
+<app-head></app-head>
+
+<router-outlet></router-outlet>
+
+<a class="go-top" [hidden]="!show_top" (click)="scrollTop()" ><div></div></a>
+
+<app-footer></app-footer>
+-->
+<mat-sidenav-container [hasBackdrop]="true">
+    <mat-sidenav position="end" mode="push" [opened]="toggle" 
+        class="sidenav-container" #sideMenu mat-swipe-left="sideMenu.open()">
+
+        <div class="close-menu" (click)="sideMenu.close()" title="chiudi il menu"> 
+            <span></span>
+            <a class="logo" >
+                <img src="images/logo_palestra_fitness_point.png" alt="logo" >
+            </a>
+        </div>
+
+        <div class="sidenav-menu">
+            <ul>
+                <li> 
+                    <a [ngClass]="(menuSelected == 'home') ? 'selected' :''" 
+                        routerLink="/home" 
+                        (click)="updateSelector('home'); sideMenu.close();" >Home</a> 
+                </li>
+                <li> 
+                    <a [ngClass]="(menuSelected == 'news') ? 'selected' :''" 
+                        routerLink="/news" 
+                        (click)="updateSelector('news'); sideMenu.close();" >News</a>  
+                </li>
+                <li> 
+                    <a [ngClass]="(menuSelected == 'staff') ? 'selected' :''" 
+                        routerLink="/staff" 
+                        (click)="updateSelector('staff'); sideMenu.close();" >Staff</a>  
+                </li>
+                <li> 
+                    <a [ngClass]="(menuSelected == 'activity') ? 'selected' :''" 
+                        routerLink="/activity" 
+                        (click)="updateSelector('activity'); sideMenu.close();" >Attivit&agrave;</a> 
+                </li>
+                <li> 
+                    <a [ngClass]="(menuSelected == 'gallery') ? 'selected' :''" 
+                        routerLink="/gallery" 
+                        (click)="updateSelector('gallery'); sideMenu.close();" >Galleria</a> 
+                </li>
+                <li> 
+                    <a [ngClass]="(menuSelected == 'contact') ? 'selected' :''" 
+                        routerLink="/contact" 
+                        (click)="updateSelector('contact'); sideMenu.close();" >Contatti</a> 
+                </li>
+            </ul>
+        </div>
+    </mat-sidenav>
+    <mat-sidenav-content>
+
+        <mat-progress-bar mode="buffer" *ngIf="loading" style="position: fixed; z-index: 99999"></mat-progress-bar>
+        
+        <app-head [sideMenu]='sideMenu'></app-head>
+
+        <router-outlet></router-outlet>
+
+        <a class="go-top" [hidden]="!show_top" (click)="scrollTop()" ><div></div></a>
+
+        <app-footer></app-footer>
+
+    </mat-sidenav-content>
+</mat-sidenav-container>

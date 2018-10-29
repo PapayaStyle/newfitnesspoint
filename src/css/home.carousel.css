@@ -1,0 +1,200 @@
+
+@media screen 
+and (max-width: 455px) {
+    /*
+    .slides {
+        margin: 0px !important;
+        padding: 0px !important;
+        width: 100% !important;
+        animation: none !important;
+        -moz-animation: none !important;
+        -webkit-animation: none !important;
+    }
+    */
+    .slides {
+        margin: 0 0 0 -25px;
+        width: 317%;
+    }
+    .slides > li{
+        display: block !important;
+        /*
+        position: relative;
+        float: none !important;
+        width: 100% !important;
+        */
+        height: 230px !important;
+    }
+    .carousel div {
+        z-index: 2 !important;
+        max-height: 120px !important;
+        padding: 15px !important;
+        width: 65%;
+    }
+    .carousel h2 {
+        font-size: 22px !important;
+    }
+    .carousel p {
+        font-size: 16px !important;
+    }
+    .carousel img {
+        display: block !important;
+        height: 100%;
+    }
+    .carousel .img {
+        display: none !important;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100% !important;
+        height: 100% !important;
+        z-index: 0 !important;
+        opacity: 0.5;
+        background-size: cover !important;
+        background-attachment: fixed !important;
+        background-repeat: no-repeat !important;
+        transform: none !important;
+        max-height: none !important;
+        border: 0px !important;
+        border-radius: 0 !important;
+        margin: 0px !important;
+        padding: 0px !important;
+    }
+}
+
+@media screen 
+and (max-width: 900px) {
+    .slides {
+        margin: 0 0 0 -25px;
+    }
+    .carousel div {
+        max-height: 200px;
+    }
+    .carousel h2 {
+        font-size: 30px;
+    }
+    .carousel p {
+        font-size: 18px;
+    }
+}
+
+@media screen 
+and (min-width: 901px) {
+    .carousel h2 {
+        font-size: 60px;
+    }
+    .carousel p {
+        font-size: 30px;
+    }
+    .slides{
+        margin: 0px;
+    }
+}
+
+.wrapper{
+    width: 100%;
+    background-color: black;
+}
+.carousel{
+    overflow:hidden;
+    width:100%;
+}
+.slides{
+    list-style:none;
+    position:relative;
+    width:309%; /* Number of panes * 100% */
+    overflow:hidden; /* Clear floats */
+        /* Slide effect Animations*/
+    -moz-animation:carousel 30s infinite;
+    -webkit-animation:carousel 30s infinite;
+    animation:carousel 30s infinite;
+}
+.slides > li{
+    position: relative;
+    float:left;
+    width: 33%; /* 100 / number of panes */
+}
+.carousel img{
+    display:block;
+    width:100%;
+    max-width:100%;
+    opacity: 0.5;
+}
+.carousel div {
+    max-height: 70%;
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color:rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    max-width: 600px;
+    z-index: 1;
+    font-family: 'Lato', 'HelveticaNeue', 'Helvetica Neue';
+    color: #e1e1e1;
+    border-radius: 5px;
+}
+.carousel .img {
+    display: none;
+}
+.carousel h2 {
+    text-transform: uppercase;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+.carousel p {
+    text-transform: lowercase;
+    margin: 0;
+    padding: 0;
+    text-align: justify;
+}
+
+@keyframes carousel{
+    0%    { left:-4%; }
+    26%   { left:-4%; }
+    31%   { left:-105%; }
+    57%   { left:-105%; }
+    62%   { left:-208%; }
+    88%   { left:-208%; }
+    100%  { left:-5%;}
+}
+@-webkit-keyframes carousel {
+    0%    { left:-4%; }
+    26%   { left:-4%; }
+    31%   { left:-105%; }
+    57%   { left:-105%; }
+    62%   { left:-208%; }
+    88%   { left:-208%; }
+    100%  { left:-5%;}
+}
+@-moz-keyframes carousel {
+    0%    { left:-4%; }
+    26%   { left:-4%; }
+    31%   { left:-105%; }
+    57%   { left:-105%; }
+    62%   { left:-208%; }
+    88%   { left:-208%; }
+    100%  { left:-5%;}
+}
+
+/*
+@keyframes carousel{
+    0%    { left:-5%; }
+    11%   { left:-5%; }
+    12.5% { left:-105%; }
+    23.5% { left:-105%; }
+    25%   { left:-205%; }
+    36%   { left:-205%; }
+    37.5% { left:-305%; }
+    48.5% { left:-305%; }
+    50%   { left:-405%; }
+    61%   { left:-405%; }
+    62.5% { left:-305%; }
+    73.5% { left:-305%; }
+    75%   { left:-205%; }
+    86%   { left:-205%; }
+    87.5% { left:-105%; }
+    98.5% { left:-105%; }
+    100%  { left:-5%; }
+}
+*/

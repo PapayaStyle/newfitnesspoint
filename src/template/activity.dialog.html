@@ -1,0 +1,18 @@
+<div class="popup">
+    <h2 mat-dialog-title>{{ activity.title | capitalize }}</h2>
+    <figure mat-dialog-content>
+        <div class="image">
+            <img src="{{ activity.image }}" >
+        </div>
+
+        <p>{{ activity.desc }}</p>
+
+        <div *ngIf="checkEmpty(activity.video)" class="vid-frame">
+            <iframe [src]="(embedUrl + activity.video) | safe" 
+                frameborder="0" allowfullscreen>
+            </iframe>
+        </div>
+    </figure>
+    
+    <mat-icon class="close" aria-label="chiudi" (click)="dialogRef.close()">clear</mat-icon>
+</div>

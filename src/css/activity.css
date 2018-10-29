@@ -1,0 +1,214 @@
+@charset "utf-8";
+.act-container {
+    display: block;
+    position: relative;
+    padding: 0.5%;
+    margin: 0;
+}
+.act-container .activity {
+    background-color: #212121;
+}
+.act-container .activity > div {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.act-container .activity img {
+    width: 100%;
+    opacity: 0.6;
+    transition: all 0.5s;
+}
+.act-container .activity:hover img {
+    -moz-transform: scale(1.05);
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
+    opacity: 1;
+}
+.activity article {
+    display: block;
+    margin: 0;
+    padding: 10px;
+    /* background-color: #F5F5F5; */
+    color: #F5F5F5;
+}
+.activity article h2 {
+    margin: 0;
+    padding: 0;
+}
+
+/* ##### START Activity Popup ##### */
+/*
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    margin: 0;
+    background: #F5F5F5;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 80%;
+    padding: 0;
+    padding-bottom: 24px;
+}
+*/
+.popup {
+    position: relative;
+    height: 100%;
+}
+.popup figure {
+    display: block;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    height: calc(100% - 24px);
+    margin-right: -24px;
+    padding-right: 24px;
+}
+.popup h2 {
+    text-align: center;
+    line-height: 1.25em !important;
+    font-weight: bold;
+    padding: 5px;
+    margin-top: -24px;
+    margin-bottom: 0;
+    font-size: 1.8em;
+    color: #333;
+    font-family: Tahoma, Arial, sans-serif;
+    text-transform: uppercase;
+}
+/*
+.popup h2 {
+    margin: 0;
+    color: #333;
+    font-family: Tahoma, Arial, sans-serif;
+    display: block;
+    text-align: center;
+    padding: 5px;
+    text-transform: uppercase;
+    font-size: 1.8em;
+    font-weight: bold;
+}
+*/
+.popup .image img {
+    width: 100%;
+}
+
+.vid-frame {
+    position: relative;
+    width: 100%;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 25px;
+    height: 0;
+    overflow: hidden;
+}
+.vid-frame iframe,
+.vid-frame object,
+.vid-frame embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+/*
+.vid-frame {
+    width: 416px; 
+    height: 234px;
+    margin: 0 auto;
+}
+*/
+.popup article {
+    display: block;
+    padding: 5px;
+    overflow: hidden;
+}
+.popup p {
+    white-space:pre-line;
+    color: #333;
+    margin: 0;
+    line-height: 1.5;
+}
+
+@media screen 
+and (max-width: 979px) {
+    .popup .image {
+        display: block;
+        position: relative;
+        object-fit: cover;
+        overflow: hidden;
+        width: 100%;
+        max-height: 300px;
+    }
+}
+@media screen 
+and (min-width: 980px) {
+    .popup .image {
+        display: block;
+        position: relative;
+        object-fit: cover;
+        overflow: hidden;
+        max-width: 500px;
+        float: right;
+        margin-left: 5px;
+    }
+}
+
+/* ##### END Activity Popup ##### */
+
+@media screen 
+and (max-width: 455px) {
+    /*
+    .act-container {
+        margin-top: 30px;
+    }
+    */
+    .act-container .activity {
+        margin: 1% .5% !important;
+        width: 99% !important;
+        float: none !important;
+    }
+}
+
+@media screen 
+and (max-width: 979px) {
+    .act-container .activity {
+        display: block;
+        cursor: pointer;
+        width: 49%;
+        float: left;
+        margin: 0.5%;
+        padding: 0;
+    }
+    .act-container .activity .image {
+        display: block;
+        position: relative;
+        object-fit: cover;
+        overflow: hidden;
+        width: 100%;
+        max-height: 230px;
+    }
+}
+
+@media screen 
+and (min-width: 980px) {
+    .act-container .activity {
+        display: block;
+        cursor: pointer;
+        width: 32.3%;
+        float: left;
+        margin: 0.5%;
+        padding: 0;
+    }
+    .act-container .activity .image {
+        display: block;
+        position: relative;
+        object-fit: cover;
+        overflow: hidden;
+        width: 100%;
+        max-height: 280px;
+    }    
+}

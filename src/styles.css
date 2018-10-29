@@ -1,0 +1,201 @@
+/* @import '~https://fonts.googleapis.com/icon?family=Material+Icons'; */
+ @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+/*@import '~@angular/material/prebuilt-themes/pink-bluegrey.css'; */
+
+html{
+    /* background-color:#161616; */
+    background-color:#F5F5F5;
+}
+::selection {
+    background-color: #FF5722;
+    color: #F5F5F5;
+}
+body {
+    margin: 0px;
+    padding: 0px;  
+}
+body * {
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+html, body, app {
+    height: 100%
+}
+
+::-webkit-scrollbar {
+    width: 2px;
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: #F44336;
+}
+
+.container {
+    min-height: calc(100vh - 335px);
+}
+#main-container {
+    min-height: calc(100vh - 380px);
+}
+
+#main-container {
+    min-height: calc(100vh - 380px);
+}
+
+.close {
+    position: absolute;
+    top: 5px;
+    right: -19px;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 500ms;
+}
+.close.material-icons {
+    font-size: 30px;
+    width: 30px;
+    height: 30px;
+    color: #e96233;
+}
+.popup .close:hover {
+    opacity: 1;
+    transition: opacity 500ms;
+}
+
+@media screen 
+and (max-width: 545px) {
+    #main-container {
+        min-height: calc(100vh - 680px);
+    }
+}
+
+.pull-left {
+    float: left;
+}
+.pull-right {
+    float: right;
+}
+
+.ngx-gallery-image.ngx-gallery-active {
+    z-index: 999 !important;
+}
+
+.mat-tab-label {
+    color: rgb(233, 98, 51) !important;
+    opacity: .9 !important;
+    font-size: 1em !important;
+    font-weight: bold !important;
+}
+.mat-tab-group.mat-primary .mat-tab-label:focus {
+    background-color: rgba(241, 176, 123, 0.3) !important;
+}
+.mat-tab-group.mat-primary .mat-ink-bar {
+    background-color: #F44336 !important;
+}
+.imageUpload .img-ul-upload {
+    background-color: #e96233 !important;
+    font-size: 1em !important;
+    border-radius: 5px !important;
+}
+.imageUpload .img-ul-upload:active {
+    background-color: #bd4d27 !important;
+}
+.imageUpload .img-ul-drag-box-msg {
+    padding-top: 10px !important;
+}
+.mat-checkbox-checked.mat-accent .mat-checkbox-background {
+    background-color: #e96233 !important;
+}
+
+/* ##### START Mat Input ##### */
+.mat-form-field-label, .mat-form-field-placeholder {
+    top: 1.5em !important;
+    left: 0.3em !important;
+}
+.mat-form-field-label {
+    color: #e96233 !important;
+}
+
+.mat-form-field-ripple {
+    transform: scaleX(1) !important;
+    opacity: 1 !important;
+    height: 1px !important;
+    background-color: #e96233 !important;
+}
+.mat-focused * {
+    caret-color: #e96233 !important;
+}
+.mat-focused .mat-form-field-label {
+    color: #e96233 !important;
+}
+.mat-focused .mat-form-field-ripple {
+    height: 2px !important;
+    background-color: #e96233 !important;
+}
+.mat-form-field-invalid * {
+    caret-color: #d9534f  !important;
+}
+.mat-form-field-invalid .mat-form-field-label {
+    /*color: #dc362a !important;*/
+    color: #d9534f  !important;
+}
+.mat-form-field-invalid .mat-form-field-ripple {
+    /*background-color: #dc362a !important;*/
+    background-color: #d9534f  !important;
+    height: 2px !important;
+}
+textarea.mat-input-element {
+    padding: .5rem .75rem !important;
+}
+/* ##### END Mat Input ##### */
+
+/* ##### START Mat Raised Button ##### */
+.mat-raised-button.mat-accent {
+    background-color: #e96233;
+}
+.btn-icon.mat-raised-button, .btn-icon.mat-button {
+    width: 40px;
+    padding: 0px;
+    margin: 0px;
+    min-width: 0px;
+}
+.mat-success.mat-raised-button {
+    background-color: #5cb85c;
+    color: #fff;
+}
+/* ##### END Mat Raised Button ##### */
+
+/* ##### START Mat Select One Menu ##### */
+
+.select-act.mat-form-field .mat-form-field-label {
+    color: #F5F5F5 !important;
+}
+.select-act.mat-form-field .mat-select-value-text {
+    color:#F5F5F5;
+    /*background-color: rgba(245, 245, 245, 0.5);*/
+}
+.select-act.mat-form-field .mat-select-arrow {
+    border-top: 5px solid #F5F5F5;
+}
+/* ##### END Mat Select One Menu ##### */
+
+.note.mat-icon-button {
+    color: #ffc400;
+}
+/*
+.mat-icon-button {
+    background-color: #f5f5f5;
+    color: #212121;
+}
+*/
+
+#video-preview {
+    overflow: hidden !important;
+    padding: 0px !important;
+    background-color: rgba(0,0,0,0) !important;
+    box-shadow: none !important;
+}
+
+.mat-checked .mat-slide-toggle-bar {
+    background-color: rgba(233,98,51,.5) !important;
+}
+.mat-checked .mat-slide-toggle-thumb {
+    background-color: #e96233 !important;
+}

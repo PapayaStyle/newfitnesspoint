@@ -1,0 +1,103 @@
+<div class="container border-radius">
+
+    <!-- CAROUSEL
+    <app-carousel></app-carousel>
+    -->
+    <!-- HOME IMAGE -->
+    <div class="pic-container">
+        <div class="info-container">
+            <div class="title-container">
+                <hr class="out-bord" />
+                <h2 style="text-align: center;">Benvenuti alla</h2>
+                <h1 style="text-align: center;">New Fitness Point</h1>
+            </div>
+            <div class="desc-container">
+                <p style="text-align: center;">
+                    Dal 2007 ben saldi in Giaveno con innovazione nel mondo del fitness.<br/>
+                    Nulla di improvvisato, da sempre PROFESSIONISTI nel settore fitness e wellness, con oltre 30 anni di esperienza!<br/>
+                    <br/>
+                    Manteniamo alto e costante il livello di performance e capacità che ci contraddistingue dalla fortuita improvvisazione di chi nel settore offre solo apparenze e novità clonate e poco innovative.
+                    Molteplici le attività per tutti, bimbi/e da 3/4 anni fino a over 50/60/70/80 e ben oltre.
+                    Il tutto plasmato e garantito da risultati fisici, salutari e tangibili oltre che agonistici su ogni disciplina, TUTTO DOCUMENTABILE E SU TUTTI I LIVELLI IN OGNI SPORT FISICO O SEMPLICE WELLNESS.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLOGAN -->
+    <div class="article-container">
+        <div *ngFor='let article of articles' class="article">
+            <article>
+                <span class="icon" [ngStyle]="changeBackground(article.pos)"><span></span></span>
+                <div class="content">
+                    <h2>{{article.title}}</h2>
+                    <div>
+                        <p>{{article.desc}}</p>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+
+    <!-- NEWS -->
+    <h1>{{newsTitle}}</h1> 
+    <div class="news" *ngFor="let news of newsList">
+        <mat-card class="box">
+
+            <div *ngIf="checkEmpty(news.image)" class="bg-image" [ngStyle]="loadBackground(news.image)"></div>
+
+            <iframe *ngIf="checkEmpty(news.video)" class="vid-frame" [src]="(embedUrl + news.video) | safe" 
+                frameborder="0" allowfullscreen>
+            </iframe>
+
+            <div class="text">
+                <h4>{{ news.title }}</h4>
+
+                <span class="time"><i class="material-icons">calendar_today</i>{{ news.date | date: "dd/MM/yyyy" }}</span>
+                
+                <div class="desc">
+                    <p>{{ (news.desc.length>80) ? (news.desc | slice:0:80)+'...' : (news.desc) }}</p>
+                </div>
+                <a mat-raised-button class="btn-open btn btn-xs btn-info" (click)="openDialogNews(news)">{{ changeLabel(news) }}</a>
+            </div>
+        </mat-card>
+    </div>
+
+    <!-- CALENDAR -->
+    <h1>{{calendarTitle}}</h1> 
+    <div class="tab-corsi">
+
+        <div class="table">
+            <div class="row head day">
+                <div style="display: table-cell"></div>
+                <div style="display: table-cell">lunedì</div>
+                <div style="display: table-cell">martedì</div>
+                <div style="display: table-cell">mercoledì</div>
+                <div style="display: table-cell">giovedì</div>
+                <div style="display: table-cell">venerdì</div>
+            </div>
+            <div class="row" *ngFor='let course of courses; let first = first; let last = last;' >
+                <div [ngClass]="isFirstLast(first, last)" class='head ore'>{{ course.Time }}</div>
+                <div [ngClass]="(course.Monday.length > 0)? 'filled' :'empty'" class="cell">
+                    <a *ngFor='let activity of course.Monday' [routerLink]="['/activity', activity.Link]">{{ activity.Name | capitalize }} {{ getNote(activity) }}</a>
+                </div>
+                <div [ngClass]="(course.Tuesday.length > 0)? 'filled' :'empty'" class="cell">
+                    <a *ngFor='let activity of course.Tuesday' [routerLink]="['/activity', activity.Link]">{{ activity.Name | capitalize }} {{ getNote(activity) }}</a>
+                </div>
+                <div [ngClass]="(course.Wednesday.length > 0)? 'filled' :'empty'" class="cell">
+                    <a *ngFor='let activity of course.Wednesday' [routerLink]="['/activity', activity.Link]">{{ activity.Name | capitalize }} {{ getNote(activity) }}</a>
+                </div>
+                <div [ngClass]="(course.Thursday.length > 0)? 'filled' :'empty'" class="cell">
+                    <a *ngFor='let activity of course.Thursday' [routerLink]="['/activity', activity.Link]">{{ activity.Name | capitalize }} {{ getNote(activity) }}</a>
+                </div>
+                <div [ngClass]="(course.Friday.length > 0)? 'filled' :'empty'" class="cell">
+                    <a *ngFor='let activity of course.Friday'  [routerLink]="['/activity', activity.Link]">{{ activity.Name | capitalize }} {{ getNote(activity) }}</a>
+                </div>
+            </div>
+        </div>
+
+        <h3>Sabato e Domenica Sala Pesi!</h3>
+
+    </div>
+
+</div>

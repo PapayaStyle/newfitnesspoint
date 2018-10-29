@@ -1,0 +1,23 @@
+<div class="popup">
+    <h2 mat-dialog-title>{{ news.title | capitalize }}</h2>
+    <div class="cnt-news" mat-dialog-content>
+        <div class="cnt-img" *ngIf="checkEmpty(news.image)">
+            <img [src]="news.image">
+        </div>
+        <div class="cnt-text">
+            <span class="time">
+                <i class="material-icons">calendar_today</i>
+                {{ news.date | date: "dd/MM/yyyy" }}
+            </span>
+            <p>{{ news.desc }}</p>
+        </div>
+        <div class="cnt-video" *ngIf="checkEmpty(news.video)">
+            <iframe [src]="(embedUrl + news.video) | safe" 
+                frameborder="0" allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+
+    <mat-icon class="close" aria-label="chiudi" (click)="dialogRef.close()">clear</mat-icon>
+
+</div>
