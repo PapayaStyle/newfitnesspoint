@@ -1,7 +1,7 @@
 import { Component, OnInit, 
     HostListener, Inject } from '@angular/core';
 import { SharedService } from '../service/shared';
-
+//prova
 @Component({
     selector: 'app',
     templateUrl: '../template/app.component.html',
