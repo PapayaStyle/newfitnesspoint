@@ -1,105 +1,89 @@
 <div class="manage-news-popup">
 
-    <!-- START Preview -->
-    <div class="preview" *ngIf="showPreview">
-        <h2 mat-dialog-title>{{ news.title | capitalize }}</h2>
-        <div class="cnt-news" mat-dialog-content>
-            <div class="cnt-img" *ngIf="imgChecked">
-                <img [src]="news.image">
-            </div>
-            <div class="cnt-text">
-                <span class="time">
-                    <i class="material-icons">calendar_today</i>
-                    {{ news.date | date: "dd/MM/yyyy" }}
-                </span>
-                <p>{{ news.desc }}</p>
-            </div>
-            <div class="cnt-video" *ngIf="vidChecked">
-                <iframe [src]="(embedUrl + news.video) | safe" 
-                    frameborder="0" allowfullscreen>
-                </iframe>
-            </div>
-        </div>
+  <!-- START Preview -->
+  <div class="preview" *ngIf="showPreview">
+    <h2 mat-dialog-title>{{ news.title | capitalize }}</h2>
+    <div class="cnt-news" mat-dialog-content>
+      <div class="cnt-img" *ngIf="imgChecked">
+        <img [src]="news.image">
+      </div>
+      <div class="cnt-text">
+        <span class="time">
+          <i class="material-icons">calendar_today</i>
+          {{ news.date | date: "dd/MM/yyyy" }}
+        </span>
+        <p>{{ news.desc }}</p>
+      </div>
+      <div class="cnt-video" *ngIf="vidChecked">
+        <iframe [src]="(embedUrl + news.video) | safe" frameborder="0" allowfullscreen>
+        </iframe>
+      </div>
     </div>
-    <!-- END Preview -->
+  </div>
+  <!-- END Preview -->
 
-    <!-- START Form Edit -->
-    <form [formGroup]="newsForm" novalidate *ngIf="!showPreview">
-        <h2 mat-dialog-title>{{ news.head }}</h2>
-        <div mat-dialog-content class="content">
-           
-            <mat-form-field class="full-width">
-                <input matInput type="text" class="form-control" placeholder="Titolo"
-                    formControlName="title" maxlength="20" />
-            </mat-form-field>
+  <!-- START Form Edit -->
+  <form [formGroup]="newsForm" novalidate *ngIf="!showPreview">
+    <h2 mat-dialog-title>{{ news.head }}</h2>
+    <div mat-dialog-content class="content">
 
-            <mat-form-field class="textarea-width">
-                <textarea matInput placeholder="Descrizione" class="form-control"
-                    formControlName="desc"  >
+      <mat-form-field class="full-width">
+        <input matInput type="text" class="form-control" placeholder="Titolo" formControlName="title" maxlength="20" />
+      </mat-form-field>
+
+      <mat-form-field class="textarea-width">
+        <textarea matInput placeholder="Descrizione" class="form-control" formControlName="desc">
                 </textarea>
-            </mat-form-field>
+      </mat-form-field>
 
-            <mat-form-field class="date-picker">
-                <input matInput [matDatepicker]="picker" class="form-control" 
-                    placeholder="Data validità" formControlName="date">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
+      <mat-form-field class="date-picker">
+        <input matInput [matDatepicker]="picker" class="form-control" placeholder="Data validità" formControlName="date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
 
-            <mat-slide-toggle 
-                [checked]="vidChecked"
-                (change)="vidToggle($event)">
-                Inserisci URL YouTube
-            </mat-slide-toggle><br>
-            <mat-slide-toggle 
-                [checked]="imgChecked"
-                (change)="imgToggle($event)">
-                Inserisci immagine
-            </mat-slide-toggle><br>
+      <mat-slide-toggle [checked]="vidChecked" (change)="vidToggle($event)">
+        Inserisci URL YouTube
+      </mat-slide-toggle><br>
+      <mat-slide-toggle [checked]="imgChecked" (change)="imgToggle($event)">
+        Inserisci immagine
+      </mat-slide-toggle><br>
 
-            <mat-form-field *ngIf="vidChecked" class="full-width">
-                <input matInput class="form-control" placeholder="URL YouTube"
-                    formControlName="video" />
-            </mat-form-field>
-            
-            <image-upload *ngIf="imgChecked" class="imageUpload"
-                buttonCaption="Carica immagine"
-                dropBoxMessage="Trascina immagine"
-                clearButtonCaption="Cancella"
-                max="1"
-                [uploadedFiles]="[previewImage]"
-                (uploadFinished)="onUploadFinished($event)">
-            </image-upload>
+      <mat-form-field *ngIf="vidChecked" class="full-width">
+        <input matInput class="form-control" placeholder="URL YouTube" formControlName="video" />
+      </mat-form-field>
 
-            <mat-checkbox class="show-box" formControlName="show">Mostra</mat-checkbox>
+      <image-upload *ngIf="imgChecked" class="imageUpload" buttonCaption="Carica immagine" dropBoxMessage="Trascina immagine"
+        clearButtonCaption="Cancella" max="1" [uploadedFiles]="[previewImage]" (uploadFinished)="onUploadFinished($event)">
+      </image-upload>
 
-            <button mat-raised-button color="warn" class="pull-left" (click)="clearForm()">
-                <mat-icon>clear</mat-icon>
-                Pulisci
-            </button>
+      <mat-checkbox class="show-box" formControlName="show">Mostra</mat-checkbox>
 
-            <button mat-raised-button color="primary" class="pull-right"
-                (click)="save(newsForm.value)" [disabled]="checkValid()" >
-                <mat-icon>save</mat-icon>
-                Salva
-            </button>
-        </div>
-    </form>
-    <!-- END Form Edit -->
+      <button mat-raised-button color="warn" class="pull-left" (click)="clearForm()">
+        <mat-icon>clear</mat-icon>
+        Pulisci
+      </button>
 
-    <!-- BOX Buttons -->
-    <div class="box-buttons">
-        <button mat-raised-button color="accent" (click)="showHidePreview()">
-            <mat-icon>{{ previewIcon }}</mat-icon>
-            {{ previewLabel }}
-        </button>
-        <button mat-raised-button color="warn" (click)="openChooseDialog()"
-            *ngIf="news.id != null">
-            <mat-icon>delete</mat-icon>
-            Elimina
-        </button>
+      <button mat-raised-button color="primary" class="pull-right" (click)="save(newsForm.value)" [disabled]="checkValid()">
+        <mat-icon>save</mat-icon>
+        Salva
+      </button>
     </div>
+  </form>
+  <!-- END Form Edit -->
 
-    <mat-icon class="close" aria-label="chiudi" (click)="dialogRef.close()">clear</mat-icon>
+  <!-- BOX Buttons -->
+  <div class="box-buttons">
+    <button mat-raised-button color="accent" (click)="showHidePreview()">
+      <mat-icon>{{ previewIcon }}</mat-icon>
+      {{ previewLabel }}
+    </button>
+    <button mat-raised-button color="warn" (click)="openChooseDialog()" *ngIf="news.id != null">
+      <mat-icon>delete</mat-icon>
+      Elimina
+    </button>
+  </div>
+
+  <mat-icon class="close" aria-label="chiudi" (click)="dialogRef.close()">clear</mat-icon>
 
 </div>

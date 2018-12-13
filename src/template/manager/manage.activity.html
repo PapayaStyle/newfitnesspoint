@@ -1,40 +1,30 @@
 <h3>Gestione Attività</h3>
 
 <div class="message" *ngIf="showMsg">
-    {{message}}
+  {{message}}
 </div>
 
 <div class="btn-box">
-    <button mat-raised-button color="accent" (click)="openActivityDialog(null)">
-        <mat-icon>add</mat-icon>
-        Aggiungi attività
-    </button>
+  <button mat-raised-button color="accent" (click)="openActivityDialog(null)">
+    <mat-icon>add</mat-icon>
+    Aggiungi attività
+  </button>
 
-    <button mat-raised-button color="accent" (click)="showHideActivity()">
-        <mat-icon>{{ showHideActivitiesIcon }}</mat-icon>
-        {{ showHideActivitiesLabel }}
-    </button>
-
-    <!--
-    <button (click)="openActivityDialog(null)" mat-raised-button class="btn btn-xs btn-info">
-        <i class="glyphicon glyphicon-plus">Aggiungi attività</i>
-    </button>
-    <button (click)="showHideActivity()" mat-raised-button class="btn btn-xs btn-info">
-        <i class="glyphicon glyphicon-plus">{{showHideActivitiesLabel}}</i>
-    </button>
-    -->
+  <button mat-raised-button color="accent" (click)="showHideActivity()">
+    <mat-icon>{{ showHideActivitiesIcon }}</mat-icon>
+    {{ showHideActivitiesLabel }}
+  </button>
 </div>
 
 <div class="act-container" *ngIf="showActivities">
-    <div class="activity" *ngFor="let activity of activities" 
-        (click)="openActivityDialog(activity)">
-        <div id="{{activity.link}}">
-            <div class="image">
-                <img src="{{activity.image}}" >
-            </div>
-            <article>
-                <h2>{{activity.title | capitalize }}</h2>
-            </article>
-        </div>
+  <div class="activity" *ngFor="let activity of activities" (click)="openActivityDialog(activity)">
+    <div id="{{activity.link}}">
+      <div class="image">
+        <img src="{{activity.image}}">
+      </div>
+      <article>
+        <h2>{{activity.title | capitalize }}</h2>
+      </article>
     </div>
+  </div>
 </div>

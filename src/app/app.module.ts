@@ -43,6 +43,7 @@ import { ManageInfoDialogComponent } from '../component/manager/component.manage
 import { ChooseDialogComponent } from '../component/manager/component.choose.dialog';
 import { InputTextDialogComponent } from '../component/manager/component.input.text.dialog';
 
+import { BaseService } from '../service/base.service';
 import { ServicePHP } from '../service/service';
 import { AuthGuard } from '../service/auth.guard';
 import { SharedService } from '../service/shared';
@@ -53,6 +54,7 @@ import { PipeSafe } from '../pipe/pipe.safe.url';
 
 import { Routing } from './app.routing';
 import { HeaderInterceptor } from '../service/interceptor';
+
 
 registerLocaleData(localeIt, 'it');
 @NgModule({
@@ -86,7 +88,7 @@ registerLocaleData(localeIt, 'it');
     ],
     bootstrap: [ AppComponent ],
     providers: [ { provide: LOCALE_ID, useValue: 'it' },
-        ServicePHP, AuthGuard, SharedService, CookieService , 
+      BaseService, ServicePHP, AuthGuard, SharedService, CookieService , 
         {
             provide: HTTP_INTERCEPTORS,
             useClass: HeaderInterceptor,

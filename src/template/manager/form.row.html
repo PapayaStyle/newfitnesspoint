@@ -1,201 +1,122 @@
 <form [formGroup]="rowFormGroup" novalidate>
-    <div class="dym-table row-form">
-        <div class="dym-row">
+  <div class="dym-table row-form">
+    <div class="dym-row">
 
-            <!-- HOUR -->
-            <div class="dym-cell">
-                <mat-form-field class="short-width">
-                    <input matInput type="text" placeholder="Ora"
-                        formControlName="hour" maxlength="5" />
-                </mat-form-field>
-                <!--
-                <input type="text" class="form-control" formControlName="hour">
-                -->
-            </div>
+      <!-- HOUR -->
+      <div class="dym-cell">
+        <mat-form-field class="short-width">
+          <input matInput type="text" placeholder="Ora" formControlName="hour" maxlength="5" />
+        </mat-form-field>
+      </div>
 
-            <!-- MONDAY -->
-            <div class="dym-cell" [ngClass]="isFilled('monday')" formArrayName="monday">
-                <div *ngFor="let activity of rowFormGroup.controls.monday.controls; let i=index" 
-                    class="dym-item">
-                    <div style="display: inline-block;">
-                        <button mat-raised-button color="warn" class="btn-icon" 
-                            (click)="removeActivity(i, 'monday')">
-                            <mat-icon aria-label="Rimuovi attività">delete</mat-icon>
-                        </button>
-                        <!--
-                        <button (click)="removeActivity(i, 'monday')" class="btn btn-xs btn-danger">
-                            <i class="glyphicon glyphicon-remove">X</i>
-                        </button>
-                        -->
-                    </div>
-                    <div class="dym-cell-act" [formGroupName]="i">
-                        <activity 
-                            [activityFormGroup]="rowFormGroup.controls.monday.controls[i]"
-                            [activities]="activities">
-                        </activity>
-                    </div>
-                </div>
-
-                <div class="add-activity">
-                    <button mat-raised-button color="accent" class="btn-icon" 
-                        (click)="addActivity('monday')">
-                        <mat-icon aria-label="Aggiungi attività">add</mat-icon>
-                    </button>
-                    <!--
-                    <button (click)="addActivity('monday')" class="btn btn-xs btn-info">
-                        <i class="glyphicon glyphicon-plus">+</i>
-                    </button>
-                    -->
-                </div>
-            </div>
-
-            <!-- TUESDAY -->
-            <div class="dym-cell" [ngClass]="isFilled('tuesday')" formArrayName="tuesday">
-                <div *ngFor="let activity of rowFormGroup.controls.tuesday.controls; let i=index" 
-                    class="dym-item">
-                    <div style="display: inline-block;">
-                        <button mat-raised-button color="warn" class="btn-icon" 
-                            (click)="removeActivity(i, 'tuesday')">
-                            <mat-icon aria-label="Rimuovi attività">delete</mat-icon>
-                        </button>
-                        <!--
-                        <button (click)="removeActivity(i, 'tuesday')" class="btn btn-xs btn-danger">
-                            <i class="glyphicon glyphicon-remove">X</i>
-                        </button>
-                        -->
-                    </div>
-                    <div class="dym-cell-act" [formGroupName]="i">
-                        <activity 
-                            [activityFormGroup]="rowFormGroup.controls.tuesday.controls[i]"
-                            [activities]="activities">
-                        </activity>
-                    </div>
-                </div>
-
-                <div class="add-activity">
-                    <button mat-raised-button color="accent" class="btn-icon" 
-                        (click)="addActivity('tuesday')">
-                        <mat-icon aria-label="Aggiungi attività">add</mat-icon>
-                    </button>
-                    <!--
-                    <button (click)="addActivity('tuesday')" class="btn btn-xs btn-info">
-                        <i class="glyphicon glyphicon-plus">+</i>
-                    </button>
-                    -->
-                </div>
-            </div>
-
-            <!-- WEDNESDAY -->
-            <div class="dym-cell" [ngClass]="isFilled('wednesday')" formArrayName="wednesday">
-                <div *ngFor="let activity of rowFormGroup.controls.wednesday.controls; let i=index" 
-                    class="dym-item">
-                    <div style="display: inline-block;">
-                        <button mat-raised-button color="warn" class="btn-icon" 
-                            (click)="removeActivity(i, 'wednesday')">
-                            <mat-icon aria-label="Rimuovi attività">delete</mat-icon>
-                        </button>
-                        <!--
-                        <button (click)="removeActivity(i, 'wednesday')" class="btn btn-xs btn-danger">
-                            <i class="glyphicon glyphicon-remove">X</i>
-                        </button>
-                        -->
-                    </div>
-                    <div class="dym-cell-act" [formGroupName]="i">
-                        <activity 
-                            [activityFormGroup]="rowFormGroup.controls.wednesday.controls[i]"
-                            [activities]="activities">
-                        </activity>
-                    </div>
-                </div>
-
-                <div class="add-activity">
-                    <button mat-raised-button color="accent" class="btn-icon" 
-                        (click)="addActivity('wednesday')">
-                        <mat-icon aria-label="Aggiungi attività">add</mat-icon>
-                    </button>
-                    <!--
-                    <button (click)="addActivity('wednesday')" class="btn btn-xs btn-info">
-                        <i class="glyphicon glyphicon-plus">+</i>
-                    </button>
-                    -->
-                </div>
-            </div>
-
-            <!-- THURSDAY -->
-            <div class="dym-cell" [ngClass]="isFilled('thursday')" formArrayName="thursday">
-                <div *ngFor="let activity of rowFormGroup.controls.thursday.controls; let i=index" 
-                    class="dym-item">
-                    <div style="display: inline-block;">
-                        <button mat-raised-button color="warn" class="btn-icon" 
-                            (click)="removeActivity(i, 'thursday')">
-                            <mat-icon aria-label="Rimuovi attività">delete</mat-icon>
-                        </button>
-                        <!--
-                        <button (click)="removeActivity(i, 'thursday')" class="btn btn-xs btn-danger">
-                            <i class="glyphicon glyphicon-remove">X</i>
-                        </button>
-                        -->
-                    </div>
-                    <div class="dym-cell-act" [formGroupName]="i">
-                        <activity 
-                            [activityFormGroup]="rowFormGroup.controls.thursday.controls[i]"
-                            [activities]="activities">
-                        </activity>
-                    </div>
-                </div>
-
-                <div class="add-activity">
-                    <button mat-raised-button color="accent" class="btn-icon" 
-                        (click)="addActivity('thursday')">
-                        <mat-icon aria-label="Aggiungi attività">add</mat-icon>
-                    </button>
-                    <!--
-                    <button (click)="addActivity('thursday')" class="btn btn-xs btn-info">
-                        <i class="glyphicon glyphicon-plus">+</i>
-                    </button>
-                    -->
-                </div>
-            </div>
-
-            <!-- FRIDAY -->
-            <div class="dym-cell" [ngClass]="isFilled('friday')" formArrayName="friday">
-                <div *ngFor="let activity of rowFormGroup.controls.friday.controls; let i=index" 
-                    class="dym-item">
-                    <div style="display: inline-block;">
-                        <button mat-raised-button color="warn" class="btn-icon" 
-                            (click)="removeActivity(i, 'friday')">
-                            <mat-icon aria-label="Rimuovi attività">delete</mat-icon>
-                        </button>
-                        <!--
-                        <button (click)="removeActivity(i, 'friday')" class="btn btn-xs btn-danger">
-                            <i class="glyphicon glyphicon-remove">X</i>
-                        </button>
-                        -->
-                    </div>
-                    <div class="dym-cell-act" [formGroupName]="i">
-                        <activity 
-                            [activityFormGroup]="rowFormGroup.controls.friday.controls[i]"
-                            [activities]="activities">
-                        </activity>
-                    </div>
-                </div>
-                
-                <div class="add-activity">
-                    <button mat-raised-button color="accent" class="btn-icon" 
-                        (click)="addActivity('friday')">
-                        <mat-icon aria-label="Aggiungi attività">add</mat-icon>
-                    </button>
-                    <!--
-                    <button (click)="addActivity('friday')" class="btn btn-xs btn-info">
-                        <i class="glyphicon glyphicon-plus">+</i>
-                    </button>
-                    -->
-                </div>
-            </div>
+      <!-- MONDAY -->
+      <div class="dym-cell" [ngClass]="isFilled('monday')" formArrayName="monday">
+        <div *ngFor="let activity of rowFormGroup.controls.monday.controls; let i=index" class="dym-item">
+          <div style="display: inline-block;">
+            <button mat-raised-button color="warn" class="btn-icon" (click)="removeActivity(i, 'monday')">
+              <mat-icon aria-label="Rimuovi attività">delete</mat-icon>
+            </button>
+          </div>
+          <div class="dym-cell-act" [formGroupName]="i">
+            <activity [activityFormGroup]="rowFormGroup.controls.monday.controls[i]" [activities]="activities">
+            </activity>
+          </div>
         </div>
-    </div>
 
-    <!--
+        <div class="add-activity">
+          <button mat-raised-button color="accent" class="btn-icon" (click)="addActivity('monday')">
+            <mat-icon aria-label="Aggiungi attività">add</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <!-- TUESDAY -->
+      <div class="dym-cell" [ngClass]="isFilled('tuesday')" formArrayName="tuesday">
+        <div *ngFor="let activity of rowFormGroup.controls.tuesday.controls; let i=index" class="dym-item">
+          <div style="display: inline-block;">
+            <button mat-raised-button color="warn" class="btn-icon" (click)="removeActivity(i, 'tuesday')">
+              <mat-icon aria-label="Rimuovi attività">delete</mat-icon>
+            </button>
+          </div>
+          <div class="dym-cell-act" [formGroupName]="i">
+            <activity [activityFormGroup]="rowFormGroup.controls.tuesday.controls[i]" [activities]="activities">
+            </activity>
+          </div>
+        </div>
+
+        <div class="add-activity">
+          <button mat-raised-button color="accent" class="btn-icon" (click)="addActivity('tuesday')">
+            <mat-icon aria-label="Aggiungi attività">add</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <!-- WEDNESDAY -->
+      <div class="dym-cell" [ngClass]="isFilled('wednesday')" formArrayName="wednesday">
+        <div *ngFor="let activity of rowFormGroup.controls.wednesday.controls; let i=index" class="dym-item">
+          <div style="display: inline-block;">
+            <button mat-raised-button color="warn" class="btn-icon" (click)="removeActivity(i, 'wednesday')">
+              <mat-icon aria-label="Rimuovi attività">delete</mat-icon>
+            </button>
+          </div>
+          <div class="dym-cell-act" [formGroupName]="i">
+            <activity [activityFormGroup]="rowFormGroup.controls.wednesday.controls[i]" [activities]="activities">
+            </activity>
+          </div>
+        </div>
+
+        <div class="add-activity">
+          <button mat-raised-button color="accent" class="btn-icon" (click)="addActivity('wednesday')">
+            <mat-icon aria-label="Aggiungi attività">add</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <!-- THURSDAY -->
+      <div class="dym-cell" [ngClass]="isFilled('thursday')" formArrayName="thursday">
+        <div *ngFor="let activity of rowFormGroup.controls.thursday.controls; let i=index" class="dym-item">
+          <div style="display: inline-block;">
+            <button mat-raised-button color="warn" class="btn-icon" (click)="removeActivity(i, 'thursday')">
+              <mat-icon aria-label="Rimuovi attività">delete</mat-icon>
+            </button>
+          </div>
+          <div class="dym-cell-act" [formGroupName]="i">
+            <activity [activityFormGroup]="rowFormGroup.controls.thursday.controls[i]" [activities]="activities">
+            </activity>
+          </div>
+        </div>
+
+        <div class="add-activity">
+          <button mat-raised-button color="accent" class="btn-icon" (click)="addActivity('thursday')">
+            <mat-icon aria-label="Aggiungi attività">add</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <!-- FRIDAY -->
+      <div class="dym-cell" [ngClass]="isFilled('friday')" formArrayName="friday">
+        <div *ngFor="let activity of rowFormGroup.controls.friday.controls; let i=index" class="dym-item">
+          <div style="display: inline-block;">
+            <button mat-raised-button color="warn" class="btn-icon" (click)="removeActivity(i, 'friday')">
+              <mat-icon aria-label="Rimuovi attività">delete</mat-icon>
+            </button>
+          </div>
+          <div class="dym-cell-act" [formGroupName]="i">
+            <activity [activityFormGroup]="rowFormGroup.controls.friday.controls[i]" [activities]="activities">
+            </activity>
+          </div>
+        </div>
+
+        <div class="add-activity">
+          <button mat-raised-button color="accent" class="btn-icon" (click)="addActivity('friday')">
+            <mat-icon aria-label="Aggiungi attività">add</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--
     <div class="margin-20">
         <div>rowFormGroup details:-</div>
         <pre>Is rowFormGroup valid?: <br>{{rowFormGroup.valid | json}}</pre>

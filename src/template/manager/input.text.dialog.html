@@ -1,22 +1,20 @@
 <div>
-    <h1 mat-dialog-title style="text-align: center">{{ dialog.title }}</h1>
-    <div mat-dialog-content>
-        <mat-form-field class="full-width">
-            <input matInput type="text" placeholder="{{dialog.title}}" [(ngModel)]="inputText" />
-            <button mat-button *ngIf="inputText" matSuffix mat-icon-button aria-label="Cancella" (click)="inputText=''">
-                <mat-icon>close</mat-icon>
-            </button>
-        </mat-form-field>
-    </div>
+  <h1 mat-dialog-title style="text-align: center">{{ dialog.title }}</h1>
+  <div mat-dialog-content>
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="{{dialog.title}}" [(ngModel)]="inputText" />
+      <button mat-button *ngIf="inputText" matSuffix mat-icon-button aria-label="Cancella" (click)="inputText=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
 
-    <button mat-raised-button class="mat-success pull-left"
-        (click)="closeDialog(true)">
-        <mat-icon aria-label="Conferma">done</mat-icon>
-        {{ dialog.btn_true }}
-    </button>
-    <button mat-raised-button color="warn" class="pull-right" 
-        (click)="closeDialog(false)" >
-        <mat-icon aria-label="Annulla">clear</mat-icon>
-        {{ dialog.btn_false }}
-    </button>
+  <button mat-raised-button class="mat-success pull-left" (click)="closeDialog(true)">
+    <mat-icon aria-label="Conferma">done</mat-icon>
+    {{ dialog.btn_true }}
+  </button>
+  <button mat-raised-button color="warn" class="pull-right" (click)="closeDialog(false)">
+    <mat-icon aria-label="Annulla">clear</mat-icon>
+    {{ dialog.btn_false }}
+  </button>
 </div>

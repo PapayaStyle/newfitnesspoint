@@ -1,78 +1,68 @@
 <div class="manage-staff-popup">
 
-    <!-- START Preview -->
-    <div class="preview" *ngIf="showPreview" >
-        <h1 mat-dialog-title>{{ staff.name | capitalize }}</h1>
-        <div class="cnt-staff">            
-            <div class="bg-img" [ngStyle]="changeBackground(staff.image)"></div>
-            <article>
-                <h2>{{ staff.name }}</h2>
-                <h4>{{ staff.activity }}</h4>
-                <p>{{ staff.desc }}</p>
-            </article>
-        </div>
+  <!-- START Preview -->
+  <div class="preview" *ngIf="showPreview">
+    <h1 mat-dialog-title>{{ staff.name | capitalize }}</h1>
+    <div class="cnt-staff">
+      <div class="bg-img" [ngStyle]="changeBackground(staff.image)"></div>
+      <article>
+        <h2>{{ staff.name }}</h2>
+        <h4>{{ staff.activity }}</h4>
+        <p>{{ staff.desc }}</p>
+      </article>
     </div>
-    <!-- END Preview -->
+  </div>
+  <!-- END Preview -->
 
-    <!-- START Form Edit -->
-    <form [formGroup]="staffForm" novalidate *ngIf="!showPreview">
-        <h1 mat-dialog-title>{{ staff.head }}</h1>
-        <div mat-dialog-content class="content">
-            
-            <mat-form-field class="full-width">
-                <input matInput type="text" class="form-control" placeholder="Nome"
-                    formControlName="name" maxlength="50" />
-            </mat-form-field>
+  <!-- START Form Edit -->
+  <form [formGroup]="staffForm" novalidate *ngIf="!showPreview">
+    <h1 mat-dialog-title>{{ staff.head }}</h1>
+    <div mat-dialog-content class="content">
 
-            <mat-form-field class="full-width">
-                <input matInput type="text" class="form-control" placeholder="Attività"
-                    formControlName="activity" maxlength="50" />
-            </mat-form-field>
+      <mat-form-field class="full-width">
+        <input matInput type="text" class="form-control" placeholder="Nome" formControlName="name" maxlength="50" />
+      </mat-form-field>
 
-            <mat-form-field class="textarea-width">
-                <textarea matInput placeholder="Descrizione" class="form-control"
-                    formControlName="desc"  >
+      <mat-form-field class="full-width">
+        <input matInput type="text" class="form-control" placeholder="Attività" formControlName="activity" maxlength="50" />
+      </mat-form-field>
+
+      <mat-form-field class="textarea-width">
+        <textarea matInput placeholder="Descrizione" class="form-control" formControlName="desc">
                 </textarea>
-            </mat-form-field>
-            
-            <image-upload class="imageUpload"
-                buttonCaption="Carica immagine"
-                dropBoxMessage="Trascina immagine"
-                clearButtonCaption="Cancella"
-                max="1"
-                [uploadedFiles]="[previewImage]"
-                (uploadFinished)="onUploadFinished($event)">
-            </image-upload>
+      </mat-form-field>
 
-            <mat-checkbox class="show-box" formControlName="show">Mostra</mat-checkbox>
+      <image-upload class="imageUpload" buttonCaption="Carica immagine" dropBoxMessage="Trascina immagine"
+        clearButtonCaption="Cancella" max="1" [uploadedFiles]="[previewImage]" (uploadFinished)="onUploadFinished($event)">
+      </image-upload>
 
-            <button mat-raised-button color="warn" class="pull-left" (click)="clearForm()">
-                <mat-icon>clear</mat-icon>
-                Pulisci
-            </button>
+      <mat-checkbox class="show-box" formControlName="show">Mostra</mat-checkbox>
 
-            <button mat-raised-button color="primary" class="pull-right"
-                (click)="save(staffForm.value)" [disabled]="!staffForm.valid">
-                <mat-icon>save</mat-icon>
-                Salva
-            </button>
-        </div>
-    </form>
-    <!-- END Form Edit -->
+      <button mat-raised-button color="warn" class="pull-left" (click)="clearForm()">
+        <mat-icon>clear</mat-icon>
+        Pulisci
+      </button>
 
-    <!-- BOX Buttons -->
-    <div class="box-buttons">
-        <button mat-raised-button color="accent" (click)="showHidePreview()">
-            <mat-icon>{{ previewIcon }}</mat-icon>
-            {{ previewLabel }}
-        </button>
-        <button mat-raised-button color="warn" (click)="openChooseDialog()"
-            *ngIf="staff.id != null">
-            <mat-icon>delete</mat-icon>
-            Elimina
-        </button>
+      <button mat-raised-button color="primary" class="pull-right" (click)="save(staffForm.value)" [disabled]="!staffForm.valid">
+        <mat-icon>save</mat-icon>
+        Salva
+      </button>
     </div>
+  </form>
+  <!-- END Form Edit -->
 
-    <mat-icon class="close" aria-label="chiudi" (click)="dialogRef.close()">clear</mat-icon>
+  <!-- BOX Buttons -->
+  <div class="box-buttons">
+    <button mat-raised-button color="accent" (click)="showHidePreview()">
+      <mat-icon>{{ previewIcon }}</mat-icon>
+      {{ previewLabel }}
+    </button>
+    <button mat-raised-button color="warn" (click)="openChooseDialog()" *ngIf="staff.id != null">
+      <mat-icon>delete</mat-icon>
+      Elimina
+    </button>
+  </div>
+
+  <mat-icon class="close" aria-label="chiudi" (click)="dialogRef.close()">clear</mat-icon>
 
 </div>

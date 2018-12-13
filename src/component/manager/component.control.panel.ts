@@ -8,38 +8,38 @@ import { Account } from '../../models/account';
 import { CookieService } from '../../../node_modules/ngx-cookie-service';
 
 @Component({
-    selector: 'app-panel',
-    templateUrl: '../../template/manager/control.panel.html',
-    styleUrls: ['../../css/manager/control-panel.css']
+  selector: 'app-panel',
+  templateUrl: '../../template/manager/control.panel.html',
+  styleUrls: ['../../css/manager/control-panel.css']
 })
 export class ControlPanelComponent implements OnInit {
 
-    public welcomeMessage: boolean;
-    public account: string;
-    public controlMenuSelected;
+  public welcomeMessage: boolean;
+  public account: string;
+  public controlMenuSelected;
 
-    constructor(private service: ServicePHP,
-        private cookie: CookieService,
-        private shareService: SharedService,
-        private router: Router) {
-        this.router.events.subscribe(route => {
-            //console.log('Control Panel -> ' + router.url);
-            this.welcomeMessage = router.url.endsWith('control-panel');
-        });
-    }
+  constructor(private service: ServicePHP,
+    private cookie: CookieService,
+    private shareService: SharedService,
+    private router: Router) {
+    this.router.events.subscribe(route => {
+      //console.log('Control Panel -> ' + router.url);
+      this.welcomeMessage = router.url.endsWith('control-panel');
+    });
+  }
 
-    ngOnInit() {
-        this.account = this.cookie.get('account');
-        this.shareService.controlMenuSelected
-            .subscribe( selection => this.controlMenuSelected = selection );
-    }
-    
-    doLogout() {
-        this.service.logout();
-        this.router.navigate(['/login']);
-    }
+  ngOnInit() {
+    this.account = this.cookie.get('account');
+    this.shareService.controlMenuSelected
+      .subscribe(selection => this.controlMenuSelected = selection);
+  }
 
-    updateSelector(value: string) {
-        this.shareService.changeControlMenuSelection(value);
-    }
+  doLogout() {
+    this.service.logout();
+    this.router.navigate(['/login']);
+  }
+
+  updateSelector(value: string) {
+    this.shareService.changeControlMenuSelection(value);
+  }
 }

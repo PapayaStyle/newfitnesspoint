@@ -1,55 +1,42 @@
 <mat-sidenav-container [hasBackdrop]="true">
-    <mat-sidenav position="end" mode="over" class="sidenav-control-cnt" 
-        #sideControlMenu mat-swipe-left="sideControlMenu.open()">
+  <mat-sidenav position="end" mode="over" class="sidenav-control-cnt" #sideControlMenu mat-swipe-left="sideControlMenu.open()">
 
-        <div class="sidenav-logout"> 
-            <p>Benvenuto <strong>{{ account }}</strong></p>
-            <button mat-button (click)="doLogout(); sideControlMenu.close()">Logout</button>
-        </div>
+    <div class="sidenav-logout">
+      <p>Benvenuto <strong>{{ account }}</strong></p>
+      <button mat-button (click)="doLogout(); sideControlMenu.close()">Logout</button>
+    </div>
 
-        <nav class="sidenav-control-menu">
-            <ul>
-                <li [ngClass]="(controlMenuSelected == 'table') ? 'selected' :''"  
-                    routerLink="./table" 
-                    (click)="updateSelector('table'); sideControlMenu.close();">
-                    <span>Tabella Corsi</span>
-                </li>
-                <li [ngClass]="(controlMenuSelected == 'activity') ? 'selected' :''"  
-                    routerLink="./activity" 
-                    (click)="updateSelector('activity'); sideControlMenu.close();">
-                    <span>Attività</span>
-                </li>
-                <li [ngClass]="(controlMenuSelected == 'news') ? 'selected' :''"  
-                    routerLink="./news" 
-                    (click)="updateSelector('news'); sideControlMenu.close();">
-                    <span>News</span>
-                </li>
-                <li [ngClass]="(controlMenuSelected == 'staff') ? 'selected' :''"  
-                    routerLink="./staff" 
-                    (click)="updateSelector('staff'); sideControlMenu.close();">
-                    <span>Staff</span>
-                </li>
-                <li [ngClass]="(controlMenuSelected == 'info') ? 'selected' :''"  
-                    routerLink="./info" 
-                    (click)="updateSelector('info'); sideControlMenu.close();">
-                    <span>Info e Slogan</span>
-                </li>
-                <li [ngClass]="(controlMenuSelected == 'gallery') ? 'selected' :''"  
-                    routerLink="./gallery" 
-                    (click)="updateSelector('gallery'); sideControlMenu.close();">
-                    <span>Galleria</span>
-                </li>
-            </ul>
-        </nav>
+    <nav class="sidenav-control-menu">
+      <ul>
+        <li [ngClass]="(controlMenuSelected == 'table') ? 'selected' :''" routerLink="./table" (click)="updateSelector('table'); sideControlMenu.close();">
+          <span>Tabella Corsi</span>
+        </li>
+        <li [ngClass]="(controlMenuSelected == 'activity') ? 'selected' :''" routerLink="./activity" (click)="updateSelector('activity'); sideControlMenu.close();">
+          <span>Attività</span>
+        </li>
+        <li [ngClass]="(controlMenuSelected == 'news') ? 'selected' :''" routerLink="./news" (click)="updateSelector('news'); sideControlMenu.close();">
+          <span>News</span>
+        </li>
+        <li [ngClass]="(controlMenuSelected == 'staff') ? 'selected' :''" routerLink="./staff" (click)="updateSelector('staff'); sideControlMenu.close();">
+          <span>Staff</span>
+        </li>
+        <li [ngClass]="(controlMenuSelected == 'info') ? 'selected' :''" routerLink="./info" (click)="updateSelector('info'); sideControlMenu.close();">
+          <span>Info e Slogan</span>
+        </li>
+        <li [ngClass]="(controlMenuSelected == 'gallery') ? 'selected' :''" routerLink="./gallery" (click)="updateSelector('gallery'); sideControlMenu.close();">
+          <span>Galleria</span>
+        </li>
+      </ul>
+    </nav>
 
-    </mat-sidenav>
-    <mat-sidenav-content>
-        <app-control-header [sideControlMenu]='sideControlMenu'></app-control-header>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-control-header [sideControlMenu]='sideControlMenu'></app-control-header>
 
-        <div id="main-container">
-            <router-outlet>
-                <h2 *ngIf="welcomeMessage">Benvenuto al Pannello di controllo!</h2>
-            </router-outlet>
-        </div>
-    </mat-sidenav-content>
+    <div id="main-container">
+      <router-outlet>
+        <h2 *ngIf="welcomeMessage">Benvenuto al Pannello di controllo!</h2>
+      </router-outlet>
+    </div>
+  </mat-sidenav-content>
 </mat-sidenav-container>

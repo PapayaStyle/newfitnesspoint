@@ -1,12 +1,12 @@
-<div class="container" >
+<div class="container">
 
-    <div class="box" *ngFor="let staff of staffList">
-        <div class="bg-img" [ngStyle]="changeBackground(staff.image)"></div>
-        <article>
-            <h1>{{ staff.name }}</h1>
-            <h2>{{ staff.activity }}</h2>
-            <p>{{ staff.desc }}</p>
-        </article>
-    </div>
+  <div class="box" *ngFor="let staff of staffList">
+    <div class="bg-img" [ngStyle]="changeBackground(staff.image)"></div>
+    <article>
+      <h1>{{ staff.name }}</h1>
+      <h2>{{ staff.activity }}</h2>
+      <p>{{ staff.desc }}</p>
+    </article>
+  </div>
 
 </div>

@@ -1,61 +1,57 @@
 <div class="manage-info-popup">
 
-    <!-- START Preview -->
-    <div class="preview" *ngIf="showPreview">
-        <h2 mat-dialog-title>{{ info.title | capitalize }}</h2>
-        <div class="cnt-info" mat-dialog-content>
-            <div class="cnt-text">
-                <p>{{ info.desc }}</p>
-            </div>
-        </div>
+  <!-- START Preview -->
+  <div class="preview" *ngIf="showPreview">
+    <h2 mat-dialog-title>{{ info.title | capitalize }}</h2>
+    <div class="cnt-info" mat-dialog-content>
+      <div class="cnt-text">
+        <p>{{ info.desc }}</p>
+      </div>
     </div>
-    <!-- END Preview -->
+  </div>
+  <!-- END Preview -->
 
-    <!-- START Form Edit -->
-    <form [formGroup]="infoForm" novalidate *ngIf="!showPreview">
-        <h2 mat-dialog-title>{{ info.head }}</h2>
-        <div mat-dialog-content class="content">
-           
-            <mat-form-field class="full-width">
-                <input matInput type="text" class="form-control" placeholder="Titolo"
-                    formControlName="title" maxlength="20" />
-            </mat-form-field>
+  <!-- START Form Edit -->
+  <form [formGroup]="infoForm" novalidate *ngIf="!showPreview">
+    <h2 mat-dialog-title>{{ info.head }}</h2>
+    <div mat-dialog-content class="content">
 
-            <mat-form-field class="textarea-width">
-                <textarea matInput placeholder="Descrizione" class="form-control"
-                    formControlName="desc"  >
+      <mat-form-field class="full-width">
+        <input matInput type="text" class="form-control" placeholder="Titolo" formControlName="title" maxlength="20" />
+      </mat-form-field>
+
+      <mat-form-field class="textarea-width">
+        <textarea matInput placeholder="Descrizione" class="form-control" formControlName="desc">
                 </textarea>
-            </mat-form-field>
+      </mat-form-field>
 
-            <mat-checkbox class="show-box" formControlName="show">Mostra</mat-checkbox>
+      <mat-checkbox class="show-box" formControlName="show">Mostra</mat-checkbox>
 
-            <button mat-raised-button color="warn" class="pull-left" (click)="clearForm()">
-                <mat-icon>clear</mat-icon>
-                Pulisci
-            </button>
+      <button mat-raised-button color="warn" class="pull-left" (click)="clearForm()">
+        <mat-icon>clear</mat-icon>
+        Pulisci
+      </button>
 
-            <button mat-raised-button color="primary" class="pull-right"
-                (click)="save(infoForm.value)" [disabled]="checkValid()" >
-                <mat-icon>save</mat-icon>
-                Salva
-            </button>
-        </div>
-    </form>
-    <!-- END Form Edit -->
-
-    <!-- BOX Buttons -->
-    <div class="box-buttons">
-        <button mat-raised-button color="accent" (click)="showHidePreview()">
-            <mat-icon>{{ previewIcon }}</mat-icon>
-            {{ previewLabel }}
-        </button>
-        <button mat-raised-button color="warn" (click)="openChooseDialog()"
-            *ngIf="info.id != null">
-            <mat-icon>delete</mat-icon>
-            Elimina
-        </button>
+      <button mat-raised-button color="primary" class="pull-right" (click)="save(infoForm.value)" [disabled]="checkValid()">
+        <mat-icon>save</mat-icon>
+        Salva
+      </button>
     </div>
+  </form>
+  <!-- END Form Edit -->
 
-    <mat-icon class="close" aria-label="chiudi" (click)="dialogRef.close()">clear</mat-icon>
+  <!-- BOX Buttons -->
+  <div class="box-buttons">
+    <button mat-raised-button color="accent" (click)="showHidePreview()">
+      <mat-icon>{{ previewIcon }}</mat-icon>
+      {{ previewLabel }}
+    </button>
+    <button mat-raised-button color="warn" (click)="openChooseDialog()" *ngIf="info.id != null">
+      <mat-icon>delete</mat-icon>
+      Elimina
+    </button>
+  </div>
+
+  <mat-icon class="close" aria-label="chiudi" (click)="dialogRef.close()">clear</mat-icon>
 
 </div>

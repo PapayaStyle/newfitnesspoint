@@ -1,17 +1,17 @@
 <div [formGroup]="activityFormGroup" class="act-form">
 
-    <mat-form-field class="select-act" >
-        <mat-select placeholder="Seleziona Attività" formControlName="activity" name="activity">
-            <mat-option *ngFor="let activity of activities" [value]="activity.id">
-                {{ activity.title | capitalize }}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
+  <mat-form-field class="select-act">
+    <mat-select placeholder="Seleziona Attività" formControlName="activity" name="activity">
+      <mat-option *ngFor="let activity of activities" [value]="activity.id">
+        {{ activity.title | capitalize }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
-    <input matInput hidden="true" type="text" formControlName="note" />
+  <input matInput hidden="true" type="text" formControlName="note" />
 
-    <button mat-icon-button class="note" *ngIf="showNotes()" (click)="openNotesDialog()">
-        <mat-icon aria-label="note">{{ iconNote }}</mat-icon>
-    </button>
-    
+  <button mat-icon-button class="note" *ngIf="showNotes()" (click)="openNotesDialog()">
+    <mat-icon aria-label="note">{{ iconNote }}</mat-icon>
+  </button>
+
 </div>

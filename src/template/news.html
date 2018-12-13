@@ -1,36 +1,35 @@
 <div class="news-container">
-    <div class="news" *ngFor="let news of newsList"> 
+  <div class="news" *ngFor="let news of newsList">
     <!-- <ng-container *ngFor="let news of newsList">
         <figure class="news" *ngIf="news.show==1">-->
-            <mat-card class="box">
+    <mat-card class="box">
 
-                <div *ngIf="checkEmpty(news.image)" class="bg-image" [ngStyle]="loadBackground(news.image)"></div>
+      <div *ngIf="checkEmpty(news.image)" class="bg-image" [ngStyle]="loadBackground(news.image)"></div>
 
-                <iframe *ngIf="checkEmpty(news.video)" class="vid-frame" [src]="(embedUrl + news.video) | safe" 
-                    frameborder="0" allowfullscreen>
-                </iframe>
+      <iframe *ngIf="checkEmpty(news.video)" class="vid-frame" [src]="(embedUrl + news.video) | safe" frameborder="0"
+        allowfullscreen>
+      </iframe>
 
-                <div class="text">
-                    <h4>{{ news.title }}</h4>
+      <div class="text">
+        <h4>{{ news.title }}</h4>
 
-                    <span class="time">
-                        <mat-icon class="calendar-icon">calendar_today</mat-icon>
-                        {{ news.date | date: "dd MMMM yyyy" }}
-                    </span>
-                    
-                    <div class="desc">
-                        <p>{{ (news.desc.length>80) ? (news.desc | slice:0:80)+'...' : (news.desc) }}</p>
-                    </div>
+        <span class="time">
+          <mat-icon class="calendar-icon">calendar_today</mat-icon>
+          {{ news.date | date: "dd MMMM yyyy" }}
+        </span>
 
-                    <button mat-raised-button color="accent" class="btn-open" 
-                        (click)="openDialogNews(news)">
-                        <mat-icon>visibility</mat-icon>
-                        Visualizza altro
-                    </button>
-                </div>
-            </mat-card>
+        <div class="desc">
+          <p>{{ (news.desc.length>80) ? (news.desc | slice:0:80)+'...' : (news.desc) }}</p>
         </div>
-        <!-- </figure>
+
+        <button mat-raised-button color="accent" class="btn-open" (click)="openDialogNews(news)">
+          <mat-icon>visibility</mat-icon>
+          Visualizza altro
+        </button>
+      </div>
+    </mat-card>
+  </div>
+  <!-- </figure>
         
     </ng-container> -->
 </div>

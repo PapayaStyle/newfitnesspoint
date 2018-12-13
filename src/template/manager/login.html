@@ -1,39 +1,36 @@
 <div class="login">
 
-    <h3>Login</h3>
+  <h3>Login</h3>
 
-    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="login-form">
+  <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="login-form">
 
-        <p class="message" *ngIf="error!=null">{{ error.message }}</p>
+    <p class="message" *ngIf="error!=null">{{ error.message }}</p>
 
-        <mat-form-field class="full-width">
-            <mat-label>Username</mat-label>
-            <input matInput type="text" formControlName="username" 
-                placeholder="Username *" [(ngModel)]="username"/>
-            <button mat-icon-button matSuffix *ngIf="username" (click)="username=''">
-                <mat-icon>close</mat-icon>
-            </button>
-        </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Username</mat-label>
+      <input matInput type="text" formControlName="username" placeholder="Username *" [(ngModel)]="username" />
+      <button mat-icon-button matSuffix *ngIf="username" (click)="username=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
 
-        <mat-form-field class="full-width">
-            <mat-label>Password</mat-label>
-            <input matInput type="password" formControlName="password" 
-                placeholder="Password *" [(ngModel)]="password"/>
-            <button mat-icon-button matSuffix *ngIf="password" (click)="password=''">
-                <mat-icon>close</mat-icon>
-            </button>
-            <!--
+    <mat-form-field class="full-width">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" formControlName="password" placeholder="Password *" [(ngModel)]="password" />
+      <button mat-icon-button matSuffix *ngIf="password" (click)="password=''">
+        <mat-icon>close</mat-icon>
+      </button>
+      <!--
             <button mat-button *ngIf="password" matSuffix mat-icon-button aria-label="Clear" (click)="password=''">
                 <mat-icon>close</mat-icon>
             </button>
             -->
-        </mat-form-field>
+    </mat-form-field>
 
-        <button mat-raised-button class="submit" color="accent"
-            type="submit" [disabled]="!form.valid">
-            <i class="glyphicon glyphicon-plus">Login</i>
-        </button>
-        <!--
+    <button mat-raised-button class="submit" color="accent" type="submit" [disabled]="!form.valid">
+      <i class="glyphicon glyphicon-plus">Login</i>
+    </button>
+    <!--
         <fieldset>
             <div class="username">
                 <input type="text" name="username" id="username" 
@@ -47,11 +44,11 @@
 
             <input class="submit" type="submit" [disabled]="!form.valid" value="Login">
         </fieldset>
-        -->    
-    </form>
+        -->
+  </form>
 
-    
-    <!--
+
+  <!--
     <div *ngIf="account!=null" style="background-color: white">
         Response from Server
         <p>Token: {{account.token}}</p>

@@ -1,62 +1,61 @@
 <div class="container">
 
-    <div class="contact-cnt">
-        <h1>Contatti</h1>
-        <div class="article"> 
-            <div>
-                <h3>Indirizzo:</h3>
-                <p id="_address2" itemprop="address" itemtype="http://schema.org/PostalAddress"></p>
-                <p itemprop="streetAddress">Via Rametti, 1 bis</p>
-                <p itemprop="postalCode">10094</p>
-                <p itemprop="addressCountry">Giaveno (To), Italy</p>
-            </div>
-        </div>
-        <div class="article"> 
-            <div>
-                <h3>Orari apertura:</h3>
-                <p>Dal <strong>Lunerdì</strong> al <strong>Venerdì</strong> 09:30-22:00</p>
-                <p><strong>Sabato</strong> 10:00-17:00</p>
-                <p><strong>Domenica</strong> 10:00-12:30</p>
-            </div>
-        </div>
+  <div class="contact-cnt">
+    <h1>Contatti</h1>
+    <div class="article">
+      <div>
+        <h3>Indirizzo:</h3>
+        <p id="_address2" itemprop="address" itemtype="http://schema.org/PostalAddress"></p>
+        <p itemprop="streetAddress">Via Rametti, 1 bis</p>
+        <p itemprop="postalCode">10094</p>
+        <p itemprop="addressCountry">Giaveno (To), Italy</p>
+      </div>
     </div>
+    <div class="article">
+      <div>
+        <h3>Orari apertura:</h3>
+        <p>Dal <strong>Lunerdì</strong> al <strong>Venerdì</strong> 09:30-22:00</p>
+        <p><strong>Sabato</strong> 10:00-17:00</p>
+        <p><strong>Domenica</strong> 10:00-12:30</p>
+      </div>
+    </div>
+  </div>
 
 
-    <!-- <div class="form-container"> -->
-    <mat-card class="form-container">
-            <h2>Contattaci</h2>
-            <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
-                <div class="box-field-top">
-                    <mat-form-field class="name">
-                        <input matInput type="text" formControlName="name" placeholder="Nome *" />
-                    </mat-form-field>
+  <!-- <div class="form-container"> -->
+  <mat-card class="form-container">
+    <h2>Contattaci</h2>
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+      <div class="box-field-top">
+        <mat-form-field class="name">
+          <input matInput type="text" formControlName="name" placeholder="Nome *" />
+        </mat-form-field>
 
-                    <mat-form-field class="email">
-                        <input matInput type="text" formControlName="email" placeholder="E-mail *"/>
-                    </mat-form-field>
-                </div>
+        <mat-form-field class="email">
+          <input matInput type="text" formControlName="email" placeholder="E-mail *" />
+        </mat-form-field>
+      </div>
 
-                <mat-form-field class="subject">
-                    <input matInput type="text" formControlName="subject" placeholder="Oggetto *" />
-                </mat-form-field>
+      <mat-form-field class="subject">
+        <input matInput type="text" formControlName="subject" placeholder="Oggetto *" />
+      </mat-form-field>
 
-                <mat-form-field class="message">
-                    <textarea matInput formControlName="message" cols="40" rows="7" placeholder="Messaggio *" ></textarea>
-                </mat-form-field>
+      <mat-form-field class="message">
+        <textarea matInput formControlName="message" cols="40" rows="7" placeholder="Messaggio *"></textarea>
+      </mat-form-field>
 
-                <div class="box-buttons">
-                    <button mat-raised-button class="clear pull-left" color="warn" type="reset">
-                        Cancella
-                    </button>
+      <div class="box-buttons">
+        <button mat-raised-button class="clear pull-left" color="warn" type="reset">
+          Cancella
+        </button>
 
-                    <button mat-raised-button class="submit pull-right" type="submit" color="primary"
-                        [disabled]="!form.valid">
-                        Invia
-                    </button>
-                </div>
-            </form>
-    </mat-card>
-    <!-- </div> -->
+        <button mat-raised-button class="submit pull-right" type="submit" color="primary" [disabled]="!form.valid">
+          Invia
+        </button>
+      </div>
+    </form>
+  </mat-card>
+  <!-- </div> -->
 
-    <iframe class="maps" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2819.2029830183724!2d7.352991124243335!3d45.041102622538084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4788383f04e58509%3A0x42c76eb18691ef22!2sA.S.D.+New+Fitness+Point!5e0!3m2!1sit!2sit!4v1507562581367"></iframe>
+  <iframe class="maps" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2819.2029830183724!2d7.352991124243335!3d45.041102622538084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4788383f04e58509%3A0x42c76eb18691ef22!2sA.S.D.+New+Fitness+Point!5e0!3m2!1sit!2sit!4v1507562581367"></iframe>
 </div>

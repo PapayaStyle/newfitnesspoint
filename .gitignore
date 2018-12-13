@@ -1,0 +1,8 @@
+#ignore folder dist
+/dist
+
+#ignore folder e2e
+/e2e
+
+#ignore folder node_modules
+/node_modules

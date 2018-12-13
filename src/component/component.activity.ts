@@ -7,72 +7,65 @@ import { ActivityDialogComponent } from './component.activity.dialog';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-    selector: 'app-activity',
-    templateUrl: '../template/activity.html',
-    styleUrls: ['../css/activity.css']
+  selector: 'app-activity',
+  templateUrl: '../template/activity.html',
+  styleUrls: ['../css/activity.css']
 })
 export class ActivityComponent implements OnInit {
 
-    public hidePopup = true;
+  public hidePopup = true;
 
-    private paramLink;
+  private paramLink;
 
-    /*public activity: any = {'Link': '', 'Image': '', 'Title': '', 'Desc': ''};*/
+  /*public activity: any = {'Link': '', 'Image': '', 'Title': '', 'Desc': ''};*/
 
-    public activities;
+  public activities;
 
-    constructor(private service: ServicePHP, 
-        public dialog: MatDialog,
-        @Inject(DOCUMENT) private document: Document,
-        public route: ActivatedRoute) {
-        
-        this.getActivity();
-    }
-   
-    ngOnInit() {
-        window.scrollTo(0, 0);
+  constructor(private service: ServicePHP,
+    public dialog: MatDialog,
+    @Inject(DOCUMENT) private document: Document,
+    public route: ActivatedRoute) {
+    this.getActivity();
+  }
 
-        this.getActivity();
+  async ngOnInit() {
+    window.scrollTo(0, 0);
 
-        //get parameter
-        this.route.params.subscribe( params => {
-            this.paramLink = params['id'];
-            
-            //check if param exist
-            if(this.paramLink) {
+    this.getActivity();
 
-                //gell all activities and check if param exist
-                this.service.getActivities('SHOW')
-                    .then( act => {
-                        act.forEach( activity => {
-                            if(activity.link == this.paramLink) {
-                                //open popup dialog
-                                this.openActivityDialog(activity);
-                            }
-                        });
-                    });
-            }
+    //get parameter
+    this.route.params.subscribe(params => {
+      this.paramLink = params['id'];
+
+      //check if param exist
+      if (this.paramLink) {
+
+      //gell all activities and check if param exist
+        this.activities.forEach(activity => {
+          if (activity.link == this.paramLink) {
+            //open popup dialog
+            this.openActivityDialog(activity);
+          }
         });
-    }
-    
-    getActivity() {
-        this.service.getActivities('SHOW')
-        .then( act => {
-            this.activities = act;
-        });
-    }
-   
-    openActivityDialog(activity): void {
-        let dialogRef = this.dialog.open(ActivityDialogComponent, {
-            height: '60%',
-            width: '70%',
-            data: { 
-                image: activity.image, 
-                video: activity.video, 
-                title: activity.title, 
-                desc: activity.desc 
-            }
-        });
-    }
+      }
+    });
+  }
+
+  async getActivity() {
+    this.activities = await this.service.getActivities('SHOW');
+  }
+
+  openActivityDialog(activity): void {
+    let dialogRef = this.dialog.open(ActivityDialogComponent, {
+      height: '60%',
+      width: '70%',
+      data: {
+        image: activity.image,
+        video: activity.video,
+        title: activity.title,
+        desc: activity.desc
+      }
+    });
+  }
 
 }

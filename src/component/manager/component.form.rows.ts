@@ -4,54 +4,56 @@ import { Inject } from '@angular/core';
 import { ServicePHP } from '../../service/service';
 import { SharedService } from '../../service/shared';
 import { Account } from '../../models/account';
-import { FormGroup, FormBuilder, FormControl, 
-    Validators, FormArray } from '@angular/forms';
+import {
+  FormGroup, FormBuilder, FormControl,
+  Validators, FormArray
+} from '@angular/forms';
 
 @Component({
-    selector: 'act-row',
-    templateUrl: '../../template/manager/form.row.html',
-    styleUrls: ['../../css/manager/manage.table.css']
+  selector: 'act-row',
+  templateUrl: '../../template/manager/form.row.html',
+  styleUrls: ['../../css/manager/manage.table.css']
 })
 export class FormRowsComponent {
 
-    @Input('rowFormGroup')
-    public rowFormGroup: FormGroup;
+  @Input('rowFormGroup')
+  public rowFormGroup: FormGroup;
 
-    @Input('activities')
-    public activities: any[];
+  @Input('activities')
+  public activities: any[];
 
-    constructor(private shareService: SharedService,
-        public builder: FormBuilder) { }
+  constructor(private shareService: SharedService,
+    public builder: FormBuilder) { }
 
-    addActivity(day) {
-        const control = <FormArray>this.rowFormGroup.controls[day];
-        const addrCtrl = this.initActivity();
-        
-        control.push(addrCtrl);
+  addActivity(day) {
+    const control = <FormArray>this.rowFormGroup.controls[day];
+    const addrCtrl = this.initActivity();
 
-        this.shareService.changeMessageVisibility(false);
-    }
+    control.push(addrCtrl);
 
-    initActivity() {
-        return this.builder.group({
-            activity: ['', Validators.required],
-            note: ['']
-        });
-    }
+    this.shareService.changeMessageVisibility(false);
+  }
 
-    removeActivity(i: number, day) {
-        const control = <FormArray>this.rowFormGroup.controls[day];
-        control.removeAt(i);
+  initActivity() {
+    return this.builder.group({
+      activity: ['', Validators.required],
+      note: ['']
+    });
+  }
 
-        this.shareService.changeMessageVisibility(false);
-    }
+  removeActivity(i: number, day) {
+    const control = <FormArray>this.rowFormGroup.controls[day];
+    control.removeAt(i);
 
-    isFilled(day) {
-        const control = <FormArray>this.rowFormGroup.controls[day];
-        if(control.length>0)
-            return 'filled';
-        else 
-            return 'empty';
-    }
+    this.shareService.changeMessageVisibility(false);
+  }
+
+  isFilled(day) {
+    const control = <FormArray>this.rowFormGroup.controls[day];
+    if (control.length > 0)
+      return 'filled';
+    else
+      return 'empty';
+  }
 
 }

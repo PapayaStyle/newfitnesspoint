@@ -1,35 +1,34 @@
 <h3>Gestione Staff</h3>
 
 <div class="message" *ngIf="showMsg">
-    {{message}}
+  {{message}}
 </div>
 
 <div class="btn-box">
-    <button mat-raised-button color="accent" (click)="openStaffDialog(null)">
-        <mat-icon>add</mat-icon>
-        <i class="glyphicon glyphicon-plus">Aggiungi staff</i>
-    </button>
-    <button mat-raised-button color="accent" (click)="showHideStaff()">
-        <mat-icon>{{ showHideStaffIcon }}</mat-icon>
-        <i class="glyphicon glyphicon-plus">{{showHideStaffLabel}}</i>
-    </button>
+  <button mat-raised-button color="accent" (click)="openStaffDialog(null)">
+    <mat-icon>add</mat-icon>
+    <i class="glyphicon glyphicon-plus">Aggiungi staff</i>
+  </button>
+  <button mat-raised-button color="accent" (click)="showHideStaff()">
+    <mat-icon>{{ showHideStaffIcon }}</mat-icon>
+    <i class="glyphicon glyphicon-plus">{{showHideStaffLabel}}</i>
+  </button>
 </div>
 
 <div class="staff-container" *ngIf="showStaff">
 
-    <div class="box" *ngFor="let staff of staffList">
-        <div class="bg-img" [ngStyle]="changeBackground(staff.image)"></div>
-        <article>
-            <h1>{{ staff.name }}</h1>
-            <h2>{{ staff.activity }}</h2>
-            <p>{{ staff.desc }}</p>
-        </article>
+  <div class="box" *ngFor="let staff of staffList">
+    <div class="bg-img" [ngStyle]="changeBackground(staff.image)"></div>
+    <article>
+      <h1>{{ staff.name }}</h1>
+      <h2>{{ staff.activity }}</h2>
+      <p>{{ staff.desc }}</p>
+    </article>
 
-        <button mat-raised-button color="accent" class="btn-open"
-            (click)="openStaffDialog(staff)">
-            <mat-icon>edit</mat-icon>
-            Modifica
-        </button>
-    </div>
+    <button mat-raised-button color="accent" class="btn-open" (click)="openStaffDialog(staff)">
+      <mat-icon>edit</mat-icon>
+      Modifica
+    </button>
+  </div>
 
 </div>

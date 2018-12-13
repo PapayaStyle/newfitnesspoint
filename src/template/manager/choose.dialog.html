@@ -1,14 +1,14 @@
 <div>
-    <h1 mat-dialog-title style="text-align: center">{{ dialog.title | uppercase }}</h1>
-    <div mat-dialog-content>
-        <p style="text-align: justify">{{ dialog.desc }}</p>
-    </div>
-    <button mat-raised-button [mat-dialog-close]="true" class="mat-success pull-left">
-        <mat-icon aria-label="Conferma">done</mat-icon>
-        {{ dialog.btn_true }}
-    </button>
-    <button mat-raised-button [mat-dialog-close]="false" color="warn" class="pull-right">
-        <mat-icon aria-label="Annulla">clear</mat-icon>
-        {{ dialog.btn_false }}
-    </button>
+  <h1 mat-dialog-title style="text-align: center">{{ dialog.title | uppercase }}</h1>
+  <div mat-dialog-content>
+    <p style="text-align: justify">{{ dialog.desc }}</p>
+  </div>
+  <button mat-raised-button [mat-dialog-close]="true" class="mat-success pull-left">
+    <mat-icon aria-label="Conferma">done</mat-icon>
+    {{ dialog.btn_true }}
+  </button>
+  <button mat-raised-button [mat-dialog-close]="false" color="warn" class="pull-right">
+    <mat-icon aria-label="Annulla">clear</mat-icon>
+    {{ dialog.btn_false }}
+  </button>
 </div>

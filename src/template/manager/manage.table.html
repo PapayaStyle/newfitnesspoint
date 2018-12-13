@@ -2,125 +2,116 @@
 
 <mat-tab-group (selectedTabChange)="reloadCalendar($event)" class="mat-tab-cnt">
 
-    <mat-tab label="Mostra Tabella">
-        <!-- Start Table View -->
-        <div class="tab-corsi">
-            <div class="table">
-                <div class="row head day">
-                    <div style="display: table-cell"></div>
-                    <div style="display: table-cell">lunedì</div>
-                    <div style="display: table-cell">martedì</div>
-                    <div style="display: table-cell">mercoledì</div>
-                    <div style="display: table-cell">giovedì</div>
-                    <div style="display: table-cell">venerdì</div>
-                </div>
-                <div class="row" *ngFor='let course of courses; let first = first; let last = last;' >
-                    <div [ngClass]="isFirstLast(first, last)" class='head ore'>{{course.Time}}</div>
-                    <div [ngClass]="(course.Monday.length > 0)? 'filled' :'empty'" class="cell">
-                        <a *ngFor='let activity of course.Monday' href='/activity#{{ activity.Link }}'>{{ activity.Name | capitalize }} {{ getNote(activity) }}</a>
-                    </div>
-                    <div [ngClass]="(course.Tuesday.length > 0)? 'filled' :'empty'" class="cell">
-                        <a *ngFor='let activity of course.Tuesday' href='/activity#{{ activity.Link }}'>{{ activity.Name | capitalize }} {{ getNote(activity) }}</a>
-                    </div>
-                    <div [ngClass]="(course.Wednesday.length > 0)? 'filled' :'empty'" class="cell">
-                        <a *ngFor='let activity of course.Wednesday' href='/activity#{{ activity.Link }}'>{{ activity.Name | capitalize }} {{ getNote(activity) }}</a>
-                    </div>
-                    <div [ngClass]="(course.Thursday.length > 0)? 'filled' :'empty'" class="cell">
-                        <a *ngFor='let activity of course.Thursday' href='/activity#{{ activity.Link }}'>{{ activity.Name | capitalize }} {{ getNote(activity) }}</a>
-                    </div>
-                    <div [ngClass]="(course.Friday.length > 0)? 'filled' :'empty'" class="cell">
-                        <a *ngFor='let activity of course.Friday' href='/activity#{{ activity.Link }}'>{{ activity.Name | capitalize }} {{ getNote(activity) }}</a>
-                    </div>
-                </div>
-            </div>
+  <mat-tab label="Mostra Tabella">
+    <!-- Start Table View -->
+    <div class="tab-corsi">
+      <div class="table">
+        <div class="row head day">
+          <div style="display: table-cell"></div>
+          <div style="display: table-cell">lunedì</div>
+          <div style="display: table-cell">martedì</div>
+          <div style="display: table-cell">mercoledì</div>
+          <div style="display: table-cell">giovedì</div>
+          <div style="display: table-cell">venerdì</div>
         </div>
-        <!-- End Table View -->
-    </mat-tab>
+        <div class="row" *ngFor='let course of courses; let first = first; let last = last;'>
+          <div [ngClass]="isFirstLast(first, last)" class='head ore'>{{course.time}}</div>
+          <div [ngClass]="(course.monday.length > 0)? 'filled' :'empty'" class="cell">
+            <a *ngFor='let activity of course.monday' href='/activity#{{ activity.link }}'>{{ activity.name |
+              capitalize }} {{ getNote(activity) }}</a>
+          </div>
+          <div [ngClass]="(course.tuesday.length > 0)? 'filled' :'empty'" class="cell">
+            <a *ngFor='let activity of course.tuesday' href='/activity#{{ activity.link }}'>{{ activity.name |
+              capitalize }} {{ getNote(activity) }}</a>
+          </div>
+          <div [ngClass]="(course.wednesday.length > 0)? 'filled' :'empty'" class="cell">
+            <a *ngFor='let activity of course.wednesday' href='/activity#{{ activity.link }}'>{{ activity.name |
+              capitalize }} {{ getNote(activity) }}</a>
+          </div>
+          <div [ngClass]="(course.thursday.length > 0)? 'filled' :'empty'" class="cell">
+            <a *ngFor='let activity of course.thursday' href='/activity#{{ activity.link }}'>{{ activity.name |
+              capitalize }} {{ getNote(activity) }}</a>
+          </div>
+          <div [ngClass]="(course.friday.length > 0)? 'filled' :'empty'" class="cell">
+            <a *ngFor='let activity of course.friday' href='/activity#{{ activity.link }}'>{{ activity.name |
+              capitalize }} {{ getNote(activity) }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Table View -->
+  </mat-tab>
 
-    <mat-tab label="Modifica Tabella">
-        <div class="message" *ngIf="showMsg">
-            {{message}}
-        </div>
-        <!-- START FORM -->
-        <form [formGroup]="tableActForm" novalidate>
+  <mat-tab label="Modifica Tabella">
+    <div class="message" *ngIf="showMsg">
+      {{message}}
+    </div>
+    <!-- START FORM -->
+    <form [formGroup]="tableActForm" novalidate>
+      <div class="dym-table">
+        <div class="dym-row">
+          <div class="dym-cell" formArrayName="rows">
+            <!-- HEADERS -->
             <div class="dym-table">
-                <div class="dym-row">
-                    <div class="dym-cell" formArrayName="rows">
-                        <!-- HEADERS -->
-                        <div class="dym-table">
-                            <div class="dym-row">
-                                <div class="dym-cell head">
-                                    ORA
-                                </div>
-                                <div class="dym-cell head">
-                                    LUNEDÌ
-                                </div>
-                                <div class="dym-cell head">
-                                    MARTEDÌ
-                                </div>
-                                <div class="dym-cell head">
-                                    MERCOLEDÌ
-                                </div>
-                                <div class="dym-cell head">
-                                    GIOVEDÌ
-                                </div>
-                                <div class="dym-cell head">
-                                    VENERDÌ
-                                </div>
-                            </div>
-                        </div>
-
-                        <div *ngFor="let row of tableActForm.controls.rows.controls; let i=index" 
-                            class="dym-item">
-                            <div class="delete-row">
-                                <button mat-raised-button color="warn" class="btn-icon" 
-                                    (click)="removeRow(i)">
-                                    <mat-icon aria-label="Elimina riga">delete</mat-icon>
-                                </button>
-                                <!--
-                                <button (click)="removeRow(i)" class="btn btn-xs btn-danger">
-                                    <i class="glyphicon glyphicon-remove">X</i>
-                                </button>
-                                -->
-                            </div>
-                            <div class="panel-body" [formGroupName]="i">
-                                <act-row [rowFormGroup]="tableActForm.controls.rows.controls[i]" [activities]="activities"></act-row>
-                            </div>
-                        </div>
-                    </div>
+              <div class="dym-row">
+                <div class="dym-cell head">
+                  ORA
                 </div>
-                
-                <div class="add-row">
-                    <button mat-raised-button color="accent" class="btn-icon" 
-                        (click)="addRow()">
-                        <mat-icon aria-label="Aggiungi riga">add</mat-icon>
-                    </button>
+                <div class="dym-cell head">
+                  LUNEDÌ
                 </div>
-                <!--
-                <button (click)="addRow()" class="btn btn-xs btn-info add-row">
-                    <i class="glyphicon glyphicon-plus">+</i>
-                </button>
-                -->
+                <div class="dym-cell head">
+                  MARTEDÌ
+                </div>
+                <div class="dym-cell head">
+                  MERCOLEDÌ
+                </div>
+                <div class="dym-cell head">
+                  GIOVEDÌ
+                </div>
+                <div class="dym-cell head">
+                  VENERDÌ
+                </div>
+              </div>
             </div>
 
-            <div class="form-btn">
-                <button mat-raised-button color="warn" (click)="clearForm()">
-                    <mat-icon >clear</mat-icon>
-                    Pulisci
+            <div *ngFor="let row of tableActForm.controls.rows.controls; let i=index" class="dym-item">
+              <div class="delete-row">
+                <button mat-raised-button color="warn" class="btn-icon" (click)="removeRow(i)">
+                  <mat-icon aria-label="Elimina riga">delete</mat-icon>
                 </button>
-
-                <button mat-raised-button color="primary" (click)="fillForm()">
-                    <mat-icon>autorenew</mat-icon>
-                    Carica Tabella
-                </button>
-
-                <button mat-raised-button color="primary" (click)="save(tableActForm.value)"
-                    [disabled]="!tableActForm.valid || isEmptyForm(tableActForm)">
-                    <mat-icon>save</mat-icon>
-                    Salva
-                </button>
+              </div>
+              <div class="panel-body" [formGroupName]="i">
+                <act-row [rowFormGroup]="tableActForm.controls.rows.controls[i]" [activities]="activities"></act-row>
+              </div>
             </div>
-        </form>
+          </div>
+        </div>
 
-    </mat-tab>
+        <div class="add-row">
+          <button mat-raised-button color="accent" class="btn-icon" (click)="addRow()">
+            <mat-icon aria-label="Aggiungi riga">add</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="form-btn">
+        <button mat-raised-button color="warn" (click)="clearForm()">
+          <mat-icon>clear</mat-icon>
+          Pulisci
+        </button>
+
+        <button mat-raised-button color="primary" (click)="fillForm()">
+          <mat-icon>autorenew</mat-icon>
+          Carica Tabella
+        </button>
+
+        <button mat-raised-button color="primary" (click)="save(tableActForm.value)" [disabled]="!tableActForm.valid || isEmptyForm(tableActForm)">
+          <mat-icon>save</mat-icon>
+          Salva
+        </button>
+      </div>
+    </form>
+
+  </mat-tab>
 </mat-tab-group>

@@ -4,67 +4,67 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { InputTextDialogComponent } from './component.input.text.dialog';
 
 @Component({
-    selector: 'activity',
-    templateUrl: '../../template/manager/form.activity.html',
-    styleUrls: ['../../css/manager/manage.table.css']
+  selector: 'activity',
+  templateUrl: '../../template/manager/form.activity.html',
+  styleUrls: ['../../css/manager/manage.table.css']
 })
 export class FormActivityComponent {
 
-    @Input('activityFormGroup')
-    public activityFormGroup: FormGroup;
+  @Input('activityFormGroup')
+  public activityFormGroup: FormGroup;
 
-    @Input('activities')
-    public activities: any[];
-    
-    public iconNote: string;
+  @Input('activities')
+  public activities: any[];
 
-    constructor(public builder: FormBuilder,
-        public dialog: MatDialog) { }
+  public iconNote: string;
 
-    hideElement(item) {
-        return item != 1 ? true : false;
-    }
+  constructor(public builder: FormBuilder,
+    public dialog: MatDialog) { }
 
-    showNotes() {
-        if(this.activityFormGroup.controls['note'].value == '')
-            this.iconNote = 'note_add';
-        else 
-            this.iconNote = 'insert_drive_file';
-            
-        let activity = this.activityFormGroup.controls['activity'].value;
-        if(activity == null || activity == undefined || activity == '')
-            return false;
-        else
-            return true;
-    }
+  hideElement(item) {
+    return item != 1 ? true : false;
+  }
 
-    openNotesDialog(): void {
-        let selectedId =  this.activityFormGroup.controls['activity'].value;
-        let activity = this.activities.find(val => val.id = selectedId);
+  showNotes() {
+    if (this.activityFormGroup.controls['note'].value == '')
+      this.iconNote = 'note_add';
+    else
+      this.iconNote = 'insert_drive_file';
 
-        let dialogRef = this.dialog.open(InputTextDialogComponent, {
-            width: '350px',
-            disableClose: true,
-            data: { 
-                title: 'Nota per attività ' + activity.title, 
-                text: this.activityFormGroup.controls['note'].value, 
-                btn_true: 'Conferma',
-                btn_false: 'Annulla'
-            }
-        });
+    let activity = this.activityFormGroup.controls['activity'].value;
+    if (activity == null || activity == undefined || activity == '')
+      return false;
+    else
+      return true;
+  }
 
-        dialogRef.afterClosed()
-            .subscribe( result => {
-                console.log('Confirm dialog closed');
-                console.log('NotesDialog result ->');
-                console.log(result);
+  openNotesDialog(): void {
+    let selectedId = this.activityFormGroup.controls['activity'].value;
+    let activity = this.activities.find(val => val.id = selectedId);
 
-                //if result is true, proceed with deletion
-                if(result.res) {
-                    console.log(result.text);
-                    this.activityFormGroup.controls['note'].setValue(result.text);
-                }
-            });
-    }
+    let dialogRef = this.dialog.open(InputTextDialogComponent, {
+      width: '350px',
+      disableClose: true,
+      data: {
+        title: 'Nota per attività ' + activity.title,
+        text: this.activityFormGroup.controls['note'].value,
+        btn_true: 'Conferma',
+        btn_false: 'Annulla'
+      }
+    });
+
+    dialogRef.afterClosed()
+      .subscribe(result => {
+        console.log('Confirm dialog closed');
+        console.log('NotesDialog result ->');
+        console.log(result);
+
+        //if result is true, proceed with deletion
+        if (result.res) {
+          console.log(result.text);
+          this.activityFormGroup.controls['note'].setValue(result.text);
+        }
+      });
+  }
 
 }
