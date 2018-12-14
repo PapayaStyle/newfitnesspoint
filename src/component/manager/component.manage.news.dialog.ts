@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { ServicePHP } from '../../service/service';
 import { ChooseDialogComponent } from './component.choose.dialog';
 import { AppDateAdapter, APP_DATE_FORMATS } from '../../app/app.data.adapter';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'manage-news-dialog',
@@ -37,7 +38,8 @@ export class ManageNewsDialogComponent {
     @Inject(MAT_DIALOG_DATA) public news: any,
     public dialogRef: MatDialogRef<ManageNewsDialogComponent>,
     public dialog: MatDialog,
-    public fb: FormBuilder) {
+    public fb: FormBuilder,
+    private toastr: ToastrService) {
 
     if (news.video) {
       this.video = this.embedUrl + news.video;
@@ -231,7 +233,7 @@ export class ManageNewsDialogComponent {
    * send value to service request to save, update or delete News
    * @param value form value
    */
-  save(value) {
+  async save(value) {
 
     if (this.vidChecked == true) {
       value.image = '';
@@ -241,22 +243,19 @@ export class ManageNewsDialogComponent {
     console.log(value);
     let dialogRes: any;
 
-    this.service.saveNews(value, this.fileImg)
-      .then(res => {
-        console.log(res);
-        if (value.type == 'I')
-          dialogRes = { status: 'OK', message: 'News inserita con successo' };
-        else if (value.type == 'U')
-          dialogRes = { status: 'OK', message: 'News aggiornata con successo' };
-        else if (value.type == 'D')
-          dialogRes = { status: 'OK', message: 'News cancellata con successo' };
+    let res = await this.service.saveNews(value, this.fileImg);
+    if(res) {
+      if (value.type == 'I')
+        this.toastr.success('News inserita con successo');
+      else if (value.type == 'U')
+        this.toastr.success('News aggiornata con successo');
+      else if (value.type == 'D')
+        this.toastr.success('News cancellata con successo');
 
-        this.dialogRef.close(dialogRes);
-      })
-      .catch(err => {
-        console.log(err);
-        this.dialogRef.close(err);
-      });
+      this.dialogRef.close({ status: 'OK'});
+    } else {
+      this.dialogRef.close({ status: 'KO'});
+    }
   }
 
   extractYoutubeVideoId() {

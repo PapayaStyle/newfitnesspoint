@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ServicePHP } from '../../service/service';
 import { ChooseDialogComponent } from './component.choose.dialog';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'manage-activity-dialog',
@@ -29,7 +30,8 @@ export class ManageActivityDialogComponent {
     @Inject(MAT_DIALOG_DATA) public activity: any,
     public dialogRef: MatDialogRef<ManageActivityDialogComponent>,
     public dialog: MatDialog,
-    public fb: FormBuilder) {
+    public fb: FormBuilder,
+    private toastr: ToastrService) {
 
     if (this.activity.image == '')
       this.previewImage = this.defaultImage;
@@ -190,27 +192,23 @@ export class ManageActivityDialogComponent {
    * send value to service request to save, update or delete activity
    * @param value form value
    */
-  save(value) {
+  async save(value) {
     console.log(value);
     let dialogRes: any;
 
-    this.service.saveActivity(value, this.fileImg)
-      .then(res => {
-        console.log(res);
-        /*
-        if(value.type == 'I')
-            dialogRes = { status: 'OK', message: 'Attività inserita con successo' };
-        else if(value.type == 'U')
-            dialogRes = { status: 'OK', message: 'Attività aggiornata con successo' };
-        else if(value.type == 'D')
-            dialogRes = { status: 'OK', message: 'Attività cancellata con successo' };
-        */
-        this.dialogRef.close(res);
-      })
-      .catch(err => {
-        console.log(err);
-        this.dialogRef.close(err);
-      });
+    let res = await this.service.saveActivity(value, this.fileImg);
+    if(res) {
+      if (value.type == 'I')
+        this.toastr.success('Attività inserita con successo');
+      else if (value.type == 'U')
+        this.toastr.success('Attività aggiornata con successo');
+      else if (value.type == 'D')
+        this.toastr.success('Attività cancellata con successo');
+
+      this.dialogRef.close({ status: 'OK'});
+    } else {
+      this.dialogRef.close({ status: 'KO'});
+    }
   }
 
   /**

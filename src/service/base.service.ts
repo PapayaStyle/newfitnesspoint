@@ -6,6 +6,7 @@ import { Response } from '@angular/http';
 import { RestResponse } from '../models/RestResponse';
 import { RequestObj } from '../models/RequestObj';
 import { Injectable } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class BaseService {
@@ -19,7 +20,8 @@ export class BaseService {
 
   constructor(protected httpClient: HttpClient,
     protected cookie: CookieService,
-    protected share: SharedService) {
+    protected share: SharedService,
+    protected toastr: ToastrService) {
     this.setHeaders();
     this.setRestUrl();
   }
@@ -76,6 +78,9 @@ export class BaseService {
     let error = new RestResponse(err);
 
     this.share.changeLoading(false);
+
+    this.toastr.error(error.message);
+
     return Promise.reject(error);
   }
 

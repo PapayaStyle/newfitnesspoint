@@ -39,6 +39,7 @@ and (min-width: 901px) {
     position: relative;
     padding: 0 0.5%;
     margin: 0;
+    min-height: calc(100vh - 350px);
 }
 .box {
     color: #161616;

@@ -13,9 +13,6 @@ import { ManageInfoDialogComponent } from './component.manage.info.dialog';
 })
 export class ManageInfoComponent implements OnInit {
 
-  public showMsg: boolean = false;
-  public message: string = '';
-
   public infoList;
   public showInfo: boolean;
   public showHideInfoLabel: string;
@@ -90,11 +87,6 @@ export class ManageInfoComponent implements OnInit {
       }
     });
 
-    dialogRef.afterOpen()
-      .subscribe(res => {
-        this.showMsg = false;
-      });
-
     dialogRef.afterClosed()
       .subscribe(res => {
         window.scrollTo(0, 0);
@@ -104,9 +96,6 @@ export class ManageInfoComponent implements OnInit {
 
         //check json res value
         if (res != undefined && (res.status == 'OK' || res.status == 'KO')) {
-          this.message = res.message;
-          this.showMsg = true;
-
           if (this.showInfo)
             this.getInfo();
         }

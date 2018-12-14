@@ -5,6 +5,7 @@ import { ServicePHP } from '../../service/service';
 import { SharedService } from '../../service/shared';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ManageActivityDialogComponent } from './component.manage.activity.dialog';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-manage-activity',
@@ -17,9 +18,6 @@ import { ManageActivityDialogComponent } from './component.manage.activity.dialo
 })
 export class ManageActivityComponent implements OnInit {
 
-  public showMsg: boolean = false;
-  public message: string = '';
-
   public activities;
   public showActivities: boolean;
   public showHideActivitiesLabel: string;
@@ -27,16 +25,14 @@ export class ManageActivityComponent implements OnInit {
 
   constructor(private service: ServicePHP,
     private shareService: SharedService,
-    public dialog: MatDialog) {
-
-    //this.shareService.showMsg.subscribe( showMsg => this.showMsg = showMsg );
+    public dialog: MatDialog,
+    private toastr: ToastrService) {
   }
 
   ngOnInit() {
     window.scrollTo(0, 0);
     this.showHideActivitiesLabel = 'Mostra attività';
     this.showHideActivitiesIcon = 'visibility';
-    this.shareService.changeMessageVisibility(false);
   }
 
   openActivityDialog(activity): void {
@@ -75,11 +71,6 @@ export class ManageActivityComponent implements OnInit {
       }
     });
 
-    dialogRef.afterOpen()
-      .subscribe(res => {
-        this.showMsg = false;
-      });
-
     dialogRef.afterClosed()
       .subscribe(res => {
         window.scrollTo(0, 0);
@@ -89,9 +80,6 @@ export class ManageActivityComponent implements OnInit {
 
         //check json res value
         if (res != undefined && (res.status == 'OK' || res.status == 'KO')) {
-          this.message = res.message;
-          this.showMsg = true;
-
           if (this.showActivities)
             this.getActivities();
         }

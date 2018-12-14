@@ -1,4 +1,6 @@
 <div class="news-container">
+  <h2 *ngIf="newsList.length == 0">Non sono presenti News</h2>
+  
   <div class="news" *ngFor="let news of newsList">
     <!-- <ng-container *ngFor="let news of newsList">
         <figure class="news" *ngIf="news.show==1">-->

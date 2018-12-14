@@ -1,20 +1,25 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, AfterViewInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ServicePHP } from '../service/service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-contact',
   templateUrl: '../template/contact.html',
   styleUrls: ['../css/contact.css']
 })
-export class ContactComponent implements OnInit {
+export class ContactComponent implements OnInit, AfterViewInit {
   public form;
-
+  private fragment: string;
+  
   constructor(@Inject(FormBuilder) private formBuilder: FormBuilder,
-    private service: ServicePHP) { }
+    private service: ServicePHP,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     window.scrollTo(0, 0);
+
+    this.route.fragment.subscribe(fragment => { this.fragment = fragment; });
 
     this.form = this.formBuilder.group({
       name: this.formBuilder.control('', Validators.compose([
@@ -30,6 +35,12 @@ export class ContactComponent implements OnInit {
         Validators.required
       ]))
     });
+  }
+
+  ngAfterViewInit(): void {
+    try {
+      document.querySelector('#' + this.fragment).scrollIntoView();
+    } catch (e) { }
   }
 
   onSubmit(formValue) {

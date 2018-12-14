@@ -54,14 +54,14 @@ import { PipeSafe } from '../pipe/pipe.safe.url';
 
 import { Routing } from './app.routing';
 import { HeaderInterceptor } from '../service/interceptor';
-
+import { ToastrModule } from 'ngx-toastr';
 
 registerLocaleData(localeIt, 'it');
 @NgModule({
     imports: [ 
         BrowserModule, BrowserAnimationsModule, MaterialModule, 
         HttpModule, HttpClientModule, Routing, FormsModule, ReactiveFormsModule, 
-        NgxGalleryModule, ImageUploadModule.forRoot()
+        NgxGalleryModule, ImageUploadModule.forRoot(), ToastrModule.forRoot()
     ],
     declarations: [ 
         PipeCapitalize, PipeSafe,

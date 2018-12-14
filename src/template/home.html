@@ -43,7 +43,7 @@
   </div>
 
   <!-- NEWS -->
-  <div *ngIf="newsList">
+  <div *ngIf="newsList.length > 0">
     <h1>{{newsTitle}}</h1>
     <div class="news" *ngFor="let news of newsList">
       <mat-card class="box">

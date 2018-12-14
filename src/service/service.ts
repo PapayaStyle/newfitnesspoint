@@ -13,14 +13,16 @@ import { Gallery } from '../models/Gallery';
 import { RestResponse } from '../models/RestResponse';
 import { BaseService } from './base.service';
 import { RequestObj } from '../models/RequestObj';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class ServicePHP extends BaseService {
 
   constructor(protected httpClient: HttpClient,
     protected cookie: CookieService,
-    protected share: SharedService) {
-    super(httpClient, cookie, share);
+    protected share: SharedService,
+    protected toastr: ToastrService) {
+    super(httpClient, cookie, share, toastr);
   }
 
   /**
@@ -201,8 +203,6 @@ export class ServicePHP extends BaseService {
     response = await this.PUT(requestObj);
     if (response) {
       return new RestResponse(response);
-    } else {
-      return { error: true };
     }
   }
 
@@ -225,8 +225,6 @@ export class ServicePHP extends BaseService {
     response = await this.POST(requestObj, param);
     if (response) {
       return new RestResponse(response);
-    } else {
-      return { error: true };
     }
   }
 
@@ -258,8 +256,6 @@ export class ServicePHP extends BaseService {
     response = await this.POST(requestObj, param);
     if (response) {
       return new RestResponse(response);
-    } else {
-      return { error: true };
     }
   }
 
@@ -290,8 +286,6 @@ export class ServicePHP extends BaseService {
     response = await this.POST(requestObj, param);
     if (response) {
       return new RestResponse(response);
-    } else {
-      return { error: true };
     }
   }
 

@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DOCUMENT } from '@angular/platform-browser';
-import { Inject } from '@angular/core';
 import { ServicePHP } from '../../service/service';
 import { SharedService } from '../../service/shared';
-import { Account } from '../../models/account';
 import {
   FormGroup, FormBuilder, FormControl,
   Validators, FormArray
@@ -11,6 +8,7 @@ import {
 import { MatTabChangeEvent } from '@angular/material';
 import { Activity } from '../../models/Activity';
 import { Courses } from '../../models/Courses';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-manage-table',
@@ -23,18 +21,16 @@ import { Courses } from '../../models/Courses';
 })
 export class ManageTableComponent implements OnInit {
 
-  public courses = [];
-  public activities = [];
-  public message: string = '';
+  public courses: Courses[] = [];
+  public activities: Activity[] = [];
   public showMsg: boolean;
 
   tableActForm: FormGroup;
 
   constructor(private service: ServicePHP,
     private shareService: SharedService,
-    public builder: FormBuilder) {
-
-    this.shareService.showMsg.subscribe(showMsg => this.showMsg = showMsg);
+    public builder: FormBuilder,
+    private toastr: ToastrService) {
 
     this.getCalendar();
     this.getActivities();
@@ -42,8 +38,6 @@ export class ManageTableComponent implements OnInit {
 
   ngOnInit() {
     window.scrollTo(0, 0);
-
-    this.shareService.changeMessageVisibility(false);
 
     this.tableActForm = this.builder.group({
       rows: this.builder.array([])
@@ -78,12 +72,11 @@ export class ManageTableComponent implements OnInit {
 
     if (event.index == 0) {
       this.getCalendar();
-      this.shareService.changeMessageVisibility(false);
     }
   }
 
   getNote(activity) {
-    if (!activity.note/* == '' || activity.note == null || activity.note == undefined*/)
+    if (!activity.note)
       return '';
     else
       return '(' + activity.note + ')';
@@ -105,8 +98,6 @@ export class ManageTableComponent implements OnInit {
     const addrCtrl = this.initRow();
 
     control.push(addrCtrl);
-
-    this.shareService.changeMessageVisibility(false);
   }
 
   /**
@@ -130,8 +121,6 @@ export class ManageTableComponent implements OnInit {
   removeRow(i: number) {
     const control = <FormArray>this.tableActForm.controls['rows'];
     control.removeAt(i);
-
-    this.shareService.changeMessageVisibility(false);
   }
 
   /**
@@ -142,8 +131,6 @@ export class ManageTableComponent implements OnInit {
       rows: this.builder.array([])
     });
 
-    this.shareService.changeMessageVisibility(false);
-
     window.scrollTo(0, 0);
   }
 
@@ -151,21 +138,13 @@ export class ManageTableComponent implements OnInit {
    * call service to save form calendar
    * @param model 
    */
-  save(model) {
+  async save(model) {
     //console.log(model);
-    this.service.saveCalendar(model)
-      .then(res => {
-        console.log(res);
-        this.message = res.message;
-
-        this.shareService.changeMessageVisibility(true);
-        window.scrollTo(0, 0);
-      })
-      .catch(err => {
-        this.message = 'Errore';
-        this.shareService.changeMessageVisibility(true);
-        window.scrollTo(0, 0);
-      });
+    let res = await this.service.saveCalendar(model);
+    if(res) {
+      window.scrollTo(0, 0);
+      this.toastr.success('Calendario attività salvato con successo');
+    }
   }
 
   /**
@@ -272,8 +251,6 @@ export class ManageTableComponent implements OnInit {
       //push row control into form
       formCtrl.push(rowCtrl);
     }
-
-    this.shareService.changeMessageVisibility(false);
     window.scrollTo(0, 0);
   }
 

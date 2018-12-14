@@ -16,9 +16,6 @@ import { ManageNewsDialogComponent } from '../manager/component.manage.news.dial
 })
 export class ManageNewsComponent implements OnInit {
 
-  public showMsg: boolean = false;
-  public message: string = '';
-
   public showNews: boolean;
   public showHideNewsLabel: string;
   public showHideNewsIcon: string;
@@ -114,10 +111,12 @@ export class ManageNewsComponent implements OnInit {
       }
     });
 
+    /*
     dialogRef.afterOpen()
       .subscribe(res => {
         this.showMsg = false;
       });
+    */
 
     dialogRef.afterClosed()
       .subscribe(res => {
@@ -128,8 +127,6 @@ export class ManageNewsComponent implements OnInit {
 
         //check json res value
         if (res != undefined && (res.status == 'OK' || res.status == 'KO')) {
-          this.message = res.message;
-          this.showMsg = true;
 
           if (this.showNews)
             this.getNews();

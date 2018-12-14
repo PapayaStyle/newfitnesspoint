@@ -4,6 +4,7 @@ import { Inject } from '@angular/core';
 import { ServicePHP } from '../service/service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NewsDialogComponent } from './component.news.dialog';
+import { News } from '../models/News';
 
 @Component({
   selector: 'app-news',
@@ -12,7 +13,7 @@ import { NewsDialogComponent } from './component.news.dialog';
 })
 export class NewsComponent implements OnInit {
 
-  public newsList;
+  public newsList:News[];
   public embedUrl = 'https://www.youtube.com/embed/';
   
   constructor(private service: ServicePHP,
@@ -26,13 +27,14 @@ export class NewsComponent implements OnInit {
 
   async getNews() {
     this.newsList = await this.service.getNewsList('SHOW');
+    console.log(this.newsList);
   }
 
   loadBackground(image): any {
     return { 'background-image': 'url('+image+')'};
   }
 
-  checkEmpty(value: string): boolean {
+  checkEmpty(value): boolean {
     if(value)
       return true;
     else 

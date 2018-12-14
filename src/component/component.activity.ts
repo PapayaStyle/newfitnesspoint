@@ -31,7 +31,7 @@ export class ActivityComponent implements OnInit {
   async ngOnInit() {
     window.scrollTo(0, 0);
 
-    this.getActivity();
+    await this.getActivity();
 
     //get parameter
     this.route.params.subscribe(params => {

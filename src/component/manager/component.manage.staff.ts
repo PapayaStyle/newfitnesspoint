@@ -6,6 +6,7 @@ import { SharedService } from '../../service/shared';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ManageActivityDialogComponent } from './component.manage.activity.dialog';
 import { ManageStaffDialogComponent } from './component.manage.staff.dialog';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-manage-staff',
@@ -17,16 +18,13 @@ import { ManageStaffDialogComponent } from './component.manage.staff.dialog';
 })
 export class ManageStaffComponent implements OnInit {
 
-  public showMsg: boolean = false;
-  public message: string = '';
-
   public staffList;
   public showStaff: boolean;
   public showHideStaffLabel: string;
   public showHideStaffIcon: string;
 
   constructor(private service: ServicePHP,
-    private shareService: SharedService,
+    private toastr: ToastrService,
     public dialog: MatDialog) { }
 
   ngOnInit() {
@@ -95,11 +93,6 @@ export class ManageStaffComponent implements OnInit {
       }
     });
 
-    dialogRef.afterOpen()
-      .subscribe(res => {
-        this.showMsg = false;
-      });
-
     dialogRef.afterClosed()
       .subscribe(res => {
         window.scrollTo(0, 0);
@@ -109,8 +102,6 @@ export class ManageStaffComponent implements OnInit {
 
         //check json res value
         if (res != undefined && (res.status == 'OK' || res.status == 'KO')) {
-          this.message = res.message;
-          this.showMsg = true;
 
           if (this.showStaff)
             this.getStaff();

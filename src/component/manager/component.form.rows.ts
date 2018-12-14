@@ -22,16 +22,13 @@ export class FormRowsComponent {
   @Input('activities')
   public activities: any[];
 
-  constructor(private shareService: SharedService,
-    public builder: FormBuilder) { }
+  constructor(public builder: FormBuilder) { }
 
   addActivity(day) {
     const control = <FormArray>this.rowFormGroup.controls[day];
     const addrCtrl = this.initActivity();
 
     control.push(addrCtrl);
-
-    this.shareService.changeMessageVisibility(false);
   }
 
   initActivity() {
@@ -44,8 +41,6 @@ export class FormRowsComponent {
   removeActivity(i: number, day) {
     const control = <FormArray>this.rowFormGroup.controls[day];
     control.removeAt(i);
-
-    this.shareService.changeMessageVisibility(false);
   }
 
   isFilled(day) {

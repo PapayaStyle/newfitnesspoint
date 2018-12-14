@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { ServicePHP } from '../../service/service';
 import { ChooseDialogComponent } from './component.choose.dialog';
 import { AppDateAdapter, APP_DATE_FORMATS } from '../../app/app.data.adapter';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'manage-staff-dialog',
@@ -30,7 +31,8 @@ export class ManageStaffDialogComponent {
     @Inject(MAT_DIALOG_DATA) public staff: any,
     public dialogRef: MatDialogRef<ManageStaffDialogComponent>,
     public dialog: MatDialog,
-    public fb: FormBuilder) {
+    public fb: FormBuilder,
+    private toastr: ToastrService) {
 
     this.previewImage = this.staff.image;
 
@@ -189,26 +191,23 @@ export class ManageStaffDialogComponent {
    * send value to service request to save, update or delete Staff
    * @param value form value
    */
-  save(value) {
+  async save(value) {
     console.log(value);
     let dialogRes: any;
 
-    this.service.saveStaff(value, this.fileImg)
-      .then(res => {
-        console.log(res);
-        if (value.type == 'I')
-          dialogRes = { status: 'OK', message: 'Staff inserito con successo' };
-        else if (value.type == 'U')
-          dialogRes = { status: 'OK', message: 'Staff aggiornato con successo' };
-        else if (value.type == 'D')
-          dialogRes = { status: 'OK', message: 'Staff cancellato con successo' };
+    let res = await this.service.saveStaff(value, this.fileImg);
+    if(res) {
+      if (value.type == 'I')
+        this.toastr.success('Staff inserito con successo');
+      else if (value.type == 'U')
+        this.toastr.success('Staff aggiornato con successo');
+      else if (value.type == 'D')
+        this.toastr.success('Staff cancellato con successo');
 
-        this.dialogRef.close(dialogRes);
-      })
-      .catch(err => {
-        console.log(err);
-        this.dialogRef.close(err);
-      });
+      this.dialogRef.close({ status: 'OK'});
+    } else {
+      this.dialogRef.close({ status: 'KO'});
+    }
   }
 
   /**

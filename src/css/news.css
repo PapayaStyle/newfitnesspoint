@@ -4,6 +4,21 @@
     padding: 0;
     padding-top: 2em;
     margin: 0 auto;
+    min-height: calc(100vh - 350px);
+}
+h2 {
+  margin: 0 auto;
+  padding: 0.3em;
+  padding-top: 0;
+  color: #161616;
+  font-size: 3em;
+  font-weight: bold;
+  padding-bottom: 2%;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+  font-variant: all-small-caps;
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
 }
 .news {
     flex: 0 0 50%;

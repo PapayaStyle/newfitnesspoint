@@ -14,8 +14,10 @@ export class SharedService {
     private loadingSource = new BehaviorSubject<boolean>(null);
     public loading = this.loadingSource.asObservable();
 
+    /*
     private showMsgSource = new BehaviorSubject<boolean>(null);
     public showMsg = this.showMsgSource.asObservable();
+    */
 
     private controlMenuSelectedSource = new BehaviorSubject<string>(null);
     public controlMenuSelected = this.controlMenuSelectedSource.asObservable();
@@ -32,9 +34,11 @@ export class SharedService {
         this.loadingSource.next(load);
     }
     
+    /*
     changeMessageVisibility(show: boolean) {
         this.showMsgSource.next(show);
     }
+    */
 
     /** change value for selected control menu */
     changeControlMenuSelection(selection: string) {

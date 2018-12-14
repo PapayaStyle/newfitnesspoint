@@ -148,6 +148,7 @@ h1 {
     text-transform: uppercase;
     margin: 0;
     padding: 0;
+    color: #e1e1e1;
 }
 .article-container .content {
     display: block;
