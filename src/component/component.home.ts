@@ -47,10 +47,10 @@ export class HomeComponent implements OnInit {
   }
 
   getNote(activity) {
-    if (!activity.note/*== '' || activity.Note == null || activity.Note == undefined*/)
+    if (!activity.note)
       return '';
     else
-      return '(' + activity.Note + ')';
+      return '(' + activity.note + ')';
   }
 
   changeBackground(value): any {

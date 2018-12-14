@@ -1,7 +1,7 @@
 <div>
   <h1 mat-dialog-title style="text-align: center">{{ dialog.title }}</h1>
   <div mat-dialog-content>
-    <mat-form-field class="full-width">
+    <mat-form-field style="width: 100%">
       <input matInput type="text" placeholder="{{dialog.title}}" [(ngModel)]="inputText" />
       <button mat-button *ngIf="inputText" matSuffix mat-icon-button aria-label="Cancella" (click)="inputText=''">
         <mat-icon>close</mat-icon>

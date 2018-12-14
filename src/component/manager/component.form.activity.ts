@@ -40,7 +40,7 @@ export class FormActivityComponent {
 
   openNotesDialog(): void {
     let selectedId = this.activityFormGroup.controls['activity'].value;
-    let activity = this.activities.find(val => val.id = selectedId);
+    let activity = this.activities.find(val => val.id == selectedId);
 
     let dialogRef = this.dialog.open(InputTextDialogComponent, {
       width: '350px',
