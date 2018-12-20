@@ -1,91 +1,62 @@
 import { Component, OnInit, Inject, HostListener } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ServicePHP } from '../../service/service';
 import { ChooseDialogComponent } from './component.choose.dialog';
-import { AppDateAdapter, APP_DATE_FORMATS } from '../../app/app.data.adapter';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'manage-news-dialog',
-  templateUrl: '../../template/manager/manage.news.dialog.html',
+  selector: 'manage-activity-dialog',
+  templateUrl: '../../template/module/manage.activity.dialog.html',
   styleUrls: [
     '../../css/manager/control-panel.css',
     '../../css/manager/manage.main.css',
-    '../../css/manager/manage.news.css'
-  ],
-  providers: [
-    { provide: DateAdapter, useClass: AppDateAdapter },
-    { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS }
+    '../../css/manager/manage.activity.css'
   ]
 })
-export class ManageNewsDialogComponent {
+export class ManageActivityDialogComponent {
 
   private defaultImage = 'http://localhost/images/default.jpg';
-  public embedUrl = 'https://www.youtube.com/embed/';
-  public video = '';
   private fileImg = null;
-  public vidChecked: boolean = false;
-  public imgChecked: boolean = false;
 
-  public newsForm: FormGroup;
+  public activityForm: FormGroup;
   public showPreview: boolean;
   public previewLabel: string;
   public previewIcon: string;
   public previewImage;
+  public embedUrl = 'https://www.youtube.com/embed/';
 
   constructor(private service: ServicePHP,
-    @Inject(MAT_DIALOG_DATA) public news: any,
-    public dialogRef: MatDialogRef<ManageNewsDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public activity: any,
+    public dialogRef: MatDialogRef<ManageActivityDialogComponent>,
     public dialog: MatDialog,
     public fb: FormBuilder,
     private toastr: ToastrService) {
 
-    if (news.video) {
-      this.video = this.embedUrl + news.video;
-      this.vidChecked = true;
-    }
-    this.imgChecked = !this.vidChecked;
-
-    if (this.news.image == '') {
+    if (this.activity.image == '')
       this.previewImage = this.defaultImage;
-      this.news.image = this.defaultImage;
-    }
-    this.previewImage = this.news.image;
-
+    else
+      this.previewImage = this.activity.image;
+    
     this.initForm();
     this.fileImg = null;
 
-    if (this.news.type == 'I')
+    if (this.activity.type == 'I')
       this.showHidePreview(false);
     else
       this.showHidePreview(true);
   }
 
   initForm() {
-    let date = new Date(this.news.date);
-
-    this.newsForm = this.fb.group({
-      id: this.news.id,
-      title: [this.news.title, [Validators.required, Validators.maxLength(20)]],
-      desc: [this.news.desc, Validators.required],
-      image: [this.news.image, Validators.required],
-      video: [this.news.video, Validators.required],
-      date: [date, Validators.required],
-      show: this.news.show,
-      type: [this.news.type, Validators.required]
+    this.activityForm = this.fb.group({
+      id: this.activity.id,
+      title: [this.activity.title, [Validators.required, Validators.maxLength(25)]],
+      desc: [this.activity.desc, Validators.required],
+      image: this.activity.image,
+      video: this.activity.video,
+      show: [this.activity.show, Validators.required],
+      type: [this.activity.type, Validators.required]
     });
-  }
-
-  vidToggle(event) {
-    this.vidChecked = !this.vidChecked;
-    this.imgChecked = !this.vidChecked;
-    console.log(!this.vidChecked);
-  }
-  imgToggle(event) {
-    this.imgChecked = !this.imgChecked;
-    this.vidChecked = !this.imgChecked;
-    console.log(this.imgChecked);
   }
 
   /**
@@ -100,11 +71,18 @@ export class ManageNewsDialogComponent {
    * @param event 
    */
   onUploadFinished(event) {
-    console.log(event.file);
+    console.log(event);
+    //put file into form
+    //let control = this.activityForm.controls['image'];
+    //control.setValue(event.file);
+    //or
+    //this.activityForm.get('image').setValue(event.file);
+
+    //clear all images (only one can be present)
     this.clearImages();
 
     //store the uploaded image into variable
-    this.fileImg = event.file;
+    this.fileImg = event;
   }
 
   /**
@@ -116,14 +94,15 @@ export class ManageNewsDialogComponent {
     let target = event.target || event.srcElement || event.currentTarget;
     if (target.attributes.class != undefined) {
       let classAttr = target.attributes.class.value;
+      //console.log(classAttr);
 
       if (classAttr == 'img-ul-x-mark'
         || classAttr == 'img-ul-close'
         || classAttr == 'img-ul-clear img-ul-button') {
         console.log('remove image');
 
-        this.news.image = '';
-        this.previewImage = '';
+        this.activity.image = 'default';
+        this.previewImage = this.defaultImage;
         this.fileImg = null;
       }
     }
@@ -146,8 +125,8 @@ export class ManageNewsDialogComponent {
     }
 
     //clear image variable
-    this.news.image = '';
-    this.previewImage = '';
+    this.activity.image = 'default';
+    this.previewImage = this.defaultImage;
     this.fileImg = null;
   }
 
@@ -155,24 +134,22 @@ export class ManageNewsDialogComponent {
    * clear all form fields
    */
   clearForm() {
-    this.newsForm = this.fb.group({
-      title: ['', [Validators.required, Validators.maxLength(20)]],
+    this.activityForm = this.fb.group({
+      title: ['', [Validators.required, Validators.maxLength(25)]],
       desc: ['', Validators.required],
       image: [''],
       video: [''],
-      date: [''],
-      type: [this.news.type, Validators.required],
-      show: [false],
+      show: [false, Validators.required],
+      type: [this.activity.type, Validators.required]
     });
 
     this.clearImages();
 
-    this.news.title = '';
-    this.news.desc = '';
-    this.news.image = '';
-    this.news.video = '';
-    this.news.date = '';
-    this.news.show = false;
+    this.activity.title = '';
+    this.activity.desc = '';
+    this.activity.image = '';
+    this.activity.video = '';
+    this.activity.show = false;
   }
 
   /**
@@ -186,13 +163,13 @@ export class ManageNewsDialogComponent {
       this.showPreview = !this.showPreview;
 
     if (this.showPreview) {
-      this.news.date = this.newsForm.controls['date'].value;
-      this.extractYoutubeVideoId();
-
       this.previewLabel = 'Modifica';
       this.previewIcon = 'edit';
-      this.news.title = this.newsForm.controls['title'].value;
-      this.news.desc = this.newsForm.controls['desc'].value;
+      this.activity.title = this.activityForm.controls['title'].value;
+      this.activity.desc = this.activityForm.controls['desc'].value;
+      //this.activity.Image = this.activityForm.controls['image'];
+      //this.activity.video = this.activityForm.controls['video'].value;
+      this.extractYoutubeVideoId();
 
       //read the new image as URL show to preview
       if (this.fileImg != null) {
@@ -200,7 +177,7 @@ export class ManageNewsDialogComponent {
         reader.readAsDataURL(this.fileImg);
         reader.onload = (e: any) => {
           this.previewImage = e.target.result;
-          this.news.image = this.previewImage;
+          this.activity.image = this.previewImage;
         };
       }
 
@@ -212,45 +189,21 @@ export class ManageNewsDialogComponent {
   }
 
   /**
-   * validate form if at least image or url in filled
-   */
-  checkValid() {
-    if (this.newsForm.controls['title'].valid
-      && this.newsForm.controls['desc'].valid
-      && this.newsForm.controls['date'].valid
-      && (
-        (this.vidChecked == true && this.newsForm.controls['video'].valid)
-        || (this.imgChecked == true && this.newsForm.controls['image'].valid)
-      )
-    ) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-
-  /**
-   * send value to service request to save, update or delete News
+   * send value to service request to save, update or delete activity
    * @param value form value
    */
   async save(value) {
-
-    if (this.vidChecked == true) {
-      value.image = '';
-    } else if (this.imgChecked == true) {
-      value.video = '';
-    }
     console.log(value);
     let dialogRes: any;
 
-    let res = await this.service.saveNews(value, this.fileImg);
+    let res = await this.service.saveActivity(value, this.fileImg);
     if(res) {
       if (value.type == 'I')
-        this.toastr.success('News inserita con successo');
+        this.toastr.success('Attività inserita con successo');
       else if (value.type == 'U')
-        this.toastr.success('News aggiornata con successo');
+        this.toastr.success('Attività aggiornata con successo');
       else if (value.type == 'D')
-        this.toastr.success('News cancellata con successo');
+        this.toastr.success('Attività cancellata con successo');
 
       this.dialogRef.close({ status: 'OK'});
     } else {
@@ -258,26 +211,16 @@ export class ManageNewsDialogComponent {
     }
   }
 
-  extractYoutubeVideoId() {
-    let regex = new RegExp('(?<=v=).*');
-    let tmp: string = this.newsForm.controls['video'].value;
-    if (regex.test(tmp))
-      this.news.video = regex.exec(tmp);
-    else
-      this.news.video = tmp;
-    console.log(this.news.video);
-  }
-
   /**
-   * open confirm dialog for confimr News cancelation
+   * open confirm dialog for confimr activity cancelation
    */
   openChooseDialog(): void {
     let dialogRef = this.dialog.open(ChooseDialogComponent, {
       width: '350px',
       disableClose: true,
       data: {
-        title: 'Elimina ' + this.news.title,
-        desc: `Sicuro di voler eliminare la news ` + this.news.title + `?`,
+        title: 'Elimina ' + this.activity.title,
+        desc: `Sicuro di voler eliminare l'attività ` + this.activity.title + `?`,
         btn_true: 'Conferma',
         btn_false: 'Annulla'
       }
@@ -290,10 +233,27 @@ export class ManageNewsDialogComponent {
 
         //if result is true, proceed with deletion
         if (res) {
-          this.newsForm.controls['type'].setValue('D');
-          this.save(this.newsForm.value);
+          this.activityForm.controls['type'].setValue('D');
+          this.save(this.activityForm.value);
         }
       });
+  }
+
+  checkEmpty(value: string): boolean {
+    if (value)
+      return true;
+    else
+      return false;
+  }
+
+  extractYoutubeVideoId() {
+    let regex = new RegExp('(?<=v=).*');
+    let tmp: string = this.activityForm.controls['video'].value;
+    if (regex.test(tmp))
+      this.activity.video = regex.exec(tmp);
+    else
+      this.activity.video = tmp;
+    console.log(this.activity.video);
   }
 
 }

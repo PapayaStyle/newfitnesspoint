@@ -8,7 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'manage-info-dialog',
-  templateUrl: '../../template/manager/manage.info.dialog.html',
+  templateUrl: '../../template/module/manage.info.dialog.html',
   styleUrls: [
     '../../css/manager/control-panel.css',
     '../../css/manager/manage.main.css',

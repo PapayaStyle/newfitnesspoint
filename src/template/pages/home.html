@@ -43,7 +43,7 @@
   </div>
 
   <!-- NEWS -->
-  <div *ngIf="newsList.length > 0">
+  <div *ngIf="newsList && newsList.length > 0">
     <h1>{{newsTitle}}</h1>
     <div class="news" *ngFor="let news of newsList">
       <mat-card class="box">
@@ -62,8 +62,20 @@
           <div class="desc">
             <p>{{ (news.desc.length>80) ? (news.desc | slice:0:80)+'...' : (news.desc) }}</p>
           </div>
-          <a mat-raised-button class="btn-open btn btn-xs btn-info" (click)="openDialogNews(news)">{{ changeLabel(news)
-            }}</a>
+
+          <button mat-raised-button color="accent" 
+            class="btn-open" 
+            (click)="openDialogNews(news)">
+            <mat-icon>visibility</mat-icon>
+            {{ changeLabel(news) }}
+          </button>
+          <!--
+          <a mat-raised-button 
+            class="btn-open btn btn-xs btn-info" 
+            (click)="openDialogNews(news)">
+            {{ changeLabel(news) }}
+          </a>
+          -->
         </div>
       </mat-card>
     </div>

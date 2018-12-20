@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 import { Inject } from '@angular/core';
-import { ServicePHP } from '../service/service';
+import { ServicePHP } from '../../service/service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { NewsDialogComponent } from './component.news.dialog';
-import { News } from '../models/News';
+import { NewsDialogComponent } from '../module/component.news.dialog';
+import { News } from '../../models/News';
 
 @Component({
   selector: 'app-news',
-  templateUrl: '../template/news.html',
-  styleUrls: ['../css/news.css']
+  templateUrl: '../../template/pages/news.html',
+  styleUrls: ['../../css/pages/news.css']
 })
 export class NewsComponent implements OnInit {
 

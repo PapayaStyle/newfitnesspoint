@@ -18,10 +18,10 @@ import { ToastrService } from 'ngx-toastr';
 @Injectable()
 export class ServicePHP extends BaseService {
 
-  constructor(protected httpClient: HttpClient,
-    protected cookie: CookieService,
-    protected share: SharedService,
-    protected toastr: ToastrService) {
+  constructor(httpClient: HttpClient,
+    cookie: CookieService,
+    share: SharedService,
+    toastr: ToastrService) {
     super(httpClient, cookie, share, toastr);
   }
 
@@ -62,7 +62,7 @@ export class ServicePHP extends BaseService {
     if (response) {
       return response;
     } else {
-      return { error: true };
+      return false;
     }
   }
 
@@ -196,7 +196,6 @@ export class ServicePHP extends BaseService {
     this.share.changeLoading(true);
 
     let url = 'save_calendar.php';
-    //const body = JSON.stringify(model);
     let requestObj = new RequestObj(url, model);
 
     let response: any;
@@ -289,6 +288,25 @@ export class ServicePHP extends BaseService {
     }
   }
 
+  async saveGallery(model, file): Promise<any> {
+    console.log('Service --> saveGallery');
+    this.share.changeLoading(true);
+
+    let url = 'save_gallery.php';
+
+    let param = new FormData();
+    param.append('data', JSON.stringify(model));
+    param.append('file', file);
+
+    let requestObj = new RequestObj(url, {});
+    
+    let response: any;
+    response = await this.POST(requestObj, param);
+    if (response) {
+      return new RestResponse(response);
+    }
+  }
+
   /**
  * call php service to send mail
  * @param name 
@@ -308,10 +326,12 @@ export class ServicePHP extends BaseService {
       .then(res => {
         console.log(res);
         return res;
-      })
+      });
+      /*
       .catch(err =>
         this.handleError(err)
       );
+      */
   }
 
 }

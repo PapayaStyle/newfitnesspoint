@@ -1,11 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import * as $ from 'jquery';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'activity-dialog',
-  templateUrl: '../template/news.dialog.html',
-  styleUrls: ['../css/news.css']
+  templateUrl: '../../template/module/news.dialog.html',
+  styleUrls: ['../../css/pages/news.css']
 })
 export class NewsDialogComponent implements OnInit {
 

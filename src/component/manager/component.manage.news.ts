@@ -3,14 +3,14 @@ import { DOCUMENT } from '@angular/platform-browser';
 import { Inject } from '@angular/core';
 import { ServicePHP } from '../../service/service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { ManageNewsDialogComponent } from '../manager/component.manage.news.dialog';
+import { ManageNewsDialogComponent } from '../module/component.manage.news.dialog';
 
 @Component({
   selector: 'app-manage-news',
   templateUrl: '../../template/manager/manage.news.html',
   styleUrls: [
     '../../css/manager/manage.main.css',
-    '../../css/news.css',
+    '../../css/pages/news.css',
     '../../css/manager/manage.news.css'
   ]
 })

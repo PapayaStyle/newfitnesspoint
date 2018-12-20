@@ -1,12 +1,12 @@
 import { Component, Inject, OnInit, AfterViewInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ServicePHP } from '../service/service';
+import { ServicePHP } from './../../service/service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-contact',
-  templateUrl: '../template/contact.html',
-  styleUrls: ['../css/contact.css']
+  templateUrl: '../../template/pages/contact.html',
+  styleUrls: ['../../css/pages/contact.css']
 })
 export class ContactComponent implements OnInit, AfterViewInit {
   public form;

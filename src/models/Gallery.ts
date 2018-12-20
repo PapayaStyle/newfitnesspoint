@@ -1,14 +1,16 @@
 export class Gallery {
-  public small: string;
-  public medium: string;
-  public big: string;
+  public id: number;
+  public thumbnail: string;
+  public preview: string;
+  public image: string;
   public show: number;
 
   constructor(obj?: any) {
     if(typeof obj == 'object') {
-      obj.small && (this.small = obj.small);
-      obj.medium && (this.medium = obj.medium);
-      obj.big && (this.big = obj.big);
+      obj.id && (this.id = obj.id);
+      obj.thumbnail && (this.thumbnail = obj.thumbnail);
+      obj.preview && (this.preview = obj.preview);
+      obj.image && (this.image = obj.image);
       obj.show && (this.show = obj.show);
     }
   }

@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 import { Inject } from '@angular/core';
-import { ServicePHP } from '../service/service';
+import { ServicePHP } from '../../service/service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { ActivityDialogComponent } from './component.activity.dialog';
+import { ActivityDialogComponent } from '../module/component.activity.dialog';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-activity',
-  templateUrl: '../template/activity.html',
-  styleUrls: ['../css/activity.css']
+  templateUrl: '../../template/pages/activity.html',
+  styleUrls: ['../../css/pages/activity.css']
 })
 export class ActivityComponent implements OnInit {
 

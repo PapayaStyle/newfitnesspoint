@@ -3,8 +3,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'activity-dialog',
-  templateUrl: '../template/activity.dialog.html',
-  styleUrls: ['../css/activity.css']
+  templateUrl: '../../template/module/activity.dialog.html',
+  styleUrls: ['../../css/pages/activity.css']
 })
 export class ActivityDialogComponent {
 

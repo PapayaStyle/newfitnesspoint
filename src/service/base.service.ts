@@ -18,10 +18,21 @@ export class BaseService {
   protected HEADERS: HttpHeaders;
   protected params: URLSearchParams;
 
-  constructor(protected httpClient: HttpClient,
-    protected cookie: CookieService,
-    protected share: SharedService,
-    protected toastr: ToastrService) {
+  protected httpClient: HttpClient;
+  protected cookie: CookieService;
+  protected share: SharedService;
+  protected toastr: ToastrService;
+
+  constructor(httpClient: HttpClient,
+    cookie: CookieService,
+    share: SharedService,
+    toastr: ToastrService) {
+
+    this.httpClient = httpClient;
+    this.cookie = cookie;
+    this.share = share;
+    this.toastr = toastr;
+
     this.setHeaders();
     this.setRestUrl();
   }
@@ -63,24 +74,31 @@ export class BaseService {
     this.cookie.set('account', account.username, 1);
   }
 
-  protected handleError(err: Response): Promise<any> {
-    console.log(err);
-
-    if (err.json().message != null) {
-      console.log(err.json());
-      err.status = err.json().status;
-      err.statusText = err.json().message;
-    } else if (err.status == 0 || err.status == null || err.status == undefined) {
-      console.log(err.status);
-      err.status = 500;
-      err.statusText = 'Generic Error';
+  private handleError(err: any, _service:BaseService): Promise<any> {
+    console.log('handleError');
+    let error: RestResponse;
+    
+    if (err.error.status) {
+      error = new RestResponse({
+        status: err.error.status,
+        statusText: err.error.statusText,
+        message: err.error.message
+      });
+    } else if (err.status) {
+      error = new RestResponse({
+        status: err.status,
+        statusText: err.message,
+        message: err.message
+      });
+    } else {
+      error = new RestResponse({ status: 'KO', message: 'Generic Error' });
     }
-    let error = new RestResponse(err);
+    
+    _service.share.changeLoading(false);
 
-    this.share.changeLoading(false);
+    _service.toastr.error(error.message);
 
-    this.toastr.error(error.message);
-
+    console.log(err);
     return Promise.reject(error);
   }
 
@@ -99,7 +117,7 @@ export class BaseService {
           this.share.changeLoading(false);
           return data;
         })
-        .catch(this.handleError);
+        .catch( err => this.handleError(err, this));
     } else {
       return Promise.reject('missing params');
     }
@@ -122,13 +140,13 @@ export class BaseService {
           this.share.changeLoading(false);
           return data;
         })
-        .catch(this.handleError);
+        .catch( err => this.handleError(err, this));
     } else {
       return Promise.reject('missing params');
     }
   }
 
-  async PUT(requestObj: RequestObj): Promise<Object> {
+  protected async PUT(requestObj: RequestObj): Promise<Object> {
     if (requestObj && requestObj.resource != null) {
       let currentUrl = `${this.BASE_URL}${requestObj.resource}`;
       console.log(`PUT-currentUrl: ${currentUrl}`);
@@ -140,7 +158,7 @@ export class BaseService {
           this.share.changeLoading(false);
           return data;
         })
-        .catch(this.handleError);
+        .catch( err => this.handleError(err, this));
     } else {
       return Promise.reject('missing params');
     }

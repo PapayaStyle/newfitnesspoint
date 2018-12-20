@@ -32,11 +32,16 @@
                 </textarea>
       </mat-form-field>
 
+      <!--
       <image-upload class="imageUpload" buttonCaption="Carica immagine" dropBoxMessage="Trascina immagine"
         clearButtonCaption="Cancella" max="1" [uploadedFiles]="[previewImage]" (uploadFinished)="onUploadFinished($event)">
       </image-upload>
-
-      <mat-checkbox class="show-box" formControlName="show">Mostra</mat-checkbox>
+      -->
+      <upload-image class="imageUpload"
+        [previewType]="'small'"
+        [image]="previewImage"
+        (file)="onUploadFinished($event)">
+      </upload-image>
 
       <button mat-raised-button color="warn" class="pull-left" (click)="clearForm()">
         <mat-icon>clear</mat-icon>

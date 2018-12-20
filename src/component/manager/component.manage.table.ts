@@ -16,7 +16,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: [
     '../../css/manager/manage.main.css',
     '../../css/manager/manage.table.css',
-    '../../css/table-courses.css'
+    '../../css/module/table-courses.css'
   ]
 })
 export class ManageTableComponent implements OnInit {

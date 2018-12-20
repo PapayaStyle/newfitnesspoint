@@ -1,1 +1,22 @@
 <h3>Gestione Galleria</h3>
+
+<div class="btn-box">
+  <button mat-raised-button color="accent" (click)="openGalleryDialog(null)">
+    <mat-icon>add</mat-icon>
+    Aggiungi Immagine
+  </button>
+  <button mat-raised-button color="accent" (click)="showHideImages()">
+    <mat-icon>{{ showHideIcon }}</mat-icon>
+    {{ showHideLabel }}
+  </button>
+</div>
+
+<div class="images-container" *ngIf="showGallery">
+
+  <div class="img-box" *ngFor="let image of galleryImages" 
+    [ngStyle]="responsive"
+    (click)="openGalleryDialog(image)">
+    <img src="http://localhost{{ image.thumbnail }}"/>
+  </div>
+
+</div>

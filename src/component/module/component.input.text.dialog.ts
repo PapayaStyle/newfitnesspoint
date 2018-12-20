@@ -3,7 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'choose-dialog',
-  templateUrl: '../../template/manager/input.text.dialog.html'
+  templateUrl: '../../template/module/input.text.dialog.html'
 })
 export class InputTextDialogComponent {
 

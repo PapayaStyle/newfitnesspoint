@@ -1,0 +1,26 @@
+.upload-cnt {
+  display: block;
+}
+
+.preview {
+  display: block;
+}
+.preview > img {
+  max-width: 800px;
+  max-height: 450px;
+}
+
+.btn-cnt button {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.thumbs-preview {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 10px;
+}
+.thumbs-preview > img {
+  max-width: 193px;
+  max-height: 100px;
+}

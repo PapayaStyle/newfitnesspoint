@@ -1,5 +1,6 @@
 export class RestResponse {
   public status: number;
+  public statusText: string;
   public message: string;
 
   constructor(obj?: any) {

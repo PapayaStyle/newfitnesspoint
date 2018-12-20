@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { DOCUMENT } from '@angular/platform-browser';
-import { Inject } from '@angular/core';
-import { ServicePHP } from '../service/service';
+import { ServicePHP } from '../../service/service';
 
 @Component({
   selector: 'app-staff',
-  templateUrl: '../template/staff.html',
-  styleUrls: ['../css/staff.css']
+  templateUrl: '../../template/pages/staff.html',
+  styleUrls: ['../../css/pages/staff.css']
 })
 export class StaffComponent implements OnInit {
 

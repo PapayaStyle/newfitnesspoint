@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { InputTextDialogComponent } from './component.input.text.dialog';
 
 @Component({
   selector: 'activity',
-  templateUrl: '../../template/manager/form.activity.html',
+  templateUrl: '../../template/module/form.activity.html',
   styleUrls: ['../../css/manager/manage.table.css']
 })
 export class FormActivityComponent {

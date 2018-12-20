@@ -3,60 +3,69 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ServicePHP } from '../../service/service';
 import { ChooseDialogComponent } from './component.choose.dialog';
+import { AppDateAdapter, APP_DATE_FORMATS } from '../../app/app.data.adapter';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'manage-activity-dialog',
-  templateUrl: '../../template/manager/manage.activity.dialog.html',
+  selector: 'manage-staff-dialog',
+  templateUrl: '../../template/module/manage.staff.dialog.html',
   styleUrls: [
     '../../css/manager/control-panel.css',
     '../../css/manager/manage.main.css',
-    '../../css/manager/manage.activity.css'
+    '../../css/manager/manage.staff.css'
   ]
 })
-export class ManageActivityDialogComponent {
+export class ManageStaffDialogComponent {
 
-  private defaultImage = 'http://localhost/images/default.jpg';
   private fileImg = null;
 
-  public activityForm: FormGroup;
+  public staffForm: FormGroup;
   public showPreview: boolean;
   public previewLabel: string;
   public previewIcon: string;
   public previewImage;
-  public embedUrl = 'https://www.youtube.com/embed/';
+
+  public convDate = null;
 
   constructor(private service: ServicePHP,
-    @Inject(MAT_DIALOG_DATA) public activity: any,
-    public dialogRef: MatDialogRef<ManageActivityDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public staff: any,
+    public dialogRef: MatDialogRef<ManageStaffDialogComponent>,
     public dialog: MatDialog,
     public fb: FormBuilder,
     private toastr: ToastrService) {
 
-    if (this.activity.image == '')
-      this.previewImage = this.defaultImage;
-    else
-      this.previewImage = this.activity.image;
-    
+    this.previewImage = this.staff.image;
+
     this.initForm();
     this.fileImg = null;
 
-    if (this.activity.type == 'I')
+    if (this.staff.type == 'I')
       this.showHidePreview(false);
     else
       this.showHidePreview(true);
   }
 
   initForm() {
-    this.activityForm = this.fb.group({
-      id: this.activity.id,
-      title: [this.activity.title, [Validators.required, Validators.maxLength(25)]],
-      desc: [this.activity.desc, Validators.required],
-      image: this.activity.image,
-      video: this.activity.video,
-      show: [this.activity.show, Validators.required],
-      type: [this.activity.type, Validators.required]
+    this.staffForm = this.fb.group({
+      id: this.staff.id,
+      name: [this.staff.name, [Validators.required, Validators.maxLength(50)]],
+      activity: [this.staff.activity, [Validators.required, Validators.maxLength(50)]],
+      desc: [this.staff.desc, Validators.required],
+      image: this.staff.image,
+      show: this.staff.show,
+      type: [this.staff.type, Validators.required]
     });
+  }
+
+  changeBackground(image): any {
+    return { 'background-image': 'url(' + image + ')' };
+  }
+
+  checkEmpty(value: string): boolean {
+    if (value)
+      return true;
+    else
+      return false;
   }
 
   /**
@@ -71,18 +80,11 @@ export class ManageActivityDialogComponent {
    * @param event 
    */
   onUploadFinished(event) {
-    console.log(event.file);
-    //put file into form
-    //let control = this.activityForm.controls['image'];
-    //control.setValue(event.file);
-    //or
-    //this.activityForm.get('image').setValue(event.file);
-
-    //clear all images (only one can be present)
+    console.log(event);
     this.clearImages();
 
     //store the uploaded image into variable
-    this.fileImg = event.file;
+    this.fileImg = event;
   }
 
   /**
@@ -94,15 +96,14 @@ export class ManageActivityDialogComponent {
     let target = event.target || event.srcElement || event.currentTarget;
     if (target.attributes.class != undefined) {
       let classAttr = target.attributes.class.value;
-      //console.log(classAttr);
 
       if (classAttr == 'img-ul-x-mark'
         || classAttr == 'img-ul-close'
         || classAttr == 'img-ul-clear img-ul-button') {
         console.log('remove image');
 
-        this.activity.image = 'default';
-        this.previewImage = this.defaultImage;
+        this.staff.image = '';
+        this.previewImage = '';
         this.fileImg = null;
       }
     }
@@ -125,8 +126,8 @@ export class ManageActivityDialogComponent {
     }
 
     //clear image variable
-    this.activity.image = 'default';
-    this.previewImage = this.defaultImage;
+    this.staff.image = '';
+    this.previewImage = '';
     this.fileImg = null;
   }
 
@@ -134,22 +135,21 @@ export class ManageActivityDialogComponent {
    * clear all form fields
    */
   clearForm() {
-    this.activityForm = this.fb.group({
-      title: ['', [Validators.required, Validators.maxLength(25)]],
+    this.staffForm = this.fb.group({
+      name: ['', [Validators.required, Validators.maxLength(30)]],
+      activity: ['', [Validators.required, Validators.maxLength(30)]],
       desc: ['', Validators.required],
-      image: [''],
-      video: [''],
-      show: [false, Validators.required],
-      type: [this.activity.type, Validators.required]
+      type: [this.staff.type, Validators.required],
+      show: [false],
     });
 
     this.clearImages();
 
-    this.activity.title = '';
-    this.activity.desc = '';
-    this.activity.image = '';
-    this.activity.video = '';
-    this.activity.show = false;
+    this.staff.name = '';
+    this.staff.activity = '';
+    this.staff.desc = '';
+    this.staff.image = '';
+    this.staff.show = false;
   }
 
   /**
@@ -163,13 +163,12 @@ export class ManageActivityDialogComponent {
       this.showPreview = !this.showPreview;
 
     if (this.showPreview) {
+
       this.previewLabel = 'Modifica';
       this.previewIcon = 'edit';
-      this.activity.title = this.activityForm.controls['title'].value;
-      this.activity.desc = this.activityForm.controls['desc'].value;
-      //this.activity.Image = this.activityForm.controls['image'];
-      //this.activity.video = this.activityForm.controls['video'].value;
-      this.extractYoutubeVideoId();
+      this.staff.name = this.staffForm.controls['name'].value;
+      this.staff.activity = this.staffForm.controls['activity'].value;
+      this.staff.desc = this.staffForm.controls['desc'].value;
 
       //read the new image as URL show to preview
       if (this.fileImg != null) {
@@ -177,7 +176,7 @@ export class ManageActivityDialogComponent {
         reader.readAsDataURL(this.fileImg);
         reader.onload = (e: any) => {
           this.previewImage = e.target.result;
-          this.activity.image = this.previewImage;
+          this.staff.image = this.previewImage;
         };
       }
 
@@ -189,21 +188,21 @@ export class ManageActivityDialogComponent {
   }
 
   /**
-   * send value to service request to save, update or delete activity
+   * send value to service request to save, update or delete Staff
    * @param value form value
    */
   async save(value) {
     console.log(value);
     let dialogRes: any;
 
-    let res = await this.service.saveActivity(value, this.fileImg);
+    let res = await this.service.saveStaff(value, this.fileImg);
     if(res) {
       if (value.type == 'I')
-        this.toastr.success('Attività inserita con successo');
+        this.toastr.success('Staff inserito con successo');
       else if (value.type == 'U')
-        this.toastr.success('Attività aggiornata con successo');
+        this.toastr.success('Staff aggiornato con successo');
       else if (value.type == 'D')
-        this.toastr.success('Attività cancellata con successo');
+        this.toastr.success('Staff cancellato con successo');
 
       this.dialogRef.close({ status: 'OK'});
     } else {
@@ -212,15 +211,15 @@ export class ManageActivityDialogComponent {
   }
 
   /**
-   * open confirm dialog for confimr activity cancelation
+   * open confirm dialog for confirm Staff cancelation
    */
   openChooseDialog(): void {
     let dialogRef = this.dialog.open(ChooseDialogComponent, {
       width: '350px',
       disableClose: true,
       data: {
-        title: 'Elimina ' + this.activity.title,
-        desc: `Sicuro di voler eliminare l'attività ` + this.activity.title + `?`,
+        title: 'Elimina ' + this.staff.name,
+        desc: `Sicuro di voler eliminare lo staff ` + this.staff.name + `?`,
         btn_true: 'Conferma',
         btn_false: 'Annulla'
       }
@@ -233,27 +232,10 @@ export class ManageActivityDialogComponent {
 
         //if result is true, proceed with deletion
         if (res) {
-          this.activityForm.controls['type'].setValue('D');
-          this.save(this.activityForm.value);
+          this.staffForm.controls['type'].setValue('D');
+          this.save(this.staffForm.value);
         }
       });
-  }
-
-  checkEmpty(value: string): boolean {
-    if (value)
-      return true;
-    else
-      return false;
-  }
-
-  extractYoutubeVideoId() {
-    let regex = new RegExp('(?<=v=).*');
-    let tmp: string = this.activityForm.controls['video'].value;
-    if (regex.test(tmp))
-      this.activity.video = regex.exec(tmp);
-    else
-      this.activity.video = tmp;
-    console.log(this.activity.video);
   }
 
 }

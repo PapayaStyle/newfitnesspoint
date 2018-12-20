@@ -1,0 +1,28 @@
+<div class="upload-cnt">
+  <div *ngIf="previewType" class="preview">
+    <img src="{{ preview }}">
+  </div>
+
+  <div class="btn-cnt">
+    <input hidden type="file" #imgFileInput [(ngModel)]="fileImg" (change)="readFile($event)"/>
+
+    <button *ngIf="!fileImg"
+      mat-raised-button color="accent"
+      (click)="imgFileInput.click()">
+      <mat-icon>attachment</mat-icon>
+      Carica immagine
+    </button>
+
+    <button *ngIf="fileImg"
+      mat-raised-button color="warn"
+      (click)="clear();">
+      <mat-icon>clear</mat-icon>
+      rimuovi immagine
+    </button>
+
+    <div *ngIf="previewThumb" class="thumbs-preview">
+      <img src="{{ previewThumb }}">
+    </div>
+  </div>
+
+</div>

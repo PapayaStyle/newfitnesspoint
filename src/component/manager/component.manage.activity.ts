@@ -4,7 +4,7 @@ import { Inject } from '@angular/core';
 import { ServicePHP } from '../../service/service';
 import { SharedService } from '../../service/shared';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { ManageActivityDialogComponent } from './component.manage.activity.dialog';
+import { ManageActivityDialogComponent } from '../module/component.manage.activity.dialog';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: '../../template/manager/manage.activity.html',
   styleUrls: [
     '../../css/manager/manage.main.css',
-    '../../css/activity.css',
+    '../../css/pages/activity.css',
     '../../css/manager/manage.activity.css'
   ]
 })

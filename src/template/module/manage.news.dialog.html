@@ -53,9 +53,16 @@
         <input matInput class="form-control" placeholder="URL YouTube" formControlName="video" />
       </mat-form-field>
 
+      <!--
       <image-upload *ngIf="imgChecked" class="imageUpload" buttonCaption="Carica immagine" dropBoxMessage="Trascina immagine"
         clearButtonCaption="Cancella" max="1" [uploadedFiles]="[previewImage]" (uploadFinished)="onUploadFinished($event)">
       </image-upload>
+      -->
+      <upload-image class="imageUpload"
+        [previewType]="'small'"
+        [image]="previewImage"
+        (file)="onUploadFinished($event)">
+      </upload-image>
 
       <mat-checkbox class="show-box" formControlName="show">Mostra</mat-checkbox>
 

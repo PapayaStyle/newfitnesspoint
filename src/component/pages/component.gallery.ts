@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { DOCUMENT } from '@angular/platform-browser';
-import { Inject } from '@angular/core';
-import { ServicePHP } from '../service/service';
+import { ServicePHP } from './../../service/service';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
+import { Gallery } from '../../models/Gallery';
 
 @Component({
   selector: 'app-gallery',
-  templateUrl: '../template/gallery.html',
-  styleUrls: ['../css/gallery.css']
+  templateUrl: '../../template/pages/gallery.html',
+  styleUrls: ['../../css/pages/gallery.css']
 })
 export class GalleryComponent implements OnInit {
 
@@ -76,7 +75,14 @@ export class GalleryComponent implements OnInit {
   }
 
   async getImages() {
-    this.galleryImages = await this.service.getGalleryImages();
+    let gallery: Gallery[] = await this.service.getGalleryImages();
+    this.galleryImages = gallery.map( img =>
+      new NgxGalleryImage ({ 
+        small: 'http://localhost'+img.thumbnail, 
+        medium: 'http://localhost'+img.preview, 
+        big: 'http://localhost'+img.image 
+      })
+    );
   }
 
 }

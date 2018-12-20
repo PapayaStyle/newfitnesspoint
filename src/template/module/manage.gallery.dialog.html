@@ -1,0 +1,38 @@
+<div class="manage-gallery-popup">
+
+  <div *ngIf="previewImage" class="previewImage">
+    <img src="{{ previewImage }}">
+  </div>
+
+  <upload-image *ngIf="new"
+    [previewType]="'medium'"
+    (file)="onFileUpload($event)">
+  </upload-image>
+
+  <div class="btn-cnt">
+    <button
+      class="pull-left"
+      mat-raised-button color="accent" 
+      (click)="dialogRef.close()" >
+      <mat-icon>clear</mat-icon>
+      Annulla
+    </button>
+    
+    <button *ngIf="new"
+      class="pull-right"
+      mat-raised-button color="primary" 
+      (click)="save()" [disabled]="!fileImg" >
+      <mat-icon>save</mat-icon>
+      Salva
+    </button>
+    <button *ngIf="!new"
+      class="pull-right"
+      mat-raised-button color="warn" 
+      (click)="openChooseDialog()" >
+      <mat-icon>delete</mat-icon>
+      Elimina
+    </button>
+  </div>
+
+  <mat-icon class="close" aria-label="chiudi" (click)="dialogRef.close()">clear</mat-icon>
+</div>

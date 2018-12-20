@@ -1,11 +1,11 @@
 import { Routes, RouterModule } from '@angular/router';
 
-import { HomeComponent } from '../component/component.home';
-import { StaffComponent } from '../component/component.staff';
-import { ActivityComponent } from '../component/component.activity';
-import { GalleryComponent } from '../component/component.gallery';
-import { ContactComponent } from '../component/component.contact';
-import { NewsComponent } from '../component/component.news';
+import { HomeComponent } from '../component/pages/component.home';
+import { StaffComponent } from '../component/pages/component.staff';
+import { ActivityComponent } from '../component/pages/component.activity';
+import { GalleryComponent } from '../component/pages/component.gallery';
+import { ContactComponent } from '../component/pages/component.contact';
+import { NewsComponent } from '../component/pages/component.news';
 
 import { LoginComponent } from '../component/manager/component.login';
 import { ControlPanelComponent } from '../component/manager/component.control.panel';
@@ -16,6 +16,7 @@ import { ManageNewsComponent } from '../component/manager/component.manage.news'
 import { ManageInfoComponent } from '../component/manager/component.manage.info';
 
 import { AuthGuard } from '../service/auth.guard';
+import { ManageGalleryComponent } from '../component/manager/component.manage.gallery';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -33,7 +34,7 @@ const appRoutes: Routes = [
         { path: 'activity', component: ManageActivityComponent },
         { path: 'staff', component: ManageStaffComponent },
         { path: 'info', component: ManageInfoComponent },
-        { path: 'gallery', component: ManageStaffComponent },
+        { path: 'gallery', component: ManageGalleryComponent },
         { path: 'news', component: ManageNewsComponent }        
     ],
     canActivateChild: [AuthGuard]

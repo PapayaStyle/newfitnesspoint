@@ -1,39 +1,52 @@
 h3 {
-    margin: 0 auto;
-    padding: 0;
-    color: #F44336;
-    font-size: 2.5em;
-    font-weight: bold;
-    padding-bottom: 2%;
-    text-transform: uppercase;
-    font-variant: all-small-caps;
-    font-family: 'Roboto', sans-serif;
-    text-align: center;
+  margin: 0 auto;
+  padding: 0;
+  color: #F44336;
+  font-size: 2.5em;
+  font-weight: bold;
+  padding-bottom: 2%;
+  text-transform: uppercase;
+  font-variant: all-small-caps;
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
 }
 
 .btn-box {
-    display: block;
-    clear: both;
-    width: 100%;
+  display: block;
+  clear: both;
+  width: 100%;
 }
 .btn-box button {
-    display: block;
-    margin: 1em;
+  display: block;
+  margin: 1em;
 }
 
 .message {
-    padding-top: 20px;
-    margin: 0px;
-    margin-bottom: -20px;
-    text-align: center;
-    font-size: 1.5em;
+  padding-top: 20px;
+  margin: 0px;
+  margin-bottom: -20px;
+  text-align: center;
+  font-size: 1.5em;
 }
 
 .box-buttons {
-    position: absolute;
-    top: 5px;
-    left: 0;
+  position: absolute;
+  top: 5px;
+  left: 0;
 }
 .box-buttons button {
-    margin-right: 5px;
+  margin-right: 5px;
 }
+.thumbs-preview {
+  display: inline-block;
+}
+.thumbs-preview img {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+upload-image {
+  display: block;
+  margin-bottom: 15px;
+}
+    

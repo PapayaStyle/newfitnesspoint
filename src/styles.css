@@ -54,7 +54,7 @@ html, body, app {
     height: 30px;
     color: #e96233;
 }
-.popup .close:hover {
+.close:hover {
     opacity: 1;
     transition: opacity 500ms;
 }
@@ -83,6 +83,7 @@ and (max-width: 545px) {
     font-size: 1em !important;
     font-weight: bold !important;
 }
+/*
 .mat-tab-group.mat-primary .mat-tab-label:focus {
     background-color: rgba(241, 176, 123, 0.3) !important;
 }
@@ -103,6 +104,7 @@ and (max-width: 545px) {
 .mat-checkbox-checked.mat-accent .mat-checkbox-background {
     background-color: #e96233 !important;
 }
+*/
 
 /* ##### START Mat Input ##### */
 .mat-form-field-label, .mat-form-field-placeholder {

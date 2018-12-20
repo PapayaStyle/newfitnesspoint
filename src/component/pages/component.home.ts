@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { ServicePHP } from '../service/service';
+import { ServicePHP } from '../../service/service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { NewsDialogComponent } from './component.news.dialog';
+import { NewsDialogComponent } from '../module/component.news.dialog';
 
 @Component({
   selector: 'app-home',
-  templateUrl: '../template/home.html',
+  templateUrl: '../../template/pages/home.html',
   styleUrls: [
-    '../css/home.css',
-    '../css/news.css',
-    '../css/table-courses.css'
+    '../../css/pages/home.css',
+    '../../css/pages/news.css',
+    '../../css/module/table-courses.css'
   ]
 })
 export class HomeComponent implements OnInit {

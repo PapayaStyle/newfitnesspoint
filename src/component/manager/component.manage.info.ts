@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ServicePHP } from '../../service/service';
 import { SharedService } from '../../service/shared';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { ManageInfoDialogComponent } from './component.manage.info.dialog';
+import { ManageInfoDialogComponent } from '../module/component.manage.info.dialog';
 
 @Component({
   selector: 'app-manage-staff',
@@ -19,7 +19,6 @@ export class ManageInfoComponent implements OnInit {
   public showHideInfoIcon: string;
 
   constructor(private service: ServicePHP,
-    private shareService: SharedService,
     public dialog: MatDialog) { }
 
   ngOnInit() {

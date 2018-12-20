@@ -124,7 +124,7 @@ h1 {
     height: 90px;
     border: 2px solid #e1e1e1;
     border-radius: 100%;
-    background-image: url("../images/icons.png");
+    background-image: url("../../images/icons.png");
     background-size: 280px;
 }
 .article .icon > span {
@@ -270,7 +270,7 @@ h3 {
 
 /* HOME IMAGE */
 .pic-container {
-    background-image: url("../images/home-img.jpg");
+    background-image: url("../../images/home-img.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

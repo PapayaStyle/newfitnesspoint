@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, HostListener } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ServicePHP } from '../../service/service';
 import { ChooseDialogComponent } from './component.choose.dialog';
@@ -7,65 +7,85 @@ import { AppDateAdapter, APP_DATE_FORMATS } from '../../app/app.data.adapter';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'manage-staff-dialog',
-  templateUrl: '../../template/manager/manage.staff.dialog.html',
+  selector: 'manage-news-dialog',
+  templateUrl: '../../template/module/manage.news.dialog.html',
   styleUrls: [
     '../../css/manager/control-panel.css',
     '../../css/manager/manage.main.css',
-    '../../css/manager/manage.staff.css'
+    '../../css/manager/manage.news.css'
+  ],
+  providers: [
+    { provide: DateAdapter, useClass: AppDateAdapter },
+    { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS }
   ]
 })
-export class ManageStaffDialogComponent {
+export class ManageNewsDialogComponent {
 
+  private defaultImage = 'http://localhost/images/default.jpg';
+  public embedUrl = 'https://www.youtube.com/embed/';
+  public video = '';
   private fileImg = null;
+  public vidChecked: boolean = false;
+  public imgChecked: boolean = false;
 
-  public staffForm: FormGroup;
+  public newsForm: FormGroup;
   public showPreview: boolean;
   public previewLabel: string;
   public previewIcon: string;
   public previewImage;
 
-  public convDate = null;
-
   constructor(private service: ServicePHP,
-    @Inject(MAT_DIALOG_DATA) public staff: any,
-    public dialogRef: MatDialogRef<ManageStaffDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public news: any,
+    public dialogRef: MatDialogRef<ManageNewsDialogComponent>,
     public dialog: MatDialog,
     public fb: FormBuilder,
     private toastr: ToastrService) {
 
-    this.previewImage = this.staff.image;
+    if (news.video) {
+      this.video = this.embedUrl + news.video;
+      this.vidChecked = true;
+    }
+    this.imgChecked = !this.vidChecked;
+
+    if (this.news.image == '') {
+      this.previewImage = this.defaultImage;
+      this.news.image = this.defaultImage;
+    }
+    this.previewImage = this.news.image;
 
     this.initForm();
     this.fileImg = null;
 
-    if (this.staff.type == 'I')
+    if (this.news.type == 'I')
       this.showHidePreview(false);
     else
       this.showHidePreview(true);
   }
 
   initForm() {
-    this.staffForm = this.fb.group({
-      id: this.staff.id,
-      name: [this.staff.name, [Validators.required, Validators.maxLength(50)]],
-      activity: [this.staff.activity, [Validators.required, Validators.maxLength(50)]],
-      desc: [this.staff.desc, Validators.required],
-      image: this.staff.image,
-      show: this.staff.show,
-      type: [this.staff.type, Validators.required]
+    let date = new Date(this.news.date);
+
+    this.newsForm = this.fb.group({
+      id: this.news.id,
+      title: [this.news.title, [Validators.required, Validators.maxLength(20)]],
+      desc: [this.news.desc, Validators.required],
+      image: [this.news.image, Validators.required],
+      video: [this.news.video, Validators.required],
+      date: [date, Validators.required],
+      show: this.news.show,
+      type: [this.news.type, Validators.required]
     });
   }
 
-  changeBackground(image): any {
-    return { 'background-image': 'url(' + image + ')' };
+  vidToggle(event) {
+    this.vidChecked = !this.vidChecked;
+    this.imgChecked = !this.vidChecked;
+    console.log(!this.vidChecked);
   }
-
-  checkEmpty(value: string): boolean {
-    if (value)
-      return true;
-    else
-      return false;
+  imgToggle(event) {
+    this.imgChecked = !this.imgChecked;
+    this.vidChecked = !this.imgChecked;
+    console.log(this.imgChecked);
   }
 
   /**
@@ -80,11 +100,11 @@ export class ManageStaffDialogComponent {
    * @param event 
    */
   onUploadFinished(event) {
-    console.log(event.file);
+    console.log(event);
     this.clearImages();
 
     //store the uploaded image into variable
-    this.fileImg = event.file;
+    this.fileImg = event;
   }
 
   /**
@@ -102,7 +122,7 @@ export class ManageStaffDialogComponent {
         || classAttr == 'img-ul-clear img-ul-button') {
         console.log('remove image');
 
-        this.staff.image = '';
+        this.news.image = '';
         this.previewImage = '';
         this.fileImg = null;
       }
@@ -126,7 +146,7 @@ export class ManageStaffDialogComponent {
     }
 
     //clear image variable
-    this.staff.image = '';
+    this.news.image = '';
     this.previewImage = '';
     this.fileImg = null;
   }
@@ -135,21 +155,24 @@ export class ManageStaffDialogComponent {
    * clear all form fields
    */
   clearForm() {
-    this.staffForm = this.fb.group({
-      name: ['', [Validators.required, Validators.maxLength(30)]],
-      activity: ['', [Validators.required, Validators.maxLength(30)]],
+    this.newsForm = this.fb.group({
+      title: ['', [Validators.required, Validators.maxLength(20)]],
       desc: ['', Validators.required],
-      type: [this.staff.type, Validators.required],
+      image: [''],
+      video: [''],
+      date: [''],
+      type: [this.news.type, Validators.required],
       show: [false],
     });
 
     this.clearImages();
 
-    this.staff.name = '';
-    this.staff.activity = '';
-    this.staff.desc = '';
-    this.staff.image = '';
-    this.staff.show = false;
+    this.news.title = '';
+    this.news.desc = '';
+    this.news.image = '';
+    this.news.video = '';
+    this.news.date = '';
+    this.news.show = false;
   }
 
   /**
@@ -163,12 +186,13 @@ export class ManageStaffDialogComponent {
       this.showPreview = !this.showPreview;
 
     if (this.showPreview) {
+      this.news.date = this.newsForm.controls['date'].value;
+      this.extractYoutubeVideoId();
 
       this.previewLabel = 'Modifica';
       this.previewIcon = 'edit';
-      this.staff.name = this.staffForm.controls['name'].value;
-      this.staff.activity = this.staffForm.controls['activity'].value;
-      this.staff.desc = this.staffForm.controls['desc'].value;
+      this.news.title = this.newsForm.controls['title'].value;
+      this.news.desc = this.newsForm.controls['desc'].value;
 
       //read the new image as URL show to preview
       if (this.fileImg != null) {
@@ -176,7 +200,7 @@ export class ManageStaffDialogComponent {
         reader.readAsDataURL(this.fileImg);
         reader.onload = (e: any) => {
           this.previewImage = e.target.result;
-          this.staff.image = this.previewImage;
+          this.news.image = this.previewImage;
         };
       }
 
@@ -188,21 +212,45 @@ export class ManageStaffDialogComponent {
   }
 
   /**
-   * send value to service request to save, update or delete Staff
+   * validate form if at least image or url in filled
+   */
+  checkValid() {
+    if (this.newsForm.controls['title'].valid
+      && this.newsForm.controls['desc'].valid
+      && this.newsForm.controls['date'].valid
+      && (
+        (this.vidChecked == true && this.newsForm.controls['video'].valid)
+        || (this.imgChecked == true && this.newsForm.controls['image'].valid)
+      )
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  /**
+   * send value to service request to save, update or delete News
    * @param value form value
    */
   async save(value) {
+
+    if (this.vidChecked == true) {
+      value.image = '';
+    } else if (this.imgChecked == true) {
+      value.video = '';
+    }
     console.log(value);
     let dialogRes: any;
 
-    let res = await this.service.saveStaff(value, this.fileImg);
+    let res = await this.service.saveNews(value, this.fileImg);
     if(res) {
       if (value.type == 'I')
-        this.toastr.success('Staff inserito con successo');
+        this.toastr.success('News inserita con successo');
       else if (value.type == 'U')
-        this.toastr.success('Staff aggiornato con successo');
+        this.toastr.success('News aggiornata con successo');
       else if (value.type == 'D')
-        this.toastr.success('Staff cancellato con successo');
+        this.toastr.success('News cancellata con successo');
 
       this.dialogRef.close({ status: 'OK'});
     } else {
@@ -210,16 +258,26 @@ export class ManageStaffDialogComponent {
     }
   }
 
+  extractYoutubeVideoId() {
+    let regex = new RegExp('(?<=v=).*');
+    let tmp: string = this.newsForm.controls['video'].value;
+    if (regex.test(tmp))
+      this.news.video = regex.exec(tmp);
+    else
+      this.news.video = tmp;
+    console.log(this.news.video);
+  }
+
   /**
-   * open confirm dialog for confirm Staff cancelation
+   * open confirm dialog for confimr News cancelation
    */
   openChooseDialog(): void {
     let dialogRef = this.dialog.open(ChooseDialogComponent, {
       width: '350px',
       disableClose: true,
       data: {
-        title: 'Elimina ' + this.staff.name,
-        desc: `Sicuro di voler eliminare lo staff ` + this.staff.name + `?`,
+        title: 'Elimina ' + this.news.title,
+        desc: `Sicuro di voler eliminare la news ` + this.news.title + `?`,
         btn_true: 'Conferma',
         btn_false: 'Annulla'
       }
@@ -232,8 +290,8 @@ export class ManageStaffDialogComponent {
 
         //if result is true, proceed with deletion
         if (res) {
-          this.staffForm.controls['type'].setValue('D');
-          this.save(this.staffForm.value);
+          this.newsForm.controls['type'].setValue('D');
+          this.save(this.newsForm.value);
         }
       });
   }

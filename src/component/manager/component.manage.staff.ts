@@ -4,8 +4,8 @@ import { Inject } from '@angular/core';
 import { ServicePHP } from '../../service/service';
 import { SharedService } from '../../service/shared';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { ManageActivityDialogComponent } from './component.manage.activity.dialog';
-import { ManageStaffDialogComponent } from './component.manage.staff.dialog';
+import { ManageActivityDialogComponent } from '../module/component.manage.activity.dialog';
+import { ManageStaffDialogComponent } from '../module/component.manage.staff.dialog';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -13,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: '../../template/manager/manage.staff.html',
   styleUrls: [
     '../../css/manager/manage.main.css',
-    '../../css/staff.css',
+    '../../css/pages/staff.css',
     '../../css/manager/manage.staff.css']
 })
 export class ManageStaffComponent implements OnInit {

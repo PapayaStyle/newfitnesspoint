@@ -1,9 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { DOCUMENT } from '@angular/platform-browser';
-import { Inject } from '@angular/core';
-import { ServicePHP } from '../../service/service';
-import { SharedService } from '../../service/shared';
-import { Account } from '../../models/account';
 import {
   FormGroup, FormBuilder, FormControl,
   Validators, FormArray
@@ -11,8 +6,8 @@ import {
 
 @Component({
   selector: 'act-row',
-  templateUrl: '../../template/manager/form.row.html',
-  styleUrls: ['../../css/manager/manage.table.css']
+  templateUrl: '../../template/module/form.row.html',
+  styleUrls: ['../..//css/manager/manage.table.css']
 })
 export class FormRowsComponent {
 

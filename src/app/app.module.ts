@@ -10,72 +10,84 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxGalleryModule } from 'ngx-gallery';
-import { ImageUploadModule } from 'angular2-image-upload';
+import { Routing } from './app.routing';
+import { HeaderInterceptor } from '../service/interceptor';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
 import { HeadComponent } from '../component/component.head';
 import { FooterComponent } from '../component/component.footer';
-import { HomeComponent } from '../component/component.home';
-import { StaffComponent } from '../component/component.staff';
-import { ContactComponent } from '../component/component.contact';
-import { ActivityComponent } from '../component/component.activity';
-import { ActivityDialogComponent } from '../component/component.activity.dialog';
-import { HomeCarouselComponent } from '../component/component.home.carousel';
-import { GalleryComponent } from '../component/component.gallery';
-import { NewsComponent } from '../component/component.news';
-import { NewsDialogComponent } from '../component/component.news.dialog';
 
+/* PAGE Component */
+import { HomeComponent } from '../component/pages/component.home';
+import { StaffComponent } from '../component/pages/component.staff';
+import { ContactComponent } from '../component/pages/component.contact';
+import { ActivityComponent } from '../component/pages/component.activity';
+import { GalleryComponent } from '../component/pages/component.gallery';
+import { NewsComponent } from '../component/pages/component.news';
+
+/* MODULE Component */
+import { ActivityDialogComponent } from '../component/module/component.activity.dialog';
+import { HomeCarouselComponent } from '../component/module/component.home.carousel';
+import { NewsDialogComponent } from '../component/module/component.news.dialog';
+
+import { ChooseDialogComponent } from '../component/module/component.choose.dialog';
+import { InputTextDialogComponent } from '../component/module/component.input.text.dialog';
+import { UploadImageComponent } from '../component/module/component.upload.image';
+
+import { FormActivityComponent } from '../component/module/component.form.activity';
+import { FormRowsComponent } from '../component/module/component.form.rows';
+import { ManageActivityDialogComponent } from '../component/module/component.manage.activity.dialog';
+import { ManageNewsDialogComponent } from '../component/module/component.manage.news.dialog';
+import { ManageStaffDialogComponent } from '../component/module/component.manage.staff.dialog';
+import { ManageInfoDialogComponent } from '../component/module/component.manage.info.dialog';
+import { ManageGalleryDialogComponent } from '../component/module/component.manage.gallery.dialog';
+
+/* MANAGER Component */
 import { LoginComponent } from '../component/manager/component.login';
 import { ControlPanelComponent } from '../component/manager/component.control.panel';
 import { ControlHeaderComponent } from '../component/manager/component.control.header';
 import { ManageTableComponent } from '../component/manager/component.manage.table';
-import { FormActivityComponent } from '../component/manager/component.form.activity';
-import { FormRowsComponent } from '../component/manager/component.form.rows';
 import { ManageActivityComponent } from '../component/manager/component.manage.activity';
-import { ManageActivityDialogComponent } from '../component/manager/component.manage.activity.dialog';
 import { ManageStaffComponent } from '../component/manager/component.manage.staff';
 import { ManageNewsComponent } from '../component/manager/component.manage.news';
-import { ManageNewsDialogComponent } from '../component/manager/component.manage.news.dialog';
-import { ManageStaffDialogComponent } from '../component/manager/component.manage.staff.dialog';
 import { ManageInfoComponent } from '../component/manager/component.manage.info';
-import { ManageInfoDialogComponent } from '../component/manager/component.manage.info.dialog';
+import { ManageGalleryComponent } from '../component/manager/component.manage.gallery';
 
-import { ChooseDialogComponent } from '../component/manager/component.choose.dialog';
-import { InputTextDialogComponent } from '../component/manager/component.input.text.dialog';
-
+/* SERVICE Component */
 import { BaseService } from '../service/base.service';
 import { ServicePHP } from '../service/service';
 import { AuthGuard } from '../service/auth.guard';
 import { SharedService } from '../service/shared';
 import { CookieService } from 'ngx-cookie-service';
 
+/* PIPE Component */
 import { PipeCapitalize } from '../pipe/pipe.capitalize';
 import { PipeSafe } from '../pipe/pipe.safe.url';
-
-import { Routing } from './app.routing';
-import { HeaderInterceptor } from '../service/interceptor';
-import { ToastrModule } from 'ngx-toastr';
 
 registerLocaleData(localeIt, 'it');
 @NgModule({
     imports: [ 
         BrowserModule, BrowserAnimationsModule, MaterialModule, 
         HttpModule, HttpClientModule, Routing, FormsModule, ReactiveFormsModule, 
-        NgxGalleryModule, ImageUploadModule.forRoot(), ToastrModule.forRoot()
+        NgxGalleryModule, ToastrModule.forRoot()
     ],
     declarations: [ 
-        PipeCapitalize, PipeSafe,
-        AppComponent, HeadComponent, FooterComponent, 
-        HomeComponent, StaffComponent, ActivityComponent, ActivityDialogComponent,
-        GalleryComponent, ContactComponent, NewsComponent, NewsDialogComponent,
-        HomeCarouselComponent, LoginComponent,
-        ControlPanelComponent, ControlHeaderComponent, 
-        ManageTableComponent, FormActivityComponent, FormRowsComponent, 
-        ManageActivityComponent, ManageActivityDialogComponent, 
-        ManageStaffComponent, 
-        ManageNewsComponent, ManageNewsDialogComponent, ManageStaffDialogComponent,
-        ManageInfoComponent, ManageInfoDialogComponent,
-        ChooseDialogComponent, InputTextDialogComponent
+      AppComponent, HeadComponent, FooterComponent,
+      HomeComponent, StaffComponent, ContactComponent, ActivityComponent, GalleryComponent, NewsComponent,
+      ActivityDialogComponent, HomeCarouselComponent, NewsDialogComponent,
+
+      LoginComponent, ControlPanelComponent, ControlHeaderComponent, ManageTableComponent, 
+      ManageActivityComponent, ManageStaffComponent, ManageNewsComponent, ManageInfoComponent, 
+      ManageGalleryComponent,
+
+      FormActivityComponent, FormRowsComponent, 
+      ManageActivityDialogComponent, ManageNewsDialogComponent, ManageStaffDialogComponent, 
+      ManageInfoDialogComponent, ManageGalleryDialogComponent,
+      
+      ChooseDialogComponent, InputTextDialogComponent, UploadImageComponent,
+
+      PipeCapitalize, PipeSafe
     ],
     entryComponents: [ 
         ActivityDialogComponent,
@@ -84,6 +96,7 @@ registerLocaleData(localeIt, 'it');
         ManageNewsDialogComponent, 
         ManageStaffDialogComponent,
         ManageInfoDialogComponent,
+        ManageGalleryDialogComponent,
         ChooseDialogComponent, InputTextDialogComponent
     ],
     bootstrap: [ AppComponent ],
