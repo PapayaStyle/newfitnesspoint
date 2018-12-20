@@ -101,7 +101,7 @@ export class ManageNewsDialogComponent {
    */
   onUploadFinished(event) {
     console.log(event);
-    this.clearImages();
+    //this.clearImages();
 
     //store the uploaded image into variable
     this.fileImg = event;
@@ -133,16 +133,9 @@ export class ManageNewsDialogComponent {
    * clear and reset image upload fields
    */
   clearImages() {
-    let clearUploadedElement = document.getElementsByClassName('img-ul-clear');
-    if (clearUploadedElement.length > 0) {
-      let element = clearUploadedElement[0] as HTMLElement;
-      element.click();
-    }
-
-    let clearHistoryElement = document.getElementsByClassName('img-ul-x-mark');
-    for (let i = 0; i < clearHistoryElement.length; i++) {
-      let element = clearHistoryElement[i] as HTMLElement;
-      element.click();
+    let clearUploadedElement = document.getElementById('clear-image');
+    if (clearUploadedElement) {
+      clearUploadedElement.click();
     }
 
     //clear image variable
