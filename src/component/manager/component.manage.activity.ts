@@ -62,7 +62,7 @@ export class ManageActivityComponent implements OnInit {
       data: {
         head: header,
         id: activity.id,
-        image: activity.image,
+        image: activity.preview,
         video: activity.video,
         title: activity.title,
         desc: activity.desc,

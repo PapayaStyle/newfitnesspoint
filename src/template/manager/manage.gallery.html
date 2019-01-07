@@ -16,7 +16,8 @@
   <div class="img-box" *ngFor="let image of galleryImages" 
     [ngStyle]="responsive"
     (click)="openGalleryDialog(image)">
-    <img src="http://localhost{{ image.thumbnail }}"/>
+    <!--<img src="http://localhost{{ image.thumbnail }}"/>-->
+    <img src="{{ image.thumbnail }}"/>
   </div>
 
 </div>

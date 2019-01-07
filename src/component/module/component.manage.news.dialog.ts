@@ -21,7 +21,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ManageNewsDialogComponent {
 
-  private defaultImage = 'http://localhost/images/default.jpg';
+  //private defaultImage = 'http://localhost/images/default.jpg';
+  private defaultImage = '/images/default.jpg';
   public embedUrl = 'https://www.youtube.com/embed/';
   public video = '';
   private fileImg = null;

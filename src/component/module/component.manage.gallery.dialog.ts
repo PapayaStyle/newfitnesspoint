@@ -29,7 +29,8 @@ export class ManageGalleryDialogComponent {
     
     this.type = image.type;
     if(image.type == 'D') {
-      this.previewImage = 'http://localhost' + this.image.preview;
+      //this.previewImage = 'http://localhost' + this.image.preview;
+      this.previewImage = this.image.preview;
       this.fileImg = this.image.preview;
       this.new = false;
     } else {

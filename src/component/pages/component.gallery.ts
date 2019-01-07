@@ -78,9 +78,12 @@ export class GalleryComponent implements OnInit {
     let gallery: Gallery[] = await this.service.getGalleryImages();
     this.galleryImages = gallery.map( img =>
       new NgxGalleryImage ({ 
-        small: 'http://localhost'+img.thumbnail, 
-        medium: 'http://localhost'+img.preview, 
-        big: 'http://localhost'+img.image 
+        //small: 'http://localhost'+img.thumbnail, 
+        //medium: 'http://localhost'+img.preview, 
+        //big: 'http://localhost'+img.image 
+        small:  img.thumbnail, 
+        medium: img.preview,  
+        big:    img.image 
       })
     );
   }

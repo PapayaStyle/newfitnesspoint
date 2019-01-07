@@ -16,7 +16,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ManageActivityDialogComponent {
 
-  private defaultImage = 'http://localhost/images/default.jpg';
+  //private defaultImage = 'http://localhost/images/default.jpg';
+  private defaultImage = '/images/default.jpg';
   private fileImg = null;
 
   public activityForm: FormGroup;
