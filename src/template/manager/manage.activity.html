@@ -16,7 +16,7 @@
   <div class="activity" *ngFor="let activity of activities" (click)="openActivityDialog(activity)">
     <div id="{{activity.link}}">
       <div class="image">
-        <img src="http://localhost/{{activity.preview}}">
+        <img src="{{ activity.image }}">
       </div>
       <article>
         <h2>{{activity.title | capitalize }}</h2>

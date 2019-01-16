@@ -4,6 +4,7 @@ export class Staff {
   public activity: string;
   public desc: string;
   public image: string;
+  public portrait: string;
   public show: number;
 
   constructor(obj?: any) {
@@ -13,6 +14,7 @@ export class Staff {
       obj.activity && (this.activity = obj.activity);
       obj.desc && (this.desc = obj.desc);
       obj.image && (this.image = obj.image);
+      obj.portrait && (this.portrait = obj.portrait);
       obj.show && (this.show = obj.show);
     }
   }

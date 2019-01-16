@@ -62,7 +62,7 @@ export class ManageActivityComponent implements OnInit {
       data: {
         head: header,
         id: activity.id,
-        image: activity.preview,
+        image: activity.image,
         video: activity.video,
         title: activity.title,
         desc: activity.desc,
@@ -73,7 +73,7 @@ export class ManageActivityComponent implements OnInit {
 
     dialogRef.afterClosed()
       .subscribe(res => {
-        window.scrollTo(0, 0);
+        //window.scrollTo(0, 0);
 
         console.log('Activity dialog closed');
         console.log(res);

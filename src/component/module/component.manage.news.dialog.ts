@@ -5,6 +5,7 @@ import { ServicePHP } from '../../service/service';
 import { ChooseDialogComponent } from './component.choose.dialog';
 import { AppDateAdapter, APP_DATE_FORMATS } from '../../app/app.data.adapter';
 import { ToastrService } from 'ngx-toastr';
+import { ImgCropperEvent } from '@alyle/ui/resizing-cropping-images';
 
 @Component({
   selector: 'manage-news-dialog',
@@ -73,7 +74,7 @@ export class ManageNewsDialogComponent {
       image: [this.news.image, Validators.required],
       video: [this.news.video, Validators.required],
       date: [date, Validators.required],
-      show: this.news.show,
+      show: this.news.show == 1 ? true : false,
       type: [this.news.type, Validators.required]
     });
   }
@@ -100,7 +101,7 @@ export class ManageNewsDialogComponent {
    * triggered after select an image to upload
    * @param event 
    */
-  onUploadFinished(event) {
+  onUploadFinished(event: ImgCropperEvent) {
     console.log(event);
     //this.clearImages();
 
@@ -111,7 +112,7 @@ export class ManageNewsDialogComponent {
   /**
    * listener to detect when clear or close image is clicked
    * @param event 
-   */
+   *
   @HostListener('click', ['$event'])
   handleClearClick(event) {
     let target = event.target || event.srcElement || event.currentTarget;
@@ -129,6 +130,7 @@ export class ManageNewsDialogComponent {
       }
     }
   }
+  */
 
   /**
    * clear and reset image upload fields
@@ -190,12 +192,16 @@ export class ManageNewsDialogComponent {
 
       //read the new image as URL show to preview
       if (this.fileImg != null) {
+        this.previewImage = this.fileImg.dataURL;
+        this.news.image = this.previewImage;
+        /*
         let reader = new FileReader();
         reader.readAsDataURL(this.fileImg);
         reader.onload = (e: any) => {
           this.previewImage = e.target.result;
           this.news.image = this.previewImage;
         };
+        */
       }
 
     } else {
@@ -231,9 +237,15 @@ export class ManageNewsDialogComponent {
 
     if (this.vidChecked == true) {
       value.image = '';
+      value.imgChecked = false;
     } else if (this.imgChecked == true) {
       value.video = '';
+      value.imgChecked = true;
     }
+    if(value.date != null && value.date != undefined) {
+      value.date = value.date.getTime();
+    }
+
     console.log(value);
     let dialogRes: any;
 

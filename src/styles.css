@@ -90,13 +90,15 @@ and (max-width: 545px) {
     font-size: 1em !important;
     font-weight: bold !important;
 }
-/*
+
 .mat-tab-group.mat-primary .mat-tab-label:focus {
     background-color: rgba(241, 176, 123, 0.3) !important;
 }
 .mat-tab-group.mat-primary .mat-ink-bar {
     background-color: #F44336 !important;
 }
+
+/*
 .imageUpload .img-ul-upload {
     background-color: #e96233 !important;
     font-size: 1em !important;
@@ -108,10 +110,11 @@ and (max-width: 545px) {
 .imageUpload .img-ul-drag-box-msg {
     padding-top: 10px !important;
 }
+*/
 .mat-checkbox-checked.mat-accent .mat-checkbox-background {
     background-color: #e96233 !important;
 }
-*/
+
 
 /* ##### START Mat Input ##### */
 .mat-form-field-label, .mat-form-field-placeholder {
@@ -151,7 +154,7 @@ and (max-width: 545px) {
     height: 2px !important;
 }
 textarea.mat-input-element {
-    padding: .5rem .75rem !important;
+    padding: .5rem 0rem !important;
 }
 /* ##### END Mat Input ##### */
 
@@ -168,6 +171,12 @@ textarea.mat-input-element {
 .mat-success.mat-raised-button {
     background-color: #5cb85c;
     color: #fff;
+}
+/* ##### END Mat Raised Button ##### */
+
+/* ##### START Mat Button ##### */
+.mat-button.mat-accent {
+  color: #e96233;
 }
 /* ##### END Mat Raised Button ##### */
 

@@ -58,14 +58,17 @@ footer a:hover {
 	text-decoration:none;
 	color:#FFF;
 }
-footer span {
-    position: absolute;
-    bottom: 0;
+footer > span {
+  position: absolute;
+  bottom: 0;
 	display: block;
-    padding: 20px 50px;
-    width: calc(100% - 100px);
-    border-top: 2px solid #f5f5f5;
+  padding: 20px 0px;
+  /*width: calc(100% - 100px);*/
+  width: 100%;
+  border-top: 2px solid #f5f5f5;
 	background-color: #161616;
 }
-
+footer > span > span {
+  padding: 0px 50px;
+}
 hr {display: none;}

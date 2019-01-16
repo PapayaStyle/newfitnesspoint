@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { ServicePHP } from '../../service/service';
 import { ChooseDialogComponent } from './component.choose.dialog';
 import { ToastrService } from 'ngx-toastr';
+import { ImgCropperEvent } from '@alyle/ui/resizing-cropping-images';
 
 @Component({
   selector: 'manage-activity-dialog',
@@ -55,7 +56,7 @@ export class ManageActivityDialogComponent {
       desc: [this.activity.desc, Validators.required],
       image: this.activity.image,
       video: this.activity.video,
-      show: [this.activity.show, Validators.required],
+      show: this.activity.show == 1 ? true : false,
       type: [this.activity.type, Validators.required]
     });
   }
@@ -71,7 +72,7 @@ export class ManageActivityDialogComponent {
    * triggered after select an image to upload
    * @param event 
    */
-  onUploadFinished(event) {
+  onUploadFinished(event: ImgCropperEvent) {
     console.log(event);
     //put file into form
     //let control = this.activityForm.controls['image'];
@@ -89,7 +90,7 @@ export class ManageActivityDialogComponent {
   /**
    * listener to detect when clear or close image is clicked
    * @param event 
-   */
+   *
   @HostListener('click', ['$event'])
   handleClearClick(event) {
     let target = event.target || event.srcElement || event.currentTarget;
@@ -108,6 +109,7 @@ export class ManageActivityDialogComponent {
       }
     }
   }
+  */
 
   /**
    * clear and reset image upload fields
@@ -167,12 +169,16 @@ export class ManageActivityDialogComponent {
 
       //read the new image as URL show to preview
       if (this.fileImg != null) {
+        this.previewImage = this.fileImg.dataURL;
+        this.activity.image = this.previewImage;
+        /*
         let reader = new FileReader();
         reader.readAsDataURL(this.fileImg);
         reader.onload = (e: any) => {
           this.previewImage = e.target.result;
           this.activity.image = this.previewImage;
         };
+        */
       }
 
     } else {

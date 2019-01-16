@@ -34,6 +34,7 @@ import { NewsDialogComponent } from '../component/module/component.news.dialog';
 import { ChooseDialogComponent } from '../component/module/component.choose.dialog';
 import { InputTextDialogComponent } from '../component/module/component.input.text.dialog';
 import { UploadImageComponent } from '../component/module/component.upload.image';
+import { ResizeCropImageComponent } from '../component/module/component.resize.crop.image';
 
 import { FormActivityComponent } from '../component/module/component.form.activity';
 import { FormRowsComponent } from '../component/module/component.form.rows';
@@ -65,12 +66,28 @@ import { CookieService } from 'ngx-cookie-service';
 import { PipeCapitalize } from '../pipe/pipe.capitalize';
 import { PipeSafe } from '../pipe/pipe.safe.url';
 
+/* START Alyle UI */
+import {
+  LyThemeModule,
+  LY_THEME
+} from '@alyle/ui';
+
+import { LyResizingCroppingImageModule } from '@alyle/ui/resizing-cropping-images';
+import { LyButtonModule } from '@alyle/ui/button';
+import { LyIconModule } from '@alyle/ui/icon';
+
+import { MinimaLight, MinimaDark } from '@alyle/ui/themes/minima';
+/* END Alyle UI */
+
 registerLocaleData(localeIt, 'it');
 @NgModule({
     imports: [ 
         BrowserModule, BrowserAnimationsModule, MaterialModule, 
         HttpModule, HttpClientModule, Routing, FormsModule, ReactiveFormsModule, 
-        NgxGalleryModule, ToastrModule.forRoot()
+        NgxGalleryModule, 
+        LyThemeModule.setTheme('minima-light'),
+        LyResizingCroppingImageModule, LyButtonModule, LyIconModule,
+        ToastrModule.forRoot()
     ],
     declarations: [ 
       AppComponent, HeadComponent, FooterComponent,
@@ -86,6 +103,7 @@ registerLocaleData(localeIt, 'it');
       ManageInfoDialogComponent, ManageGalleryDialogComponent,
       
       ChooseDialogComponent, InputTextDialogComponent, UploadImageComponent,
+      ResizeCropImageComponent,
 
       PipeCapitalize, PipeSafe
     ],
@@ -106,7 +124,9 @@ registerLocaleData(localeIt, 'it');
             provide: HTTP_INTERCEPTORS,
             useClass: HeaderInterceptor,
             multi: true
-        }
+        },
+      { provide: LY_THEME, useClass: MinimaLight, multi: true }, // name: `minima-light`
+      { provide: LY_THEME, useClass: MinimaDark, multi: true } // name: `minima-dark`
     ]
 })
 export class AppModule { }

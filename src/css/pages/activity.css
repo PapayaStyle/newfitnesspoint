@@ -4,6 +4,7 @@
     position: relative;
     padding: 0.5%;
     margin: 0;
+    min-height: calc(100vh - 320px);
 }
 .act-container .activity {
     background-color: #212121;

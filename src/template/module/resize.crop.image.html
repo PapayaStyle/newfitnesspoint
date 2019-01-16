@@ -1,0 +1,60 @@
+<div class="module-cnt">
+
+  <div class="actions-cnt">
+
+    <!-- CARICA -->
+    <button *ngIf="!cropping.isLoaded && !image"
+      mat-raised-button color="accent" 
+      (click)="_fileInput.click()">
+      <mat-icon>attachment</mat-icon>
+      {{ label }}
+    </button>
+
+    <!-- RIMUOVI -->
+    <button *ngIf="cropping.isLoaded || image"
+      mat-raised-button color="warn"
+      (click)="clean(cropping)">
+      <mat-icon>clear</mat-icon>
+      Rimuovi immagine
+    </button>
+
+    <!-- Hidden input  toggleImage(true); cropping.selectInputEvent($event) -->
+    <input #_fileInput type="file" 
+      (change)="onFileLoad(cropping, $event)" 
+      accept="image/*" hidden>
+
+    <!-- CROP -->
+    <button *ngIf="showComponent" 
+      mat-button color="primary"
+      class="pull-right"
+      (click)="cropping.crop(); toggleImage(false)">
+      <mat-icon>crop</mat-icon>
+      Crop
+    </button>
+
+    <!-- PREVIEW THUMBS -->
+    <div *ngIf="preview" class="preview">
+      <img *ngIf="previewImage"
+      [ngStyle]="previewStyle" 
+      [src]="previewImage">
+    </div>
+  </div>
+
+  <div *ngIf="cropping.isLoaded && showComponent" class="tools">
+    <button (click)="cropping.zoomIn()" mat-button class="icon"><mat-icon>zoom_in</mat-icon></button>
+    <button (click)="cropping.zoomOut()" mat-button class="icon"><mat-icon>zoom_out</mat-icon></button>
+    <button (click)="cropping.center()" mat-button class="icon"><mat-icon>filter_center_focus</mat-icon></button>
+    <button (click)="cropping.rotate(-90)" mat-button class="icon"><mat-icon>rotate_90_degrees_ccw</mat-icon></button>
+    <button (click)="cropping.fit()" mat-button>Fit</button>
+    <button (click)="cropping.fitToScreen()" mat-button>Fit to screen</button>
+    <button (click)="cropping.setScale(1)" mat-button>1:1</button>
+  </div>
+
+  <ly-img-cropper #cropping [ngStyle]="showImage"
+    [withClass]="classes.cropping" 
+    [config]="myConfig"
+    (cropped)="onCropped($event)">
+    <span>Drag and drop image</span>
+  </ly-img-cropper>
+
+</div>

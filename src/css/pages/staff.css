@@ -10,13 +10,31 @@ and (max-width: 455px) {
 @media screen 
 and (max-width: 900px) {
     .box article {
-        width: 300px;
-        margin: 0 auto;
+        width: 250px;
         padding: 5%;
+
+        float: right;
     }
+    .box:nth-child(even) article {
+        float: left;
+    }
+
     .box .bg-img {
         background-attachment: scroll;
     }
+
+    .box .portrait {
+        position: relative;
+        padding: 0 5%;
+        float: right;
+    }
+    .box:nth-child(even) .portrait {
+        float: left;
+    }
+    .box .portrait img {
+      max-height: 200px;
+      max-width: 150px;
+  }
 }
 
 @media screen 
@@ -26,11 +44,26 @@ and (min-width: 901px) {
     }
     .box article {
         float: right;
+        width: 400px;
         max-width: 30%;
         padding: 5em 8em;
     }
     .box .bg-img {
         background-attachment: fixed;
+    }
+
+    
+    .box .portrait {
+        position: relative;
+        padding: 0 5em;
+        float: right;
+    }
+    .box:nth-child(even) .portrait {
+        float: left;
+    }
+    .box .portrait img {
+        max-height: 300px;
+        max-width: 200px;
     }
 }
 
@@ -39,7 +72,7 @@ and (min-width: 901px) {
     position: relative;
     padding: 0 0.5%;
     margin: 0;
-    min-height: calc(100vh - 350px);
+    min-height: calc(100vh - 320px);
 }
 .box {
     color: #161616;
@@ -99,4 +132,15 @@ and (min-width: 901px) {
     color: white;
     font-weight: 400;
     text-shadow: 2px 0 0 #161616, -2px 0 0 #161616, 0 2px 0 #161616, 0 -2px 0 #161616, 1px 1px #161616, -1px -1px 0 #161616, -1px 1px 0 #161616;
+}
+
+.box .portrait {
+  position: relative;
+  display: flex;
+  align-items: center;
+  z-index: 1;
+}
+.box .portrait img {
+  border-radius: 3px;
+  opacity: 0.9;
 }

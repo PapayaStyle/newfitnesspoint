@@ -51,7 +51,7 @@ export class ContactComponent implements OnInit, AfterViewInit {
       + '\nMessage: ' + formValue.message);
 
     let response = this.service
-      .sendMail(formValue.name, formValue.email, formValue.subject, formValue.message);
+      .sendMail(formValue);
 
     console.log(response[0].name);
   }

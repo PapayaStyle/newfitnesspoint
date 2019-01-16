@@ -89,7 +89,7 @@ and (max-width: 954px) {
 and (min-width: 955px) {
 	.news {
         display: inline-flex;
-        max-width: 50%;
+        width: 50%;
     }
 }
 @media screen 

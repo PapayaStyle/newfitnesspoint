@@ -216,7 +216,7 @@ export class ServicePHP extends BaseService {
 
     let param = new FormData();
     param.append('data', JSON.stringify(model));
-    param.append('file', file);
+    param.append('file', JSON.stringify(file));
 
     let requestObj = new RequestObj(url, {});
 
@@ -237,6 +237,7 @@ export class ServicePHP extends BaseService {
     let url = 'save_news.php';
 
     const param = new FormData();
+    /*
     param.append('data', JSON.stringify({
       id: model.id,
       title: model.title,
@@ -247,7 +248,9 @@ export class ServicePHP extends BaseService {
       show: model.show,
       type: model.type
     }));
-    param.append('file', file);
+    */
+    param.append('data', JSON.stringify(model));
+    param.append('file', JSON.stringify(file));
 
     let requestObj = new RequestObj(url, {});
 
@@ -261,13 +264,14 @@ export class ServicePHP extends BaseService {
   /**
    * call php service to save/edit/delete news
    */
-  async saveStaff(model, file): Promise<any> {
+  async saveStaff(model, fileImg, filePortrait): Promise<any> {
     console.log('Service --> saveStaff');
     this.share.changeLoading(true);
 
     let url = 'save_staff.php';
 
     const param = new FormData();
+    /*
     param.append('data', JSON.stringify({
       id: model.id,
       name: model.name,
@@ -277,7 +281,10 @@ export class ServicePHP extends BaseService {
       show: model.show,
       type: model.type
     }));
-    param.append('file', file);
+    */
+    param.append('data', JSON.stringify(model));
+    param.append('fileImg', JSON.stringify(fileImg));
+    param.append('filePortrait', JSON.stringify(filePortrait));
 
     let requestObj = new RequestObj(url, {});
 
@@ -314,24 +321,18 @@ export class ServicePHP extends BaseService {
  * @param subject 
  * @param message 
  */
-  async sendMail(name: string, email: string, subject: string, message: string): Promise<any> {
-    const obj = { name: name, email: email, subject: subject, message: message };
-    const body = JSON.stringify(obj);
+  async sendMail(model): Promise<any> {
+    console.log('Service --> sendMail');
+    this.share.changeLoading(true);
 
-    let url = this.BASE_URL + '/send_mail.php';
+    let url = 'send_mail.php';
+    let requestObj = new RequestObj(url, model);
 
-    return this.httpClient.post(url, body,
-      { headers: this.HEADERS, responseType: 'json' })
-      .toPromise()
-      .then(res => {
-        console.log(res);
-        return res;
-      });
-      /*
-      .catch(err =>
-        this.handleError(err)
-      );
-      */
+    let response: any;
+    response = await this.PUT(requestObj);
+    if (response) {
+      return new RestResponse(response);
+    }
   }
 
 }

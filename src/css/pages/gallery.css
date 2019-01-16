@@ -1,6 +1,9 @@
 .mat-sidenav-container, .mat-sidenav-content, .mat-tab-body-content {
     transform: none !important;
 }
+.container {
+  min-height: calc(100vh - 320px);
+}
 .gallery {
     display: block;
     margin: 10px auto;

@@ -54,15 +54,22 @@
       </mat-form-field>
 
       <!--
-      <image-upload *ngIf="imgChecked" class="imageUpload" buttonCaption="Carica immagine" dropBoxMessage="Trascina immagine"
-        clearButtonCaption="Cancella" max="1" [uploadedFiles]="[previewImage]" (uploadFinished)="onUploadFinished($event)">
-      </image-upload>
-      -->
-      <upload-image class="imageUpload"
+      <upload-image *ngIf="imgChecked"
+        class="imageUpload"
         [previewType]="'small'"
         [image]="previewImage"
         (file)="onUploadFinished($event)">
       </upload-image>
+      -->
+      <resize-crop-image *ngIf="imgChecked"
+        [label]="'Carica Immagine'"
+        [width]="500"
+        [height]="325"
+        [image]="previewImage"
+        [preview]="true"
+        [preview-height]="100"
+        (file)="onUploadFinished($event)">
+      </resize-crop-image>
 
       <mat-checkbox class="show-box" formControlName="show">Mostra</mat-checkbox>
 

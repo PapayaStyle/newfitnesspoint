@@ -17,8 +17,6 @@ export class ActivityComponent implements OnInit {
 
   private paramLink;
 
-  /*public activity: any = {'Link': '', 'Image': '', 'Title': '', 'Desc': ''};*/
-
   public activities;
 
   constructor(private service: ServicePHP,

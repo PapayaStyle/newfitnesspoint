@@ -12,7 +12,9 @@ and (max-width: 455px) {
         font-size: 1.1em;
     }
 }
-
+.container {
+  min-height: calc(100vh - 320px);
+}
 .contact-cnt {
     /*
     background-repeat: no-repeat;

@@ -141,7 +141,7 @@ and (min-width: 901px) {
 }
 .manage-staff-popup form .show-box {
     display: block;
-    padding-bottom: 1em;
+    padding-bottom: 20px;
 }
 .textarea-width {    
     width: calc(100% - 24px);

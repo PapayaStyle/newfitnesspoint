@@ -5,6 +5,7 @@ import { ServicePHP } from '../../service/service';
 import { ChooseDialogComponent } from './component.choose.dialog';
 import { AppDateAdapter, APP_DATE_FORMATS } from '../../app/app.data.adapter';
 import { ToastrService } from 'ngx-toastr';
+import { ImgCropperEvent } from '@alyle/ui/resizing-cropping-images';
 
 @Component({
   selector: 'manage-staff-dialog',
@@ -18,12 +19,14 @@ import { ToastrService } from 'ngx-toastr';
 export class ManageStaffDialogComponent {
 
   private fileImg = null;
+  private filePortrait = null;
 
   public staffForm: FormGroup;
   public showPreview: boolean;
   public previewLabel: string;
   public previewIcon: string;
   public previewImage;
+  public previewPortrait;
 
   public convDate = null;
 
@@ -35,9 +38,11 @@ export class ManageStaffDialogComponent {
     private toastr: ToastrService) {
 
     this.previewImage = this.staff.image;
+    this.previewPortrait = this.staff.portrait;
 
     this.initForm();
     this.fileImg = null;
+    this.filePortrait = null;
 
     if (this.staff.type == 'I')
       this.showHidePreview(false);
@@ -52,7 +57,8 @@ export class ManageStaffDialogComponent {
       activity: [this.staff.activity, [Validators.required, Validators.maxLength(50)]],
       desc: [this.staff.desc, Validators.required],
       image: this.staff.image,
-      show: this.staff.show,
+      portrait: this.staff.portrait,
+      show: this.staff.show == 1 ? true : false,
       type: [this.staff.type, Validators.required]
     });
   }
@@ -68,6 +74,10 @@ export class ManageStaffDialogComponent {
       return false;
   }
 
+  setHeight(height) {
+    return { 'height': height+'px' };
+  }
+
   /**
    * triggered by dialog when click outside dialog box
    */
@@ -76,15 +86,28 @@ export class ManageStaffDialogComponent {
   }
 
   /**
-   * triggered after select an image to upload
+   * triggered after crop an image to upload
    * @param event 
    */
-  onUploadFinished(event) {
+  onUploadImgFinished(event: ImgCropperEvent) {
     console.log(event);
     //this.clearImages();
 
     //store the uploaded image into variable
     this.fileImg = event;
+  }
+
+  /**
+   * triggered after crop an image(portrait) to upload
+   * @param event 
+   */
+  onUploadPortraitFinished(event: ImgCropperEvent) {
+    //console.log('onCropFinished');
+    console.log(event);
+    //this.clearImages();
+
+    //store the cropped image into variable
+    this.filePortrait = event;
   }
 
   /**
@@ -103,8 +126,12 @@ export class ManageStaffDialogComponent {
         console.log('remove image');
 
         this.staff.image = '';
+
         this.previewImage = '';
+        this.previewPortrait = '';
+
         this.fileImg = null;
+        this.filePortrait = null;
       }
     }
   }
@@ -121,7 +148,9 @@ export class ManageStaffDialogComponent {
     //clear image variable
     this.staff.image = '';
     this.previewImage = '';
+    this.previewPortrait = '';
     this.fileImg = null;
+    this.filePortrait = null;
   }
 
   /**
@@ -165,12 +194,22 @@ export class ManageStaffDialogComponent {
 
       //read the new image as URL show to preview
       if (this.fileImg != null) {
+        this.previewImage = this.fileImg.dataURL;
+        this.staff.image = this.previewImage;
+        /*
         let reader = new FileReader();
         reader.readAsDataURL(this.fileImg);
         reader.onload = (e: any) => {
           this.previewImage = e.target.result;
           this.staff.image = this.previewImage;
         };
+        */
+      }
+
+      //read the new portrait image as URL show to preview
+      if (this.filePortrait != null) {
+          this.previewPortrait = this.filePortrait.dataURL;
+          this.staff.portrait = this.previewPortrait;
       }
 
     } else {
@@ -188,7 +227,7 @@ export class ManageStaffDialogComponent {
     console.log(value);
     let dialogRes: any;
 
-    let res = await this.service.saveStaff(value, this.fileImg);
+    let res = await this.service.saveStaff(value, this.fileImg, this.filePortrait);
     if(res) {
       if (value.type == 'I')
         this.toastr.success('Staff inserito con successo');

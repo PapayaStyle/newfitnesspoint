@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DOCUMENT } from '@angular/platform-browser';
-import { Inject } from '@angular/core';
 import { ServicePHP } from '../../service/service';
-import { SharedService } from '../../service/shared';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { ManageActivityDialogComponent } from '../module/component.manage.activity.dialog';
+import { MatDialog } from '@angular/material';
 import { ManageStaffDialogComponent } from '../module/component.manage.staff.dialog';
 import { ToastrService } from 'ngx-toastr';
 
@@ -55,7 +51,7 @@ export class ManageStaffComponent implements OnInit {
   }
 
   openStaffDialog(staff): void {
-    let height = '70%';
+    let height = '75%';
     let width = '70%';
 
     let header = '';
@@ -69,6 +65,7 @@ export class ManageStaffComponent implements OnInit {
         'image': '',
         'name': '',
         'activity': '',
+        'portrait': '',
         'desc': '',
         'show': false
       };
@@ -85,6 +82,7 @@ export class ManageStaffComponent implements OnInit {
         head: header,
         id: staff.id,
         image: staff.image,
+        portrait: staff.portrait,
         name: staff.name,
         activity: staff.activity,
         desc: staff.desc,
@@ -95,7 +93,7 @@ export class ManageStaffComponent implements OnInit {
 
     dialogRef.afterClosed()
       .subscribe(res => {
-        window.scrollTo(0, 0);
+        //window.scrollTo(0, 0);
 
         console.log('Staff dialog closed');
         console.log(res);
@@ -107,6 +105,10 @@ export class ManageStaffComponent implements OnInit {
             this.getStaff();
         }
       });
+  }
+
+  setHeight(height) {
+    return { 'height': height+'px' };
   }
 
 }

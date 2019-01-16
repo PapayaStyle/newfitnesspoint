@@ -7,9 +7,6 @@ import { ServicePHP } from '../../service/service';
   styleUrls: ['../../css/pages/staff.css']
 })
 export class StaffComponent implements OnInit {
-
-  public staff = [ {Link: ``, Image: ``, Title: ``, Desc: ``} ];
-
   public staffList;
 
   constructor(private service: ServicePHP) {}
@@ -26,4 +23,9 @@ export class StaffComponent implements OnInit {
   changeBackground(image): any {
     return { 'background-image': 'url('+image+')'};
   }
+
+  setHeight(height) {
+    return { 'height': height+'px' };
+  }
+
 }

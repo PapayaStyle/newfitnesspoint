@@ -32,16 +32,22 @@
                 </textarea>
       </mat-form-field>
 
-      <!--
-      <image-upload class="imageUpload" buttonCaption="Carica immagine" dropBoxMessage="Trascina immagine"
-        clearButtonCaption="Cancella" max="1" [uploadedFiles]="[previewImage]" (uploadFinished)="onUploadFinished($event)">
-      </image-upload>
-      -->
+      <!--      
       <upload-image class="imageUpload"
         [previewType]="'small'"
         [image]="previewImage"
         (file)="onUploadFinished($event)">
       </upload-image>
+      -->
+      <resize-crop-image
+        [label]="'Carica Immagine'"
+        [width]="500"
+        [height]="325"
+        [image]="previewImage"
+        [preview]="true"
+        [preview-height]="100"
+        (file)="onUploadFinished($event)">
+      </resize-crop-image>
 
       <mat-form-field class="full-width">
         <input matInput class="form-control" placeholder="Video short URL" formControlName="video" />

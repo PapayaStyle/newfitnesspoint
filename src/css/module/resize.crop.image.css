@@ -1,0 +1,35 @@
+.module-cnt {
+  padding-bottom: 20px;
+}
+
+.actions-cnt {
+  display: block;
+}
+.actions-cnt button {
+  display: inline-block; 
+  vertical-align: middle;
+}
+.actions-cnt .preview {
+  display: inline-block; 
+  vertical-align: middle; 
+  margin: 0 10px;
+}
+
+.tools {
+  display: block;
+  width: 100%;
+  height: 40px;
+  margin: 5px 0;
+  position: relative;
+}
+.tools button {
+  float: left;
+  height: 40px !important;
+}
+
+.mat-button.icon {
+  border-radius: 50%;
+  min-width: 0px;
+  width: 40px;
+  padding: 0px;
+}
