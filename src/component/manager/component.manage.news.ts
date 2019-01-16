@@ -72,7 +72,7 @@ export class ManageNewsComponent implements OnInit {
   }
 
   openNewsDialog(news): void {
-    let height = '60%';
+    let height = '75%';
     let width = '70%';
 
     let header = '';

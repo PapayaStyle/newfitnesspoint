@@ -57,7 +57,7 @@ export class ManageActivityComponent implements OnInit {
 
     let dialogRef = this.dialog.open(ManageActivityDialogComponent, {
       disableClose: true,
-      height: '60%',
+      height: '75%',
       width: '70%',
       data: {
         head: header,
