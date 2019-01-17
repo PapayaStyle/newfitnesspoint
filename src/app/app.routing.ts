@@ -33,7 +33,7 @@ const appRoutes: Routes = [
         { path: 'table', component: ManageTableComponent },
         { path: 'activity', component: ManageActivityComponent },
         { path: 'staff', component: ManageStaffComponent },
-        { path: 'info', component: ManageInfoComponent },
+        //{ path: 'info', component: ManageInfoComponent },
         { path: 'gallery', component: ManageGalleryComponent },
         { path: 'news', component: ManageNewsComponent }        
     ],
