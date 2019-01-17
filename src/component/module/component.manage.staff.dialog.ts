@@ -113,7 +113,7 @@ export class ManageStaffDialogComponent {
   /**
    * listener to detect when clear or close image is clicked
    * @param event 
-   */
+   *
   @HostListener('click', ['$event'])
   handleClearClick(event) {
     let target = event.target || event.srcElement || event.currentTarget;
@@ -135,6 +135,7 @@ export class ManageStaffDialogComponent {
       }
     }
   }
+  */
 
   /**
    * clear and reset image upload fields

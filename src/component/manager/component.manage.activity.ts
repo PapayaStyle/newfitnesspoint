@@ -25,8 +25,7 @@ export class ManageActivityComponent implements OnInit {
 
   constructor(private service: ServicePHP,
     private shareService: SharedService,
-    public dialog: MatDialog,
-    private toastr: ToastrService) {
+    public dialog: MatDialog) {
   }
 
   ngOnInit() {

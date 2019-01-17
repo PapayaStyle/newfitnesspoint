@@ -25,7 +25,7 @@
   <!-- <div class="form-container"> -->
   <mat-card class="form-container" id="contact-us">
     <h2>Contattaci</h2>
-    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+    <form [formGroup]="form">
       <div class="box-field-top">
         <mat-form-field class="name">
           <input matInput type="text" formControlName="name" placeholder="Nome *" />
@@ -45,12 +45,28 @@
       </mat-form-field>
 
       <div class="box-buttons">
-        <button mat-raised-button class="clear pull-left" color="warn" type="reset">
+        <button mat-raised-button color="warn"
+          class="clear pull-left" 
+          (click)="initForm()">
           Cancella
         </button>
 
-        <button mat-raised-button class="submit pull-right" type="submit" color="primary" [disabled]="!form.valid">
+        <!--
+        <button mat-raised-button 
+          class="submit pull-right" 
+          type="submit" 
+          color="primary" 
+          [disabled]="!form.valid">
           Invia
+        </button>
+        -->
+
+        <button mat-raised-button color="primary" 
+          class="submit pull-right" 
+          (click)="send(form.value)" 
+          [disabled]="!form.valid || wait">
+          <mat-icon>save</mat-icon>
+          Salva
         </button>
       </div>
     </form>

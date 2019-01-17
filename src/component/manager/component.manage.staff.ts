@@ -20,7 +20,6 @@ export class ManageStaffComponent implements OnInit {
   public showHideStaffIcon: string;
 
   constructor(private service: ServicePHP,
-    private toastr: ToastrService,
     public dialog: MatDialog) { }
 
   ngOnInit() {
