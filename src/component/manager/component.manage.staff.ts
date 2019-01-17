@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServicePHP } from '../../service/service';
 import { MatDialog } from '@angular/material';
-import { ManageStaffDialogComponent } from '../module/component.manage.staff.dialog';
+import { StaffDialogComponent } from '../module/component.staff.dialog';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -73,7 +73,7 @@ export class ManageStaffComponent implements OnInit {
       type = 'U';
     }
 
-    let dialogRef = this.dialog.open(ManageStaffDialogComponent, {
+    let dialogRef = this.dialog.open(StaffDialogComponent, {
       disableClose: true,
       width: width,
       height: height,

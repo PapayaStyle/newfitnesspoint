@@ -70,7 +70,7 @@ export class ServicePHP extends BaseService {
    * destroy authentication token 
    */
   logout() {
-    this.cookie.deleteAll();
+    this.cookie.deleteAll('/');
     //console.log(this.cookie.getAll());
     this.HEADERS.delete('Authorization');
   }

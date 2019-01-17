@@ -4,7 +4,7 @@ import { Inject } from '@angular/core';
 import { ServicePHP } from '../../service/service';
 import { SharedService } from '../../service/shared';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { ManageActivityDialogComponent } from '../module/component.manage.activity.dialog';
+import { ActivityDialogComponent } from '../module/component.activity.dialog';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -54,7 +54,7 @@ export class ManageActivityComponent implements OnInit {
       type = 'U';
     }
 
-    let dialogRef = this.dialog.open(ManageActivityDialogComponent, {
+    let dialogRef = this.dialog.open(ActivityDialogComponent, {
       disableClose: true,
       height: '75%',
       width: '70%',
@@ -66,7 +66,8 @@ export class ManageActivityComponent implements OnInit {
         title: activity.title,
         desc: activity.desc,
         show: activity.show,
-        type: type
+        type: type,
+        readOnly: false
       }
     });
 

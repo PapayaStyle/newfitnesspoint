@@ -2,7 +2,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { ServicePHP } from '../../service/service';
 import { MatDialog } from '@angular/material';
 import { Gallery } from '../../models/Gallery';
-import { ManageGalleryDialogComponent } from '../module/component.manage.gallery.dialog';
+import { GalleryDialogComponent } from '../module/component.gallery.dialog';
 
 @Component({
   selector: 'app-manage-gallery',
@@ -87,7 +87,7 @@ export class ManageGalleryComponent implements OnInit {
       type = 'D';
     }
 
-    let dialogRef = this.dialog.open(ManageGalleryDialogComponent, {
+    let dialogRef = this.dialog.open(GalleryDialogComponent, {
       disableClose: true,
       width: width,
       height: height,

@@ -3,8 +3,8 @@ import { DOCUMENT } from '@angular/platform-browser';
 import { Inject } from '@angular/core';
 import { ServicePHP } from '../../service/service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { NewsDialogComponent } from '../module/component.news.dialog';
 import { News } from '../../models/News';
+import { NewsDialogComponent } from '../module/component.news.dialog';
 
 @Component({
   selector: 'app-news',
@@ -57,7 +57,8 @@ export class NewsComponent implements OnInit {
         video: news.video, 
         title: news.title, 
         desc: news.desc,
-        date: news.date
+        date: news.date,
+        readOnly: true
       }
     });
   }

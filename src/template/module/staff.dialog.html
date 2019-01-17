@@ -31,17 +31,9 @@
       </mat-form-field>
 
       <mat-form-field class="textarea-width">
-        <textarea matInput placeholder="Descrizione" class="form-control" formControlName="desc">
-                </textarea>
+        <textarea matInput placeholder="Descrizione" class="form-control" formControlName="desc"></textarea>
       </mat-form-field>
-
-      <!--      
-      <upload-image class="imageUpload"
-        [previewType]="'small'"
-        [image]="previewImage"
-        (file)="onUploadFinished($event)">
-      </upload-image>
-      -->
+      
       <resize-crop-image
         [label]="'Carica Sfondo'"
         [width]="1000"
@@ -71,7 +63,10 @@
         Pulisci
       </button>
 
-      <button mat-raised-button color="primary" class="pull-right" (click)="save(staffForm.value)" [disabled]="!staffForm.valid">
+      <button mat-raised-button color="primary" 
+        class="pull-right" 
+        (click)="save(staffForm.value)" 
+        [disabled]="!staffForm.valid">
         <mat-icon>save</mat-icon>
         Salva
       </button>

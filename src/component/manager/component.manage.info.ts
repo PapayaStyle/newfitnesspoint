@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ServicePHP } from '../../service/service';
 import { SharedService } from '../../service/shared';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { ManageInfoDialogComponent } from '../module/component.manage.info.dialog';
+import { InfoDialogComponent } from '../module/component.info.dialog';
 
 @Component({
   selector: 'app-manage-staff',
@@ -71,7 +71,7 @@ export class ManageInfoComponent implements OnInit {
       type = 'U';
     }
 
-    let dialogRef = this.dialog.open(ManageInfoDialogComponent, {
+    let dialogRef = this.dialog.open(InfoDialogComponent, {
       disableClose: true,
       width: width,
       height: height,

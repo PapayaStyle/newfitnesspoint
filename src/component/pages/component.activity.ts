@@ -3,8 +3,8 @@ import { DOCUMENT } from '@angular/platform-browser';
 import { Inject } from '@angular/core';
 import { ServicePHP } from '../../service/service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { ActivityDialogComponent } from '../module/component.activity.dialog';
 import { ActivatedRoute } from '@angular/router';
+import { ActivityDialogComponent } from '../module/component.activity.dialog';
 
 @Component({
   selector: 'app-activity',
@@ -55,13 +55,14 @@ export class ActivityComponent implements OnInit {
 
   openActivityDialog(activity): void {
     let dialogRef = this.dialog.open(ActivityDialogComponent, {
-      height: '60%',
+      height: '65%',
       width: '70%',
       data: {
         image: activity.image,
         video: activity.video,
         title: activity.title,
-        desc: activity.desc
+        desc: activity.desc,
+        readOnly: true
       }
     });
   }

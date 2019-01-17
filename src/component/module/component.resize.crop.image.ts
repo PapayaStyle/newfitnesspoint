@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { ImgResolution, ImgCropperConfig, ImgCropperEvent } from '@alyle/ui/resizing-cropping-images';
-import { LyTheme2 } from '@alyle/ui';
 
 const styles = {
   actions: {
@@ -33,7 +32,6 @@ export class ResizeCropImageComponent implements OnInit {
   
   private defaultDim = 250;
   
-  public classes = this.theme;
   public previewImage: string;
 
   public result: string;
@@ -44,7 +42,7 @@ export class ResizeCropImageComponent implements OnInit {
 
   public previewStyle: any;
 
-  constructor( private theme: LyTheme2 ) { }
+  constructor() { }
 
   ngOnInit() {
     if(this.image && this.preview) {
@@ -74,23 +72,7 @@ export class ResizeCropImageComponent implements OnInit {
     
   }
 
-  onCropped(e: ImgCropperEvent) {
-    //create file from url
-    //let blob = new Blob([e.dataURL], {type: e.type});
-    //let arrayOfBlob = new Array<Blob>();
-    //arrayOfBlob.push(blob);
-    //let file = new File([e.dataURL], e.name, {type: e.type});
-
-    //console.log('file');
-    //console.log(file);
-    /*
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = (read: any) => {
-        this.previewImage = read.target.result;
-    };
-    */
-    
+  onCropped(e: ImgCropperEvent) {    
     console.log('cropped img: ', e);
     this.previewImage = e.dataURL;
 
@@ -107,7 +89,7 @@ export class ResizeCropImageComponent implements OnInit {
 
   toggleImage(val) {
     if(val) {
-      this.showImage = { 'height': '300px'};
+      this.showImage = { 'height': this.height+50+'px', 'width': this.width+50+'px'};
       this.showComponent = true;
     } else {
       this.showImage = { 'height': '0px'};

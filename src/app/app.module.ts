@@ -27,9 +27,7 @@ import { GalleryComponent } from '../component/pages/component.gallery';
 import { NewsComponent } from '../component/pages/component.news';
 
 /* MODULE Component */
-import { ActivityDialogComponent } from '../component/module/component.activity.dialog';
 import { HomeCarouselComponent } from '../component/module/component.home.carousel';
-import { NewsDialogComponent } from '../component/module/component.news.dialog';
 
 import { ChooseDialogComponent } from '../component/module/component.choose.dialog';
 import { InputTextDialogComponent } from '../component/module/component.input.text.dialog';
@@ -38,11 +36,11 @@ import { ResizeCropImageComponent } from '../component/module/component.resize.c
 
 import { FormActivityComponent } from '../component/module/component.form.activity';
 import { FormRowsComponent } from '../component/module/component.form.rows';
-import { ManageActivityDialogComponent } from '../component/module/component.manage.activity.dialog';
-import { ManageNewsDialogComponent } from '../component/module/component.manage.news.dialog';
-import { ManageStaffDialogComponent } from '../component/module/component.manage.staff.dialog';
-import { ManageInfoDialogComponent } from '../component/module/component.manage.info.dialog';
-import { ManageGalleryDialogComponent } from '../component/module/component.manage.gallery.dialog';
+import { ActivityDialogComponent } from '../component/module/component.activity.dialog';
+import { NewsDialogComponent } from '../component/module/component.news.dialog';
+import { StaffDialogComponent } from '../component/module/component.staff.dialog';
+import { InfoDialogComponent } from '../component/module/component.info.dialog';
+import { GalleryDialogComponent } from '../component/module/component.gallery.dialog';
 
 /* MANAGER Component */
 import { LoginComponent } from '../component/manager/component.login';
@@ -92,15 +90,14 @@ registerLocaleData(localeIt, 'it');
     declarations: [ 
       AppComponent, HeadComponent, FooterComponent,
       HomeComponent, StaffComponent, ContactComponent, ActivityComponent, GalleryComponent, NewsComponent,
-      ActivityDialogComponent, HomeCarouselComponent, NewsDialogComponent,
 
       LoginComponent, ControlPanelComponent, ControlHeaderComponent, ManageTableComponent, 
       ManageActivityComponent, ManageStaffComponent, ManageNewsComponent, ManageInfoComponent, 
       ManageGalleryComponent,
 
       FormActivityComponent, FormRowsComponent, 
-      ManageActivityDialogComponent, ManageNewsDialogComponent, ManageStaffDialogComponent, 
-      ManageInfoDialogComponent, ManageGalleryDialogComponent,
+      ActivityDialogComponent, NewsDialogComponent, StaffDialogComponent, 
+      InfoDialogComponent, GalleryDialogComponent,
       
       ChooseDialogComponent, InputTextDialogComponent, UploadImageComponent,
       ResizeCropImageComponent,
@@ -108,13 +105,8 @@ registerLocaleData(localeIt, 'it');
       PipeCapitalize, PipeSafe
     ],
     entryComponents: [ 
-        ActivityDialogComponent,
-        NewsComponent, NewsDialogComponent,
-        ManageActivityDialogComponent, 
-        ManageNewsDialogComponent, 
-        ManageStaffDialogComponent,
-        ManageInfoDialogComponent,
-        ManageGalleryDialogComponent,
+        ActivityDialogComponent, NewsDialogComponent, StaffDialogComponent,
+        InfoDialogComponent, GalleryDialogComponent,
         ChooseDialogComponent, InputTextDialogComponent
     ],
     bootstrap: [ AppComponent ],

@@ -8,14 +8,14 @@ import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'manage-info-dialog',
-  templateUrl: '../../template/module/manage.info.dialog.html',
+  templateUrl: '../../template/module/info.dialog.html',
   styleUrls: [
     '../../css/manager/control-panel.css',
     '../../css/manager/manage.main.css',
     '../../css/manager/manage.info.css'
   ]
 })
-export class ManageInfoDialogComponent {
+export class InfoDialogComponent {
 
   public infoForm: FormGroup;
   public showPreview: boolean;
@@ -25,7 +25,7 @@ export class ManageInfoDialogComponent {
 
   constructor(private service: ServicePHP,
     @Inject(MAT_DIALOG_DATA) public info: any,
-    public dialogRef: MatDialogRef<ManageInfoDialogComponent>,
+    public dialogRef: MatDialogRef<InfoDialogComponent>,
     public dialog: MatDialog,
     public fb: FormBuilder,
     private toastr: ToastrService) {

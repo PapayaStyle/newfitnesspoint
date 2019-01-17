@@ -2,7 +2,7 @@
 
   <div class="actions-cnt">
 
-    <!-- CARICA -->
+    <!-- LOAD BTN -->
     <button *ngIf="!cropping.isLoaded && !image"
       mat-raised-button color="accent" 
       (click)="_fileInput.click()">
@@ -10,7 +10,7 @@
       {{ label }}
     </button>
 
-    <!-- RIMUOVI -->
+    <!-- CLEAR BTN -->
     <button *ngIf="cropping.isLoaded || image"
       mat-raised-button color="warn"
       (click)="clean(cropping)">
@@ -18,18 +18,18 @@
       Rimuovi immagine
     </button>
 
-    <!-- Hidden input  toggleImage(true); cropping.selectInputEvent($event) -->
+    <!-- FILE Hidden input -->
     <input #_fileInput type="file" 
       (change)="onFileLoad(cropping, $event)" 
       accept="image/*" hidden>
 
-    <!-- CROP -->
+    <!-- CROP BTN -->
     <button *ngIf="showComponent" 
-      mat-button color="primary"
+      mat-raised-button color="primary"
       class="pull-right"
       (click)="cropping.crop(); toggleImage(false)">
       <mat-icon>crop</mat-icon>
-      Crop
+      Ritaglia
     </button>
 
     <!-- PREVIEW THUMBS -->
@@ -40,21 +40,23 @@
     </div>
   </div>
 
+  <!-- IMAGE TOOLS -->
   <div *ngIf="cropping.isLoaded && showComponent" class="tools">
     <button (click)="cropping.zoomIn()" mat-button class="icon"><mat-icon>zoom_in</mat-icon></button>
     <button (click)="cropping.zoomOut()" mat-button class="icon"><mat-icon>zoom_out</mat-icon></button>
     <button (click)="cropping.center()" mat-button class="icon"><mat-icon>filter_center_focus</mat-icon></button>
     <button (click)="cropping.rotate(-90)" mat-button class="icon"><mat-icon>rotate_90_degrees_ccw</mat-icon></button>
-    <button (click)="cropping.fit()" mat-button>Fit</button>
-    <button (click)="cropping.fitToScreen()" mat-button>Fit to screen</button>
+    <button (click)="cropping.fit()" mat-button>Adatta</button>
+    <button (click)="cropping.fitToScreen()" mat-button>Adatta al contenitore</button>
     <button (click)="cropping.setScale(1)" mat-button>1:1</button>
   </div>
 
+  <!-- IMAGE CONTAINER -->
   <ly-img-cropper #cropping [ngStyle]="showImage"
-    [withClass]="classes.cropping" 
+    class="image-editor"
     [config]="myConfig"
     (cropped)="onCropped($event)">
-    <span>Drag and drop image</span>
+    <span>Trascina Immagine</span>
   </ly-img-cropper>
 
 </div>

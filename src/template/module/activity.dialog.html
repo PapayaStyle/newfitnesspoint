@@ -1,17 +1,82 @@
-<div class="popup">
-  <h2 mat-dialog-title>{{ activity.title | capitalize }}</h2>
-  <figure mat-dialog-content>
-    <div class="image">
-      <img src="{{ activity.image }}">
-    </div>
+<div class="manage-act-popup">
 
-    <p>{{ activity.desc }}</p>
+  <!-- START Preview -->
+  <div class="preview" *ngIf="showPreview">
+    <h2 mat-dialog-title>{{activity.title | capitalize }}</h2>
+    <figure mat-dialog-content>
+      <div class="image">
+        <img src="{{ previewImage }}">
+      </div>
 
-    <div *ngIf="checkEmpty(activity.video)" class="vid-frame">
-      <iframe [src]="(embedUrl + activity.video) | safe" frameborder="0" allowfullscreen>
-      </iframe>
+      <p>{{activity.desc}}</p>
+
+      <div *ngIf="checkEmpty(activity.video)" class="vid-frame">
+        <iframe class="vid-frame" [src]="(embedUrl + activity.video) | safe" frameborder="0" allowfullscreen>
+        </iframe>
+      </div>
+    </figure>
+  </div>
+  <!-- END Preview -->
+
+  <!-- START Form Edit -->
+  <form [formGroup]="activityForm" novalidate *ngIf="!showPreview && !readOnly">
+    <h2 mat-dialog-title>{{ activity.head }}</h2>
+    <div mat-dialog-content class="content">
+
+      <mat-form-field class="full-width">
+        <input matInput class="form-control" placeholder="Titolo" formControlName="title" maxlength="25" />
+      </mat-form-field>
+
+      <mat-form-field class="textarea-width">
+        <textarea matInput placeholder="Descrizione" class="form-control" formControlName="desc">
+                </textarea>
+      </mat-form-field>
+      
+      <resize-crop-image
+        [label]="'Carica Immagine'"
+        [width]="500"
+        [height]="325"
+        [image]="previewImage"
+        [preview]="true"
+        [preview-height]="100"
+        (file)="onUploadFinished($event)">
+      </resize-crop-image>
+
+      <mat-form-field class="full-width">
+        <input matInput class="form-control" placeholder="Video short URL" formControlName="video" />
+      </mat-form-field>
+
+      <mat-checkbox class="show-box" formControlName="show">Mostra</mat-checkbox>
+
+      <button mat-raised-button color="warn" class="pull-left" (click)="clearForm()">
+        <mat-icon>clear</mat-icon>
+        Pulisci
+      </button>
+
+      <button mat-raised-button color="primary" 
+        class="pull-right" 
+        (click)="save(activityForm.value)" 
+        [disabled]="!activityForm.valid">
+        <mat-icon>save</mat-icon>
+        Salva
+      </button>
     </div>
-  </figure>
+  </form>
+  <!-- END Form Edit -->
+
+  <!-- BOX Buttons -->
+  <div class="box-buttons" *ngIf="!readOnly">
+
+    <button mat-raised-button color="accent" (click)="showHidePreview()">
+      <mat-icon>{{ previewIcon }}</mat-icon>
+      {{ previewLabel }}
+    </button>
+
+    <button mat-raised-button color="warn" (click)="openChooseDialog()" *ngIf="activity.id != null">
+      <mat-icon>delete</mat-icon>
+      Elimina
+    </button>
+  </div>
 
   <mat-icon class="close" aria-label="chiudi" (click)="dialogRef.close()">clear</mat-icon>
 </div>

@@ -3,7 +3,7 @@ import { DOCUMENT } from '@angular/platform-browser';
 import { Inject } from '@angular/core';
 import { ServicePHP } from '../../service/service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { ManageNewsDialogComponent } from '../module/component.manage.news.dialog';
+import { NewsDialogComponent } from '../module/component.news.dialog';
 
 @Component({
   selector: 'app-manage-news',
@@ -94,7 +94,7 @@ export class ManageNewsComponent implements OnInit {
       type = 'U';
     }
 
-    let dialogRef = this.dialog.open(ManageNewsDialogComponent, {
+    let dialogRef = this.dialog.open(NewsDialogComponent, {
       disableClose: true,
       width: width,
       height: height,
@@ -107,7 +107,8 @@ export class ManageNewsComponent implements OnInit {
         desc: news.desc,
         date: news.date,
         show: news.show,
-        type: type
+        type: type,
+        readOnly: false
       }
     });
 

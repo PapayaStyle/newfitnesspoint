@@ -6,14 +6,14 @@ import { ChooseDialogComponent } from './component.choose.dialog';
 
 @Component({
   selector: 'manage-gallery-dialog',
-  templateUrl: '../../template/module/manage.gallery.dialog.html',
+  templateUrl: '../../template/module/gallery.dialog.html',
   styleUrls: [
     '../../css/manager/control-panel.css',
     '../../css/manager/manage.main.css',
     '../../css/manager/manage.gallery.css'
   ]
 })
-export class ManageGalleryDialogComponent {
+export class GalleryDialogComponent {
 
   private fileImg = null;
   private type;
@@ -23,7 +23,7 @@ export class ManageGalleryDialogComponent {
 
   constructor(private service: ServicePHP,
     @Inject(MAT_DIALOG_DATA) public image: any,
-    public dialogRef: MatDialogRef<ManageGalleryDialogComponent>,
+    public dialogRef: MatDialogRef<GalleryDialogComponent>,
     public dialog: MatDialog,
     private toastr: ToastrService) {
     

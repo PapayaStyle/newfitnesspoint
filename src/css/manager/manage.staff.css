@@ -52,9 +52,7 @@ h3 {
     z-index: 1;
     text-align: justify;
     position: relative;
-}
-.cnt-staff .bg-img {
-    background-attachment: scroll;
+    float: left;
 }
 .cnt-staff .bg-img {
     display: block;
@@ -65,6 +63,8 @@ h3 {
     height: 100%;
     z-index: 0;
     opacity: 0.5;
+    background-size: cover;
+    background-repeat: no-repeat;
     background-attachment: scroll;
 }
 .cnt-staff h2 {
@@ -95,30 +95,60 @@ h3 {
     font-weight: 400;
     text-shadow: 2px 0 0 #161616, -2px 0 0 #161616, 0 2px 0 #161616, 0 -2px 0 #161616, 1px 1px #161616, -1px -1px 0 #161616, -1px 1px 0 #161616;
 }
+
+.preview .portrait {
+  position: relative;
+  display: flex;
+  align-items: center;
+  z-index: 1;
+  float: left;
+}
+.preview .portrait img {
+  border-radius: 3px;
+  opacity: 0.9;
+}
 @media screen 
 and (max-width: 900px) {
     .preview article {
-        margin: 0 auto;
+        width: 250px;
         padding: 5%;
     }
     .preview .bg-img {
         background-attachment: scroll;
     }
+
+    .box .portrait {
+        position: relative;
+        padding: 0 5%;
+    }
+    .box .portrait img {
+        max-height: 200px;
+        max-width: 150px;
+    }
 }
 
 @media screen 
 and (min-width: 901px) {
-    .preview:nth-child(even) article {
-        float: left;
-    }
     .preview article {
+        /*
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        */
+        width: 400px;
+        padding: 3em 2em;
     }
     .preview .bg-img {
-        background-attachment: fixed;
+        background-attachment: scroll;
+    }
+    .preview .portrait {
+        position: relative;
+        padding: 0 5em;
+    }
+    .preview .portrait img {
+        max-height: 300px;
+        max-width: 200px;
     }
 }
 /* End PREVIEW */

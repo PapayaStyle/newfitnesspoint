@@ -27,6 +27,11 @@
   height: 40px !important;
 }
 
+.image-editor {
+  margin: 0 auto;
+  max-width: 100%;
+}
+
 .mat-button.icon {
   border-radius: 50%;
   min-width: 0px;

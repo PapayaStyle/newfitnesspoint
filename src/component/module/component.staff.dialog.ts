@@ -9,14 +9,14 @@ import { ImgCropperEvent } from '@alyle/ui/resizing-cropping-images';
 
 @Component({
   selector: 'manage-staff-dialog',
-  templateUrl: '../../template/module/manage.staff.dialog.html',
+  templateUrl: '../../template/module/staff.dialog.html',
   styleUrls: [
     '../../css/manager/control-panel.css',
     '../../css/manager/manage.main.css',
     '../../css/manager/manage.staff.css'
   ]
 })
-export class ManageStaffDialogComponent {
+export class StaffDialogComponent {
 
   private fileImg = null;
   private filePortrait = null;
@@ -32,7 +32,7 @@ export class ManageStaffDialogComponent {
 
   constructor(private service: ServicePHP,
     @Inject(MAT_DIALOG_DATA) public staff: any,
-    public dialogRef: MatDialogRef<ManageStaffDialogComponent>,
+    public dialogRef: MatDialogRef<StaffDialogComponent>,
     public dialog: MatDialog,
     public fb: FormBuilder,
     private toastr: ToastrService) {
@@ -56,7 +56,7 @@ export class ManageStaffDialogComponent {
       name: [this.staff.name, [Validators.required, Validators.maxLength(50)]],
       activity: [this.staff.activity, [Validators.required, Validators.maxLength(50)]],
       desc: [this.staff.desc, Validators.required],
-      image: this.staff.image,
+      image: [this.staff.image, Validators.required],
       portrait: this.staff.portrait,
       show: this.staff.show == 1 ? true : false,
       type: [this.staff.type, Validators.required]
@@ -91,10 +91,23 @@ export class ManageStaffDialogComponent {
    */
   onUploadImgFinished(event: ImgCropperEvent) {
     console.log(event);
-    //this.clearImages();
 
     //store the uploaded image into variable
     this.fileImg = event;
+
+    //read the new image URL for preview
+    if (this.fileImg != null) {
+      this.previewImage = this.fileImg.dataURL;
+      this.staff.image = this.previewImage;
+      this.staffForm.controls['image'].setValue(this.staff.image);
+    } else {
+      this.previewImage = null;
+      this.staff.image = null;
+      this.staffForm.controls['image'].setValue(null);
+    }
+
+    console.log(this.staffForm.valid);
+    console.log(this.staffForm.value);
   }
 
   /**
@@ -104,38 +117,21 @@ export class ManageStaffDialogComponent {
   onUploadPortraitFinished(event: ImgCropperEvent) {
     //console.log('onCropFinished');
     console.log(event);
-    //this.clearImages();
 
     //store the cropped image into variable
     this.filePortrait = event;
-  }
 
-  /**
-   * listener to detect when clear or close image is clicked
-   * @param event 
-   *
-  @HostListener('click', ['$event'])
-  handleClearClick(event) {
-    let target = event.target || event.srcElement || event.currentTarget;
-    if (target.attributes.class != undefined) {
-      let classAttr = target.attributes.class.value;
-
-      if (classAttr == 'img-ul-x-mark'
-        || classAttr == 'img-ul-close'
-        || classAttr == 'img-ul-clear img-ul-button') {
-        console.log('remove image');
-
-        this.staff.image = '';
-
-        this.previewImage = '';
-        this.previewPortrait = '';
-
-        this.fileImg = null;
-        this.filePortrait = null;
-      }
+    //read the new portrait image URL for preview
+    if (this.filePortrait != null) {
+      this.previewPortrait = this.filePortrait.dataURL;
+      this.staff.portrait = this.previewPortrait;
+      this.staffForm.controls['portrait'].setValue(this.staff.portrait);
+    } else {
+      this.previewPortrait = null;
+      this.staff.portrait = null;
+      this.staffForm.controls['portrait'].setValue(null);
     }
   }
-  */
 
   /**
    * clear and reset image upload fields
@@ -162,6 +158,8 @@ export class ManageStaffDialogComponent {
       name: ['', [Validators.required, Validators.maxLength(30)]],
       activity: ['', [Validators.required, Validators.maxLength(30)]],
       desc: ['', Validators.required],
+      image: ['', Validators.required],
+      portrait: [''],
       type: [this.staff.type, Validators.required],
       show: [false],
     });
@@ -192,26 +190,6 @@ export class ManageStaffDialogComponent {
       this.staff.name = this.staffForm.controls['name'].value;
       this.staff.activity = this.staffForm.controls['activity'].value;
       this.staff.desc = this.staffForm.controls['desc'].value;
-
-      //read the new image as URL show to preview
-      if (this.fileImg != null) {
-        this.previewImage = this.fileImg.dataURL;
-        this.staff.image = this.previewImage;
-        /*
-        let reader = new FileReader();
-        reader.readAsDataURL(this.fileImg);
-        reader.onload = (e: any) => {
-          this.previewImage = e.target.result;
-          this.staff.image = this.previewImage;
-        };
-        */
-      }
-
-      //read the new portrait image as URL show to preview
-      if (this.filePortrait != null) {
-          this.previewPortrait = this.filePortrait.dataURL;
-          this.staff.portrait = this.previewPortrait;
-      }
 
     } else {
       this.previewLabel = 'Anteprima';
