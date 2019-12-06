@@ -1,0 +1,39 @@
+<!-- Start Table View -->
+<div class="tab-corsi">
+  <div class="table">
+    <div class="row head day">
+      <div style="display: table-cell"></div>
+      <div style="display: table-cell">lunedì</div>
+      <div style="display: table-cell">martedì</div>
+      <div style="display: table-cell">mercoledì</div>
+      <div style="display: table-cell">giovedì</div>
+      <div style="display: table-cell">venerdì</div>
+    </div>
+    <div class="row" *ngFor='let course of courses; let first = first; let last = last;'>
+      <div [ngClass]="isFirstLast(first, last)" class='head ore'>{{course.time}}</div>
+      <div [ngClass]="(course.monday && course.monday.length > 0)? 'filled' :'empty'" class="cell">
+        <a *ngFor='let lesson of course.monday' href='/activity#{{ lesson.activity.link }}'>
+          {{ lesson.activity.name | capitalize }} {{ getNote(lesson) }}</a>
+      </div>
+      <div [ngClass]="(course.tuesday && course.tuesday.length > 0)? 'filled' :'empty'" class="cell">
+        <a *ngFor='let lesson of course.tuesday' href='/activity#{{ lesson.activity.link }}'>
+          {{ lesson.activity.name | capitalize }} {{ getNote(lesson) }}</a>
+      </div>
+      <div [ngClass]="(course.wednesday && course.wednesday.length > 0)? 'filled' :'empty'" class="cell">
+        <a *ngFor='let lesson of course.wednesday' href='/activity#{{ lesson.activity.link }}'>
+          {{ lesson.activity.name | capitalize }} {{ getNote(lesson) }}</a>
+      </div>
+      <div [ngClass]="(course.thursday && course.thursday.length > 0)? 'filled' :'empty'" class="cell">
+        <a *ngFor='let lesson of course.thursday' href='/activity#{{ lesson.activity.link }}'>
+          {{ lesson.activity.name | capitalize }} {{ getNote(lesson) }}</a>
+      </div>
+      <div [ngClass]="(course.friday && course.friday.length > 0)? 'filled' :'empty'" class="cell">
+        <a *ngFor='let lesson of course.friday' href='/activity#{{ lesson.activity.link }}'>
+          {{ lesson.activity.name | capitalize }} {{ getNote(lesson) }}</a>
+      </div>
+    </div>
+  </div>
+
+  <h3 *ngIf="subtitle">{{subtitle}}</h3>
+</div>
+<!-- End Table View -->

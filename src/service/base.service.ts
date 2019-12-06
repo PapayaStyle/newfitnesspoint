@@ -11,7 +11,8 @@ import { ToastrService } from 'ngx-toastr';
 @Injectable()
 export class BaseService {
 
-  protected LOCAL_URL = 'http://localhost/request/';
+  // protected LOCAL_URL = 'http://localhost/request/';
+  protected LOCAL_URL = 'http://localhost';
   protected SERVER_URL = 'http://www.new-fitnesspoint.it/request/';
 
   protected BASE_URL;
@@ -41,28 +42,28 @@ export class BaseService {
     this.HEADERS = new HttpHeaders();
 
     let curr_url: string = window.location.href;
-    let port: string = window.document.location.port;
+    let port: 5000;//string = window.document.location.port;
     let protocol: string = window.document.location.protocol;
 
     console.log('Current: ' + curr_url);
-    if (curr_url.includes('localhost')) {
-      this.HEADERS.set('Content-Type', 'application/json');
-    } else if (curr_url.includes('new-fitnesspoint')) {
+    // if (curr_url.includes('localhost')) {
+    //   this.HEADERS.set('Content-Type', 'application/json');
+    // } else if (curr_url.includes('new-fitnesspoint')) {
       this.HEADERS.set('Content-Type', 'application/json');
       this.HEADERS.set('Access-Control-Allow-Origin', '*');
       this.HEADERS.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
       this.HEADERS.set('Access-Control-Allow-Headers', 'Authorization');
-    }
+    // }
   }
 
   protected setRestUrl() {
     let curr_url: string = window.location.href;
-    let port: string = window.document.location.port;
+    let port: number = 5000;//window.document.location.port;
     let protocol: string = window.document.location.protocol;
 
     console.log('Current: ' + curr_url);
     if (curr_url.includes('localhost')) {
-      this.BASE_URL = this.LOCAL_URL;
+      this.BASE_URL = this.LOCAL_URL + ':' + port + '/api';
     } else if (curr_url.includes('new-fitnesspoint')) {
       this.BASE_URL = this.SERVER_URL;
     }

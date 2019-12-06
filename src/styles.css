@@ -217,3 +217,7 @@ textarea.mat-input-element {
 .mat-checked .mat-slide-toggle-thumb {
     background-color: #e96233 !important;
 }
+
+.mat-progress-spinner.mat-accent circle, .mat-spinner.mat-accent circle {
+  stroke: #e96233 !important;
+}

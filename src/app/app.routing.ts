@@ -1,22 +1,22 @@
 import { Routes, RouterModule } from '@angular/router';
 
-import { HomeComponent } from '../component/pages/component.home';
-import { StaffComponent } from '../component/pages/component.staff';
-import { ActivityComponent } from '../component/pages/component.activity';
-import { GalleryComponent } from '../component/pages/component.gallery';
-import { ContactComponent } from '../component/pages/component.contact';
-import { NewsComponent } from '../component/pages/component.news';
+import { HomeComponent } from './pages/home/component.home';
+import { StaffComponent } from './pages/staff/component.staff';
+import { ActivityComponent } from './pages/activity/component.activity';
+import { GalleryComponent } from './pages/gallery/component.gallery';
+import { ContactComponent } from './pages/contact/component.contact';
+import { NewsComponent } from './pages/news/component.news';
 
-import { LoginComponent } from '../component/manager/component.login';
-import { ControlPanelComponent } from '../component/manager/component.control.panel';
-import { ManageTableComponent } from '../component/manager/component.manage.table';
-import { ManageActivityComponent } from '../component/manager/component.manage.activity';
-import { ManageStaffComponent } from '../component/manager/component.manage.staff';
-import { ManageNewsComponent } from '../component/manager/component.manage.news';
-import { ManageInfoComponent } from '../component/manager/component.manage.info';
+import { LoginComponent } from './manager/login/component.login';
+import { ControlPanelComponent } from './manager/control.panel/component.control.panel';
+import { ManageCoursesComponent } from './manager/courses/component.manage.courses';
+import { ManageActivityComponent } from './manager/activity/component.manage.activity';
+import { ManageStaffComponent } from './manager/staff/component.manage.staff';
+import { ManageNewsComponent } from './manager/news/component.manage.news';
+import { ManageInfoComponent } from './manager/info/component.manage.info';
 
 import { AuthGuard } from '../service/auth.guard';
-import { ManageGalleryComponent } from '../component/manager/component.manage.gallery';
+import { ManageGalleryComponent } from './manager/gallery/component.manage.gallery';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -30,7 +30,7 @@ const appRoutes: Routes = [
   { 
     path: 'control-panel', component: ControlPanelComponent, canActivate: [AuthGuard],
     children: [
-        { path: 'table', component: ManageTableComponent },
+        { path: 'courses', component: ManageCoursesComponent },
         { path: 'activity', component: ManageActivityComponent },
         { path: 'staff', component: ManageStaffComponent },
         //{ path: 'info', component: ManageInfoComponent },

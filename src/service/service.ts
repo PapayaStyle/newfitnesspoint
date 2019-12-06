@@ -16,7 +16,7 @@ import { RequestObj } from '../models/RequestObj';
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
-export class ServicePHP extends BaseService {
+export class Service extends BaseService {
 
   constructor(httpClient: HttpClient,
     cookie: CookieService,
@@ -26,7 +26,7 @@ export class ServicePHP extends BaseService {
   }
 
   /**
-   * call php service to do login
+   * call service to do login
    * @param username 
    * @param password 
    */
@@ -34,8 +34,9 @@ export class ServicePHP extends BaseService {
     console.log('Service --> login');
     this.share.changeLoading(true);
 
-    let url = 'login.php';
-    let requestObj = new RequestObj(url, {});
+    // let path = 'login.php';
+    let path = '/login';
+    let requestObj = new RequestObj(path, {});
 
     let response: any;
     response = await this.POST(requestObj, account);
@@ -48,7 +49,7 @@ export class ServicePHP extends BaseService {
   }
 
   /**
-   * call php service to check authentication
+   * call service to check authentication
    */
   async auth(): Promise<any> {
     console.log('Service --> auth');
@@ -78,14 +79,15 @@ export class ServicePHP extends BaseService {
   /* ##### START ##### GET REQUEST ##### */
 
   /**
-   * call php service to get Calendar
+   * call service to get Calendar
    */
   async getCalendar(): Promise<any> {
     console.log('Service --> getCalendar');
     this.share.changeLoading(true);
 
-    let url = 'calendar_query.php';
-    let requestObj = new RequestObj(url, {});
+    // let path = 'calendar_query.php';
+    let path = '/calendar';
+    let requestObj = new RequestObj(path, {});
 
     let response: any;
     response = await this.GET(requestObj);
@@ -98,17 +100,19 @@ export class ServicePHP extends BaseService {
   }
 
   /**
-   * call php service to get Activities
+   * call service to get Activities
    */
-  async getActivities(req: string): Promise<any> {
+  async getActivities(flagShow: boolean): Promise<any> {
     console.log('Service --> getActivities');
     this.share.changeLoading(true);
 
-    let url = 'activity_query.php';
-    let queryString = '?req=' + req;
-    url = url + queryString;
+    // let path = 'activity_query.php';
+    let path = '/activity';
+    // let queryString = '?req=' + flagShow ? 'ALL' : 'SHOW';
+    let queryString = '?flagShow=' + flagShow;
+    path = path + queryString;
 
-    let requestObj = new RequestObj(url, {});
+    let requestObj = new RequestObj(path, {});
 
     let response: any;
     response = await this.GET(requestObj);
@@ -121,17 +125,19 @@ export class ServicePHP extends BaseService {
   }
 
   /**
-   * call php service to get Staff
+   * call service to get Staff
    */
-  async getStaffList(req: string): Promise<any> {
+  async getStaffList(flagShow: boolean): Promise<any> {
     console.log('Service --> getStaffList');
     this.share.changeLoading(true);
 
-    let url = 'staff_query.php';
-    let queryString = '?req=' + req;
-    url = url + queryString;
+    // let path = 'staff_query.php';
+    let path = '/staff';
+    // let queryString = '?req=' + flagShow ? 'ALL' : 'SHOW';
+    let queryString = '?flagShow=' + flagShow;
+    path = path + queryString;
 
-    let requestObj = new RequestObj(url, {});
+    let requestObj = new RequestObj(path, {});
 
     let response: any;
     response = await this.GET(requestObj);
@@ -144,17 +150,20 @@ export class ServicePHP extends BaseService {
   }
 
   /**
-   * call php service to get News
+   * call service to get News
    */
-  async getNewsList(req: string): Promise<any> {
+  async getNewsList(flagShow: boolean, flagLast?:boolean): Promise<any> {
     console.log('Service --> getNewsList');
     this.share.changeLoading(true);
 
-    let url = 'news_query.php';
-    let queryString = '?req=' + req;
-    url = url + queryString;
+    // let url = 'news_query.php';
+    let path = '/news';
+    // let queryString = '?req=' + flagShow ? 'ALL' : 'SHOW';
+    let queryString = '?flagShow=' + flagShow;
+    queryString = queryString + (flagLast ? '&flagLast='+flagLast : '');
+    path = path + queryString;
 
-    let requestObj = new RequestObj(url, {});
+    let requestObj = new RequestObj(path, {});
 
     let response: any;
     response = await this.GET(requestObj);
@@ -167,7 +176,7 @@ export class ServicePHP extends BaseService {
   }
 
   /**
-   * call php service to get Gallety images
+   * call service to get Gallety images
    */
   async getGalleryImages(): Promise<any> {
     console.log('Service --> getGalleryImages');
@@ -189,14 +198,15 @@ export class ServicePHP extends BaseService {
 
 
   /**
-   * call php service to save Calendar
+   * call service to save Calendar
    */
   async saveCalendar(model): Promise<any> {
     console.log('Service --> saveCalendar');
     this.share.changeLoading(true);
 
-    let url = 'save_calendar.php';
-    let requestObj = new RequestObj(url, model);
+    // let path = 'save_calendar.php';
+    let path = '/calendar';
+    let requestObj = new RequestObj(path, model);
 
     let response: any;
     response = await this.PUT(requestObj);
@@ -206,7 +216,7 @@ export class ServicePHP extends BaseService {
   }
 
   /**
-   * call php service to save/edit/delete activity
+   * call service to save/edit/delete activity
    */
   async saveActivity(model, file): Promise<any> {
     console.log('Service --> saveActivity');
@@ -228,7 +238,7 @@ export class ServicePHP extends BaseService {
   }
 
   /**
-   * call php service to save/edit/delete news
+   * call service to save/edit/delete news
    */
   async saveNews(model, file): Promise<any> {
     console.log('Service --> saveNews');
@@ -262,7 +272,7 @@ export class ServicePHP extends BaseService {
   }
 
   /**
-   * call php service to save/edit/delete news
+   * call service to save/edit/delete news
    */
   async saveStaff(model, fileImg, filePortrait): Promise<any> {
     console.log('Service --> saveStaff');
@@ -295,6 +305,9 @@ export class ServicePHP extends BaseService {
     }
   }
 
+  /**
+   * call service to save and upload image
+   */
   async saveGallery(model, file): Promise<any> {
     console.log('Service --> saveGallery');
     this.share.changeLoading(true);
@@ -315,7 +328,7 @@ export class ServicePHP extends BaseService {
   }
 
   /**
- * call php service to send mail
+ * call service to send mail
  * @param name 
  * @param email 
  * @param subject 

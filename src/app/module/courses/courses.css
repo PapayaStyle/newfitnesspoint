@@ -1,0 +1,109 @@
+
+@media screen 
+and (max-width: 500px) {
+    .tab-corsi {
+        padding: 0 1em;
+    }
+    .tab-corsi .table .day {
+        text-transform: capitalize !important;
+    }
+    .tab-corsi .head {
+        font-size: 0.8em !important;
+    }
+    .tab-corsi, .cell a {
+        font-size: 0.8em !important;
+    }
+}
+
+@media screen 
+and (max-width: 900px) {
+    .tab-corsi .head {
+        font-size: 0.9em !important;
+    }
+    .tab-corsi, .cell a {
+        font-size: 0.9em !important;
+    }
+}
+
+/* Tabella attività */
+.tab-corsi {
+    clear: both;
+    width: 90%;
+    max-width: 950px;
+    margin: 0 auto;
+}
+.tab-corsi .table {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+}
+.tab-corsi .table .row {
+    display: table-row;
+}
+.tab-corsi .head {
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 1em;
+    font-weight: bold;
+    height: 70px;
+    width: 25px;
+    color: #212121;
+    background-color: #F5F5F5;
+    border: 1px solid #F5F5F5;
+    border-top: 1px solid #212121;
+    border-bottom: 1px solid #212121;
+    text-align: center;
+}
+.tab-corsi .first {
+    border-top: 1px solid #F5F5F5 !important;
+}
+.tab-corsi .last {
+    border-bottom: 1px solid #F5F5F5 !important;
+}
+.tab-corsi .table .day {
+    color: #212121;
+    height: 20px !important;
+    padding: 15px 20px 15px 20px;
+    text-transform: uppercase;
+}
+.filled:nth-child(2n+1) {
+    background-color: #FF5722;
+}
+.filled:nth-child(2n+2) {
+    background-color: #212121;
+}
+.ore {
+    line-height: 70px;
+}
+.tab-corsi .cell {
+    display: table-cell;
+    border:1px solid #F5F5F5;
+    vertical-align: middle;
+}
+.tab-corsi .cell a {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    color: #e1e1e1;
+    padding-top :2px;
+    padding-bottom: 2px;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+}
+.tab-corsi .cell > a:hover {
+    text-decoration: underline;
+}
+.empty {
+    background-color:#BDBDBD;
+}
+/* Fine Tabella attività */
+
+h3 {
+  text-align: center;
+  color: black;
+  padding-top: 0%;
+  padding-bottom: 2%;
+  font-size: 2em;
+  font-variant: all-small-caps;
+}

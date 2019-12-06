@@ -1,0 +1,12 @@
+<div class="act-container">
+  <div class="activity" *ngFor="let activity of activities" (click)="openActivityDialog(activity)">
+    <div id="{{activity.link}}">
+      <div class="image">
+        <img src="{{activity.image}}">
+      </div>
+      <article>
+        <h2>{{activity.name | capitalize }}</h2>
+      </article>
+    </div>
+  </div>
+</div>

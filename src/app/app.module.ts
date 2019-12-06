@@ -14,48 +14,49 @@ import { Routing } from './app.routing';
 import { HeaderInterceptor } from '../service/interceptor';
 import { ToastrModule } from 'ngx-toastr';
 
-import { AppComponent } from './app.component';
-import { HeadComponent } from '../component/component.head';
-import { FooterComponent } from '../component/component.footer';
+import { AppComponent } from './component/app.component';
+import { HeadComponent } from './head/component.head';
+import { FooterComponent } from './footer/component.footer';
 
 /* PAGE Component */
-import { HomeComponent } from '../component/pages/component.home';
-import { StaffComponent } from '../component/pages/component.staff';
-import { ContactComponent } from '../component/pages/component.contact';
-import { ActivityComponent } from '../component/pages/component.activity';
-import { GalleryComponent } from '../component/pages/component.gallery';
-import { NewsComponent } from '../component/pages/component.news';
+import { HomeComponent } from './pages/home/component.home';
+import { StaffComponent } from './pages/staff/component.staff';
+import { ContactComponent } from './pages/contact/component.contact';
+import { ActivityComponent } from './pages/activity/component.activity';
+import { GalleryComponent } from './pages/gallery/component.gallery';
+import { NewsComponent } from './pages/news/component.news';
 
 /* MODULE Component */
-import { HomeCarouselComponent } from '../component/module/component.home.carousel';
+import { HomeCarouselComponent } from './module/carousel/component.home.carousel';
 
-import { ChooseDialogComponent } from '../component/module/component.choose.dialog';
-import { InputTextDialogComponent } from '../component/module/component.input.text.dialog';
-import { UploadImageComponent } from '../component/module/component.upload.image';
-import { ResizeCropImageComponent } from '../component/module/component.resize.crop.image';
+import { ChooseDialogComponent } from './module/dialog/choose/component.choose.dialog';
+import { InputTextDialogComponent } from './module/dialog/input/component.input.text.dialog';
+import { UploadImageComponent } from './module/upload.image/component.upload.image';
+import { ResizeCropImageComponent } from './module/resize.image/component.resize.crop.image';
+import { CoursesComponent } from './module/courses/component.courses';
 
-import { FormActivityComponent } from '../component/module/component.form.activity';
-import { FormRowsComponent } from '../component/module/component.form.rows';
-import { ActivityDialogComponent } from '../component/module/component.activity.dialog';
-import { NewsDialogComponent } from '../component/module/component.news.dialog';
-import { StaffDialogComponent } from '../component/module/component.staff.dialog';
-import { InfoDialogComponent } from '../component/module/component.info.dialog';
-import { GalleryDialogComponent } from '../component/module/component.gallery.dialog';
+import { FormActivityComponent } from './module/form/activity/component.form.activity';
+import { FormRowsComponent } from './module/form/rows/component.form.rows';
+import { ActivityDialogComponent } from './module/dialog/activity/component.activity.dialog';
+import { NewsDialogComponent } from './module/dialog/news/component.news.dialog';
+import { StaffDialogComponent } from './module/dialog/staff/component.staff.dialog';
+import { InfoDialogComponent } from './module/dialog/info/component.info.dialog';
+import { GalleryDialogComponent } from './module/dialog/gallery/component.gallery.dialog';
 
 /* MANAGER Component */
-import { LoginComponent } from '../component/manager/component.login';
-import { ControlPanelComponent } from '../component/manager/component.control.panel';
-import { ControlHeaderComponent } from '../component/manager/component.control.header';
-import { ManageTableComponent } from '../component/manager/component.manage.table';
-import { ManageActivityComponent } from '../component/manager/component.manage.activity';
-import { ManageStaffComponent } from '../component/manager/component.manage.staff';
-import { ManageNewsComponent } from '../component/manager/component.manage.news';
-import { ManageInfoComponent } from '../component/manager/component.manage.info';
-import { ManageGalleryComponent } from '../component/manager/component.manage.gallery';
+import { LoginComponent } from './manager/login/component.login';
+import { ControlPanelComponent } from './manager/control.panel/component.control.panel';
+import { ControlHeaderComponent } from './manager/control.header/component.control.header';
+import { ManageCoursesComponent } from './manager/courses/component.manage.courses';
+import { ManageActivityComponent } from './manager/activity/component.manage.activity';
+import { ManageStaffComponent } from './manager/staff/component.manage.staff';
+import { ManageNewsComponent } from './manager/news/component.manage.news';
+import { ManageInfoComponent } from './manager/info/component.manage.info';
+import { ManageGalleryComponent } from './manager/gallery/component.manage.gallery';
 
 /* SERVICE Component */
 import { BaseService } from '../service/base.service';
-import { ServicePHP } from '../service/service';
+import { Service } from '../service/service';
 import { AuthGuard } from '../service/auth.guard';
 import { SharedService } from '../service/shared';
 import { CookieService } from 'ngx-cookie-service';
@@ -91,7 +92,7 @@ registerLocaleData(localeIt, 'it');
       AppComponent, HeadComponent, FooterComponent,
       HomeComponent, StaffComponent, ContactComponent, ActivityComponent, GalleryComponent, NewsComponent,
 
-      LoginComponent, ControlPanelComponent, ControlHeaderComponent, ManageTableComponent, 
+      LoginComponent, ControlPanelComponent, ControlHeaderComponent, ManageCoursesComponent, 
       ManageActivityComponent, ManageStaffComponent, ManageNewsComponent, ManageInfoComponent, 
       ManageGalleryComponent,
 
@@ -100,7 +101,7 @@ registerLocaleData(localeIt, 'it');
       InfoDialogComponent, GalleryDialogComponent,
       
       ChooseDialogComponent, InputTextDialogComponent, UploadImageComponent,
-      ResizeCropImageComponent,
+      ResizeCropImageComponent, HomeCarouselComponent, CoursesComponent, 
 
       PipeCapitalize, PipeSafe
     ],
@@ -111,7 +112,7 @@ registerLocaleData(localeIt, 'it');
     ],
     bootstrap: [ AppComponent ],
     providers: [ { provide: LOCALE_ID, useValue: 'it' },
-      BaseService, ServicePHP, AuthGuard, SharedService, CookieService , 
+      BaseService, Service, AuthGuard, SharedService, CookieService , 
         {
             provide: HTTP_INTERCEPTORS,
             useClass: HeaderInterceptor,

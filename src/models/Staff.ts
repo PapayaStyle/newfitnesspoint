@@ -1,21 +1,21 @@
 export class Staff {
-  public id: number;
+  public id: string;
   public name: string;
   public activity: string;
-  public desc: string;
+  public description: string;
   public image: string;
   public portrait: string;
-  public show: number;
+  public showed: number;
 
   constructor(obj?: any) {
     if(typeof obj == 'object') {
       obj.id && (this.id = obj.id);
       obj.name && (this.name = obj.name);
       obj.activity && (this.activity = obj.activity);
-      obj.desc && (this.desc = obj.desc);
+      obj.description && (this.description = obj.description);
       obj.image && (this.image = obj.image);
       obj.portrait && (this.portrait = obj.portrait);
-      obj.show && (this.show = obj.show);
+      obj.showed && (this.showed = obj.showed);
     }
   }
 }

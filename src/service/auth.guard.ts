@@ -4,7 +4,7 @@ import {
     RouterStateSnapshot, CanActivate, CanActivateChild
 } from '@angular/router';
 
-import { ServicePHP } from '../service/service';
+import { Service } from '../service/service';
 import { CookieService } from 'ngx-cookie-service';
  
 @Injectable()
@@ -12,7 +12,7 @@ export class AuthGuard implements CanActivate {
  
     constructor(private router: Router,
         private cookie: CookieService,
-        private service: ServicePHP) { }
+        private service: Service) { }
  
     canActivate(routeAct: ActivatedRouteSnapshot,
         state: RouterStateSnapshot) { 

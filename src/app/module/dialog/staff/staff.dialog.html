@@ -1,0 +1,91 @@
+<div class="manage-staff-popup">
+
+  <!-- START Preview -->
+  <div class="preview" *ngIf="showPreview">
+    <h1 mat-dialog-title>{{ staff.name | capitalize }}</h1>
+    <div class="cnt-staff" #box>
+      <div class="bg-img" [ngStyle]="changeBackground(staff.image)"></div>
+      <div class="portrait" [ngStyle]="setHeight(box.clientHeight)">
+          <img src="{{ staff.portrait }}" />
+        </div>
+      <article>
+        <h2>{{ staff.name }}</h2>
+        <h4>{{ staff.activity }}</h4>
+        <p>{{ staff.description }}</p>
+      </article>
+    </div>
+  </div>
+  <!-- END Preview -->
+
+  <!-- START Form Edit -->
+  <form [formGroup]="staffForm" novalidate *ngIf="!showPreview">
+    <h1 mat-dialog-title>{{ staff.head }}</h1>
+    <div mat-dialog-content class="content">
+
+      <mat-form-field class="full-width">
+        <input matInput type="text" class="form-control" placeholder="Nome" formControlName="name" maxlength="50" />
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input matInput type="text" class="form-control" placeholder="Attività" formControlName="activity" maxlength="50" />
+      </mat-form-field>
+
+      <mat-form-field class="textarea-width">
+        <textarea matInput placeholder="Descrizione" class="form-control" formControlName="description"></textarea>
+      </mat-form-field>
+      
+      <resize-crop-image
+        [label]="'Carica Sfondo'"
+        [width]="1000"
+        [height]="650"
+        [image]="previewImage"
+        [preview]="true"
+        [preview-height]="100"
+        (file)="onUploadImgFinished($event)">
+      </resize-crop-image>
+
+
+      <resize-crop-image
+        [label]="'Carica Portrait'"
+        [width]="200"
+        [height]="300"
+        [image]="previewPortrait"
+        [preview]="true"
+        [preview-height]="100"
+        (file)="onUploadPortraitFinished($event)">
+      </resize-crop-image>
+
+
+      <mat-checkbox class="show-box" formControlName="show">Mostra</mat-checkbox>
+
+      <button mat-raised-button color="warn" class="pull-left" (click)="clearForm()">
+        <mat-icon>clear</mat-icon>
+        Pulisci
+      </button>
+
+      <button mat-raised-button color="primary" 
+        class="pull-right" 
+        (click)="save(staffForm.value)" 
+        [disabled]="!staffForm.valid">
+        <mat-icon>save</mat-icon>
+        Salva
+      </button>
+    </div>
+  </form>
+  <!-- END Form Edit -->
+
+  <!-- BOX Buttons -->
+  <div class="box-buttons">
+    <button mat-raised-button color="accent" (click)="showHidePreview()">
+      <mat-icon>{{ previewIcon }}</mat-icon>
+      {{ previewLabel }}
+    </button>
+    <button mat-raised-button color="warn" (click)="openChooseDialog()" *ngIf="staff.id != null">
+      <mat-icon>delete</mat-icon>
+      Elimina
+    </button>
+  </div>
+
+  <mat-icon class="close" aria-label="chiudi" (click)="dialogRef.close()">clear</mat-icon>
+
+</div>
